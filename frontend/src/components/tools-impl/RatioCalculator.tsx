@@ -87,7 +87,7 @@ export function RatioCalculator() {
                 value={simpA}
                 onChange={(e) => setSimpA(e.target.value)}
                 placeholder="24"
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
 
@@ -103,7 +103,7 @@ export function RatioCalculator() {
                 value={simpB}
                 onChange={(e) => setSimpB(e.target.value)}
                 placeholder="36"
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
           </div>
@@ -113,9 +113,9 @@ export function RatioCalculator() {
               {simpResult.error}
             </div>
           ) : simpResult.data ? (
-            <div className="p-6 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="p-6 rounded-xl border border-[var(--primary)]/30/30 bg-[var(--primary)]/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
+                <span className="text-xs font-semibold text-[var(--primary)] dark:text-[var(--primary)] uppercase tracking-wider block mb-1">
                   Simplified Ratio
                 </span>
                 <span className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">
@@ -132,7 +132,7 @@ export function RatioCalculator() {
                 onClick={() => handleCopy(simpResult.data?.formatted ?? '')}
                 className="text-xs"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[var(--primary)]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>Copy Ratio</span>
               </Button>
             </div>
@@ -156,7 +156,7 @@ export function RatioCalculator() {
                 value={propA}
                 onChange={(e) => setPropA(e.target.value)}
                 placeholder="A"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
 
@@ -170,7 +170,7 @@ export function RatioCalculator() {
                 value={propB}
                 onChange={(e) => setPropB(e.target.value)}
                 placeholder="B"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
 
@@ -184,7 +184,7 @@ export function RatioCalculator() {
                 value={propC}
                 onChange={(e) => setPropC(e.target.value)}
                 placeholder="C"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
 
@@ -198,7 +198,7 @@ export function RatioCalculator() {
                 value={propD}
                 onChange={(e) => setPropD(e.target.value)}
                 placeholder="D"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-bold focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
           </div>
@@ -208,9 +208,9 @@ export function RatioCalculator() {
               {propResult.error}
             </div>
           ) : propResult.solvedTerm && propResult.value !== null ? (
-            <div className="p-6 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-between">
+            <div className="p-6 rounded-xl border border-[var(--primary)]/30/30 bg-[var(--primary)]/5 flex items-center justify-between">
               <div>
-                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
+                <span className="text-xs font-semibold text-[var(--primary)] dark:text-[var(--primary)] uppercase tracking-wider block mb-1">
                   Solved Value for {propResult.solvedTerm}
                 </span>
                 <span className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">
@@ -223,7 +223,7 @@ export function RatioCalculator() {
                 onClick={() => handleCopy(String(Number(propResult.value?.toFixed(4))))}
                 className="text-xs"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[var(--primary)]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>Copy Value</span>
               </Button>
             </div>

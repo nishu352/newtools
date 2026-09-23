@@ -54,9 +54,9 @@ export function CaseConverter() {
               key={c.style}
               type="button"
               onClick={() => handleConvert(c.style)}
-              className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-left hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-xs transition-all cursor-pointer group"
+              className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-left hover:border-[var(--primary)]/30 dark:hover:border-[var(--primary)]/30 hover:shadow-xs transition-all cursor-pointer group"
             >
-              <span className="font-semibold text-xs text-slate-900 dark:text-slate-100 block group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
+              <span className="font-semibold text-xs text-slate-900 dark:text-slate-100 block group-hover:text-[var(--primary)] dark:group-hover:text-[var(--primary)]">
                 {c.label}
               </span>
               <span className="text-[10px] text-slate-400 font-mono mt-0.5 block truncate">
@@ -85,7 +85,7 @@ export function CaseConverter() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Paste or type text to convert its case..."
-          className="w-full h-80 p-4 font-sans text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 leading-relaxed resize-y"
+          className="w-full h-80 p-4 font-sans text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] leading-relaxed resize-y"
         />
       </div>
 
@@ -109,7 +109,7 @@ export function CaseConverter() {
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
               Copied!
             </>
           ) : (

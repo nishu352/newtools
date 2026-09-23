@@ -49,7 +49,7 @@ export function PercentageCalculator() {
       <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center">
               <Percent className="w-4 h-4" />
             </div>
             <h3 className="font-semibold text-sm text-slate-900 dark:text-slate-100">
@@ -63,14 +63,14 @@ export function PercentageCalculator() {
               type="number"
               value={c1X}
               onChange={(e) => setC1X(e.target.value)}
-              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>% of</span>
             <input
               type="number"
               value={c1Y}
               onChange={(e) => setC1Y(e.target.value)}
-              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>?</span>
           </div>
@@ -82,7 +82,7 @@ export function PercentageCalculator() {
             {res1.error ? (
               <span className="text-rose-500">{res1.error}</span>
             ) : (
-              <strong className="text-base text-emerald-600 dark:text-emerald-400">{res1.formatted}</strong>
+              <strong className="text-base text-[var(--primary)] dark:text-[var(--primary)]">{res1.formatted}</strong>
             )}
           </div>
           {!res1.error && res1.formatted && (
@@ -91,7 +91,7 @@ export function PercentageCalculator() {
               onClick={() => handleCopy(res1.formatted, 'c1')}
               className="px-2 py-1 text-xs rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
             >
-              {copiedKey === 'c1' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'c1' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </button>
           )}
@@ -102,7 +102,7 @@ export function PercentageCalculator() {
       <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center">
               <Percent className="w-4 h-4" />
             </div>
             <h3 className="font-semibold text-sm text-slate-900 dark:text-slate-100">
@@ -115,14 +115,14 @@ export function PercentageCalculator() {
               type="number"
               value={c2X}
               onChange={(e) => setC2X(e.target.value)}
-              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>is what % of</span>
             <input
               type="number"
               value={c2Y}
               onChange={(e) => setC2Y(e.target.value)}
-              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>?</span>
           </div>
@@ -134,7 +134,7 @@ export function PercentageCalculator() {
             {res2.error ? (
               <span className="text-rose-500">{res2.error}</span>
             ) : (
-              <strong className="text-base text-emerald-600 dark:text-emerald-400">{res2.formatted}</strong>
+              <strong className="text-base text-[var(--primary)] dark:text-[var(--primary)]">{res2.formatted}</strong>
             )}
           </div>
           {!res2.error && res2.formatted && (
@@ -143,7 +143,7 @@ export function PercentageCalculator() {
               onClick={() => handleCopy(res2.formatted, 'c2')}
               className="px-2 py-1 text-xs rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
             >
-              {copiedKey === 'c2' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'c2' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </button>
           )}
@@ -154,7 +154,7 @@ export function PercentageCalculator() {
       <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center">
               <Percent className="w-4 h-4" />
             </div>
             <h3 className="font-semibold text-sm text-slate-900 dark:text-slate-100">
@@ -168,14 +168,14 @@ export function PercentageCalculator() {
               type="number"
               value={c3X}
               onChange={(e) => setC3X(e.target.value)}
-              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>to</span>
             <input
               type="number"
               value={c3Y}
               onChange={(e) => setC3Y(e.target.value)}
-              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
           </div>
         </div>
@@ -186,7 +186,7 @@ export function PercentageCalculator() {
             {res3.error ? (
               <span className="text-rose-500">{res3.error}</span>
             ) : (
-              <strong className="text-base text-emerald-600 dark:text-emerald-400">{res3.formatted}</strong>
+              <strong className="text-base text-[var(--primary)] dark:text-[var(--primary)]">{res3.formatted}</strong>
             )}
           </div>
           {!res3.error && res3.formatted && (
@@ -195,7 +195,7 @@ export function PercentageCalculator() {
               onClick={() => handleCopy(res3.formatted, 'c3')}
               className="px-2 py-1 text-xs rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
             >
-              {copiedKey === 'c3' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'c3' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </button>
           )}
@@ -206,7 +206,7 @@ export function PercentageCalculator() {
       <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center">
               <Percent className="w-4 h-4" />
             </div>
             <h3 className="font-semibold text-sm text-slate-900 dark:text-slate-100">
@@ -220,14 +220,14 @@ export function PercentageCalculator() {
               type="number"
               value={c4X}
               onChange={(e) => setC4X(e.target.value)}
-              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
             <span>and</span>
             <input
               type="number"
               value={c4Y}
               onChange={(e) => setC4Y(e.target.value)}
-              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-24 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-center font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
           </div>
         </div>
@@ -238,7 +238,7 @@ export function PercentageCalculator() {
             {res4.error ? (
               <span className="text-rose-500">{res4.error}</span>
             ) : (
-              <strong className="text-base text-emerald-600 dark:text-emerald-400">{res4.formatted}</strong>
+              <strong className="text-base text-[var(--primary)] dark:text-[var(--primary)]">{res4.formatted}</strong>
             )}
           </div>
           {!res4.error && res4.formatted && (
@@ -247,7 +247,7 @@ export function PercentageCalculator() {
               onClick={() => handleCopy(res4.formatted, 'c4')}
               className="px-2 py-1 text-xs rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
             >
-              {copiedKey === 'c4' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'c4' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </button>
           )}

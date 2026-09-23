@@ -50,7 +50,7 @@ export function Base64Tool() {
               onClick={() => setMode('encode')}
               className={`px-3 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 mode === 'encode'
-                  ? 'bg-slate-900 text-white dark:bg-emerald-600'
+                  ? 'bg-slate-900 text-white dark:bg-[var(--primary)]'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
@@ -61,7 +61,7 @@ export function Base64Tool() {
               onClick={() => setMode('decode')}
               className={`px-3 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 mode === 'decode'
-                  ? 'bg-slate-900 text-white dark:bg-emerald-600'
+                  ? 'bg-slate-900 text-white dark:bg-[var(--primary)]'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
@@ -79,7 +79,7 @@ export function Base64Tool() {
               type="checkbox"
               checked={urlSafe}
               onChange={(e) => setUrlSafe(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)] cursor-pointer"
             />
             <span>URL-safe (RFC 4648)</span>
           </label>
@@ -101,7 +101,7 @@ export function Base64Tool() {
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
                 Copied!
               </>
             ) : (
@@ -133,7 +133,7 @@ export function Base64Tool() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={mode === 'encode' ? 'Type or paste text to encode...' : 'Paste Base64 string to decode...'}
-            className="w-full h-80 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-y"
+            className="w-full h-80 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-y"
             spellCheck={false}
           />
         </div>

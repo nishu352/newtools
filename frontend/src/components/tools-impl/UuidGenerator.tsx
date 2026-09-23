@@ -74,7 +74,7 @@ export function UuidGenerator() {
               max={100}
               value={count}
               onChange={(e) => handleCountChange(Number(e.target.value) || 1)}
-              className="w-18 px-2.5 py-1 text-xs text-center rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-18 px-2.5 py-1 text-xs text-center rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             />
           </div>
 
@@ -83,7 +83,7 @@ export function UuidGenerator() {
               type="checkbox"
               checked={uppercase}
               onChange={(e) => handleToggleUppercase(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
             />
             <span>UPPERCASE</span>
           </label>
@@ -93,7 +93,7 @@ export function UuidGenerator() {
               type="checkbox"
               checked={hyphens}
               onChange={(e) => handleToggleHyphens(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
             />
             <span>Include Hyphens</span>
           </label>
@@ -114,7 +114,7 @@ export function UuidGenerator() {
           >
             {copiedAll ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
                 Copied All!
               </>
             ) : (
@@ -148,8 +148,8 @@ export function UuidGenerator() {
             >
               {copiedIndex === idx ? (
                 <>
-                  <Check className="w-3 h-3 text-emerald-500" />
-                  <span className="text-emerald-600 dark:text-emerald-400">Copied</span>
+                  <Check className="w-3 h-3 text-[var(--primary)]" />
+                  <span className="text-[var(--primary)] dark:text-[var(--primary)]">Copied</span>
                 </>
               ) : (
                 <>

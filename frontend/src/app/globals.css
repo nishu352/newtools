@@ -1,56 +1,214 @@
 @import "tailwindcss";
 
+/* ─── Google Font hint (Inter loaded via next/font) ─────────────────────────── */
 @layer base {
+  /* ─── Light mode tokens ─────────────────────────────────────────────────── */
   :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-    --card: #ffffff;
-    --card-foreground: #0f172a;
-    --border: #e2e8f0;
-    --muted: #f1f5f9;
-    --muted-foreground: #64748b;
-    --accent: #10b981;
+    /* Primary accent — Electric Blue */
+    --primary:           #2563EB;
+    --primary-hover:     #1D4ED8;
+    --primary-soft:      #DBEAFE;
+    --primary-foreground:#ffffff;
+
+    /* Secondary accent — Cyan (use sparingly) */
+    --cyan:              #06B6D4;
+    --cyan-soft:         #CFFAFE;
+
+    /* Surfaces */
+    --background:        #f8fafc;
+    --surface:           #ffffff;
+    --surface-elevated:  #ffffff;
+    --surface-muted:     #f1f5f9;
+
+    /* Borders */
+    --border:            #e2e8f0;
+    --border-strong:     #cbd5e1;
+
+    /* Text */
+    --foreground:        #0f172a;
+    --foreground-muted:  #64748b;
+    --foreground-subtle: #94a3b8;
+
+    /* Legacy aliases (keep components working) */
+    --card:              #ffffff;
+    --card-foreground:   #0f172a;
+    --muted:             #f1f5f9;
+    --muted-foreground:  #64748b;
+    --accent:            #2563EB;
     --accent-foreground: #ffffff;
+
+    /* Semantic status */
+    --success:           #16a34a;
+    --success-soft:      #dcfce7;
+    --warning:           #d97706;
+    --warning-soft:      #fef3c7;
+    --error:             #dc2626;
+    --error-soft:        #fee2e2;
   }
 
+  /* ─── Dark mode tokens ──────────────────────────────────────────────────── */
   .dark {
-    --background: #090d16;
-    --foreground: #f8fafc;
-    --card: #0f172a;
-    --card-foreground: #f8fafc;
-    --border: #1e293b;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --accent: #10b981;
+    /* Primary accent — Electric Blue (slightly lighter for dark bg) */
+    --primary:           #3B82F6;
+    --primary-hover:     #2563EB;
+    --primary-soft:      #1e3a5f;
+    --primary-foreground:#ffffff;
+
+    /* Secondary accent */
+    --cyan:              #22D3EE;
+    --cyan-soft:         #164e63;
+
+    /* Surfaces */
+    --background:        #090d16;
+    --surface:           #0f172a;
+    --surface-elevated:  #1e293b;
+    --surface-muted:     #1e293b;
+
+    /* Borders */
+    --border:            #1e293b;
+    --border-strong:     #334155;
+
+    /* Text */
+    --foreground:        #f1f5f9;
+    --foreground-muted:  #94a3b8;
+    --foreground-subtle: #64748b;
+
+    /* Legacy aliases */
+    --card:              #0f172a;
+    --card-foreground:   #f8fafc;
+    --muted:             #1e293b;
+    --muted-foreground:  #94a3b8;
+    --accent:            #3B82F6;
     --accent-foreground: #ffffff;
+
+    /* Semantic status */
+    --success:           #4ade80;
+    --success-soft:      #14532d;
+    --warning:           #fbbf24;
+    --warning-soft:      #451a03;
+    --error:             #f87171;
+    --error-soft:        #450a0a;
   }
 }
 
+/* ─── Base styles ───────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbars for code textareas */
-textarea::-webkit-scrollbar {
+/* Prevent horizontal scroll at any viewport */
+*, *::before, *::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* ─── Focus visible system ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Text selection ────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+}
+
+.dark ::selection {
+  background-color: var(--primary-soft);
+  color: #93c5fd;
+}
+
+/* ─── Scrollbar — thin for code/pill rows ──────────────────────────────────── */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ─── Scrollbar — textareas / code panels ──────────────────────────────────── */
+textarea::-webkit-scrollbar,
+.code-panel::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-textarea::-webkit-scrollbar-track {
+textarea::-webkit-scrollbar-track,
+.code-panel::-webkit-scrollbar-track {
   background: transparent;
 }
 
-textarea::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
+textarea::-webkit-scrollbar-thumb,
+.code-panel::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
   border-radius: 3px;
 }
 
-textarea::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.7);
+textarea::-webkit-scrollbar-thumb:hover,
+.code-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
+
+/* ─── Typography helpers ────────────────────────────────────────────────────── */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ─── Result / code output panels ──────────────────────────────────────────── */
+.result-value {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+pre, code, .mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Mobile nav animation ──────────────────────────────────────────────────── */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.18s ease-out forwards;
 }

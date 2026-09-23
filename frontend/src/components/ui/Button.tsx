@@ -9,30 +9,33 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     const variantStyles = {
+      // Electric Blue — consistent in both light and dark
       primary:
-        'bg-slate-900 text-white hover:bg-slate-800 dark:bg-emerald-600 dark:text-white dark:hover:bg-emerald-500 shadow-sm',
+        'bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] shadow-sm shadow-blue-500/20 dark:shadow-blue-900/30',
       secondary:
-        'bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+        'bg-[var(--surface-muted)] text-[var(--foreground)] hover:bg-[var(--border)] dark:hover:bg-[var(--border-strong)]',
       outline:
-        'border border-slate-200 dark:border-slate-800 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200',
+        'border border-[var(--border)] bg-transparent hover:bg-[var(--surface-muted)] text-[var(--foreground)]',
       ghost:
-        'bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300',
+        'bg-transparent hover:bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--foreground)]',
       danger:
-        'bg-rose-600 text-white hover:bg-rose-700 dark:bg-rose-600 dark:hover:bg-rose-500',
+        'bg-[var(--error)] text-white hover:opacity-90',
     };
 
     const sizeStyles = {
-      sm: 'h-8 px-3 text-xs rounded-md',
-      md: 'h-9 px-4 text-sm rounded-lg',
-      lg: 'h-11 px-6 text-base rounded-lg',
-      icon: 'h-9 w-9 p-0 flex items-center justify-center rounded-lg',
+      sm:   'h-9 px-3.5 text-xs rounded-md',
+      md:   'h-10 px-4 text-sm rounded-lg',     // 40px — comfortable tap
+      lg:   'h-11 px-6 text-base rounded-lg',   // 44px — full tap target
+      icon: 'h-10 w-10 p-0 flex items-center justify-center rounded-lg',
     };
 
     return (
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer',
+          'inline-flex items-center justify-center gap-2 font-medium transition-colors',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-1',
+          'disabled:pointer-events-none disabled:opacity-50 cursor-pointer',
           variantStyles[variant],
           sizeStyles[size],
           className

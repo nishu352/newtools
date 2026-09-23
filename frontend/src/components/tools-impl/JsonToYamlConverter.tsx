@@ -117,7 +117,7 @@ export function JsonToYamlConverter() {
             onChange={(e) => setJsonInput(e.target.value)}
             placeholder="Paste your JSON here..."
             spellCheck={false}
-            className="flex-1 w-full bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+            className="flex-1 w-full bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
           />
         </div>
 
@@ -125,7 +125,7 @@ export function JsonToYamlConverter() {
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-[460px]">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
             <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Code2 className="w-3.5 h-3.5 text-emerald-500" />
+              <Code2 className="w-3.5 h-3.5 text-[var(--primary)]" />
               YAML Output
             </label>
             <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export function JsonToYamlConverter() {
                 disabled={!conversion.success || !conversion.output}
                 className="text-xs"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500 mr-1" /> : <Copy className="w-3.5 h-3.5 mr-1" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[var(--primary)] mr-1" /> : <Copy className="w-3.5 h-3.5 mr-1" />}
                 {copied ? 'Copied' : 'Copy'}
               </Button>
               <Button

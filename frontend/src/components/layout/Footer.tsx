@@ -1,103 +1,88 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { CATEGORY_LIST } from '@/lib/tools/definitions/categories';
-import { ShieldCheck, Zap, Lock, HeartHandshake } from 'lucide-react';
+import { ShieldCheck, Zap, Lock, HeartHandshake, Wrench } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const pillars = [
+    { icon: Zap, label: 'Blazing Fast', desc: 'Browser execution, zero server lag' },
+    { icon: Lock, label: 'Zero Retention', desc: 'No data stored or uploaded' },
+    { icon: HeartHandshake, label: '100% Free', desc: 'No paywalls or subscriptions' },
+    { icon: ShieldCheck, label: 'Ad-Free', desc: 'Built for direct utility' },
+  ];
+
   return (
-    <footer className="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40 text-slate-600 dark:text-slate-400">
-      {/* Platform Pillars Banner */}
-      <div className="border-b border-slate-200 dark:border-slate-800/80 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <Zap className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Blazing Fast</h4>
-                <p className="text-xs text-slate-500">Browser execution with zero server lag</p>
-              </div>
-            </div>
+    <footer className="w-full border-t border-[var(--border)] bg-[var(--surface-muted)]/60 text-[var(--foreground-muted)]">
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <Lock className="w-5 h-5" />
+      {/* Platform pillars */}
+      <div className="border-b border-[var(--border)] py-6">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {pillars.map(({ icon: Icon, label, desc }) => (
+              <div key={label} className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center shrink-0">
+                  <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-sm font-semibold text-[var(--foreground)] leading-tight">{label}</h4>
+                  <p className="text-xs text-[var(--foreground-subtle)] mt-0.5 leading-tight hidden sm:block">{desc}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Zero Retention</h4>
-                <p className="text-xs text-slate-500">No data stored, logged, or uploaded</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <HeartHandshake className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">100% Free</h4>
-                <p className="text-xs text-slate-500">No paywalls, subscriptions, or popups</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Clean & Ad-Free</h4>
-                <p className="text-xs text-slate-500">Built for direct utility without clutter</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Main Links Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-          {/* Brand Info */}
-          <div className="md:col-span-2 flex flex-col">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-bold text-lg text-slate-900 dark:text-slate-100">OmniTools</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+      {/* Main links */}
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+
+          {/* Brand */}
+          <div className="col-span-2 flex flex-col gap-3">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-[var(--primary)] flex items-center justify-center text-white">
+                <Wrench className="w-3.5 h-3.5" />
+              </div>
+              <span className="font-bold text-[var(--foreground)]">OmniTools</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)] mb-0.5" />
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm mb-4">
-              A privacy-first, ultra-fast online utility platform designed for developers, writers, analysts, and everyday
-              productivity. Tools execute directly inside your browser.
+            <p className="text-xs text-[var(--foreground-subtle)] leading-relaxed max-w-xs">
+              A privacy-first, ultra-fast online utility platform for developers, writers,
+              analysts, and everyday productivity. Tools execute directly inside your browser.
             </p>
-            <div className="text-xs text-slate-400">
-              Architecture: Next.js + Fastify + Client-Side First Execution
-            </div>
+            <p className="text-xs text-[var(--foreground-subtle)] opacity-60">
+              Next.js · Fastify · Client-Side Execution
+            </p>
           </div>
 
-          {/* Categories Columns */}
+          {/* Categories */}
           <div className="flex flex-col gap-2">
-            <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-1">
+            <h5 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] mb-1">
               Categories
             </h5>
-            {CATEGORY_LIST.slice(0, 4).map((cat) => (
+            {CATEGORY_LIST.slice(0, 5).map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/categories/${cat.slug}`}
-                className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                className="text-xs text-[var(--foreground-muted)] hover:text-[var(--primary)] transition-colors"
               >
                 {cat.name}
               </Link>
             ))}
           </div>
 
+          {/* More tools */}
           <div className="flex flex-col gap-2">
-            <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-1">
+            <h5 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] mb-1">
               More Tools
             </h5>
-            {CATEGORY_LIST.slice(4).map((cat) => (
+            {CATEGORY_LIST.slice(5).map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/categories/${cat.slug}`}
-                className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                className="text-xs text-[var(--foreground-muted)] hover:text-[var(--primary)] transition-colors"
               >
                 {cat.name}
               </Link>
@@ -106,35 +91,37 @@ export function Footer() {
 
           {/* Platform & Legal */}
           <div className="flex flex-col gap-2">
-            <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-1">
-              Platform & Legal
+            <h5 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] mb-1">
+              Company
             </h5>
-            <Link href="/about" className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-              About OmniTools
-            </Link>
-            <Link href="/privacy" className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-              Privacy Guarantee
-            </Link>
-            <Link href="/terms" className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="/contact" className="text-xs hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-              Contact & Requests
-            </Link>
+            {[
+              { href: '/about', label: 'About' },
+              { href: '/privacy', label: 'Privacy' },
+              { href: '/terms', label: 'Terms' },
+              { href: '/contact', label: 'Contact' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-xs text-[var(--foreground-muted)] hover:text-[var(--primary)] transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-          <p>© {currentYear} OmniTools Platform. Built with privacy-first principles.</p>
-          <div className="flex items-center gap-4 mt-4 sm:mt-0">
-            <Link href="/privacy" className="hover:underline">
-              Privacy Policy
+        {/* Bottom bar */}
+        <div className="mt-10 pt-5 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--foreground-subtle)]">
+          <p>© {currentYear} OmniTools. Built with privacy-first principles.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-[var(--primary)] hover:underline transition-colors">
+              Privacy
             </Link>
-            <Link href="/terms" className="hover:underline">
+            <Link href="/terms" className="hover:text-[var(--primary)] hover:underline transition-colors">
               Terms
             </Link>
-            <Link href="/contact" className="hover:underline">
+            <Link href="/contact" className="hover:text-[var(--primary)] hover:underline transition-colors">
               Suggest a Tool
             </Link>
           </div>

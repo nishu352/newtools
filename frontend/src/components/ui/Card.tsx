@@ -5,13 +5,14 @@ export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
   return (
     <div
       className={cn(
-        'rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 shadow-sm transition-all',
+        'rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-sm transition-all',
         className
       )}
       {...props}
     />
   );
 }
+
 
 export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />;

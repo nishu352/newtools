@@ -17,21 +17,14 @@ interface ToolPageProps {
 
 export async function generateStaticParams() {
   const tools = toolRegistry.getAllTools();
-  return tools.map((tool) => ({
-    slug: tool.slug,
-  }));
+  return tools.map((tool) => ({ slug: tool.slug }));
 }
 
 export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
   const { slug } = await params;
   const tool = toolRegistry.getToolBySlug(slug);
 
-  if (!tool) {
-    return generatePageMetadata({
-      title: 'Tool Not Found',
-      noIndex: true,
-    });
-  }
+  if (!tool) return generatePageMetadata({ title: 'Tool Not Found', noIndex: true });
 
   return generatePageMetadata({
     title: tool.seo.title,
@@ -45,9 +38,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
   const { slug } = await params;
   const tool = toolRegistry.getToolBySlug(slug);
 
-  if (!tool) {
-    notFound();
-  }
+  if (!tool) notFound();
 
   const category = toolRegistry.getCategoryBySlug(tool.category);
   const relatedTools = toolRegistry
@@ -73,7 +64,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Breadcrumbs
           items={[
             { name: 'Tools', href: '/tools' },
@@ -83,36 +74,36 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         />
 
         {/* Tool Header */}
-        <div className="my-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+        <div className="my-5 pb-5 border-b border-[var(--border)]">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <ExecutionBadge mode={tool.executionMode} />
             <PrivacyBadge variant="compact" />
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
             {tool.name}
           </h1>
 
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
+          <p className="mt-2 text-sm text-[var(--foreground-muted)] max-w-3xl leading-relaxed">
             {tool.description}
           </p>
         </div>
 
-        {/* Main Tool Execution Runner */}
-        <div className="p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800/90 bg-white dark:bg-slate-900/40 shadow-sm mb-12">
+        {/* Tool Runner — appears first, above all long-form content */}
+        <div className="p-4 sm:p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm mb-10">
           <ToolRunner tool={tool} />
         </div>
 
         {/* Feature Highlights */}
         {tool.features && tool.features.length > 0 && (
-          <div className="mb-12 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20">
-            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">
+          <div className="mb-10 p-5 rounded-xl border border-[var(--border)] bg-[var(--surface-muted)]/40">
+            <h2 className="text-sm font-bold text-[var(--foreground)] mb-3">
               Key Capabilities
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {tool.features.map((feat, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <div key={idx} className="flex items-start gap-2 text-xs text-[var(--foreground-muted)]">
+                  <CheckCircle2 className="w-4 h-4 text-[var(--primary)] shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </div>
               ))}
@@ -122,10 +113,10 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
         {/* FAQ Section */}
         {tool.faqs && tool.faqs.length > 0 && (
-          <div className="mb-12">
+          <div className="mb-10">
             <div className="flex items-center gap-2 mb-4">
-              <HelpCircle className="w-4 h-4 text-slate-400" />
-              <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+              <HelpCircle className="w-4 h-4 text-[var(--foreground-subtle)]" />
+              <h2 className="text-base font-bold text-[var(--foreground)]">
                 Frequently Asked Questions
               </h2>
             </div>
@@ -133,12 +124,12 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
               {tool.faqs.map((faq, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30"
+                  className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)]"
                 >
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-1.5">
+                  <h3 className="text-sm font-semibold text-[var(--foreground)] mb-1.5">
                     {faq.question}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-[var(--foreground-muted)] leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
@@ -149,11 +140,11 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
         {/* Related Tools */}
         {relatedTools.length > 0 && (
-          <div className="pt-8 border-t border-slate-200 dark:border-slate-800">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
+          <div className="pt-8 border-t border-[var(--border)]">
+            <h2 className="text-base font-bold text-[var(--foreground)] mb-4">
               More {category?.name || 'Related'} Tools
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {relatedTools.map((relTool) => (
                 <ToolCard key={relTool.id} tool={relTool} />
               ))}

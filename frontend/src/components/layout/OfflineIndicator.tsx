@@ -50,8 +50,8 @@ export function OfflineIndicator() {
           <span>You&apos;re offline. Cached tools are still available.</span>
         </div>
       ) : showRestored ? (
-        <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-emerald-950/90 text-emerald-200 border border-emerald-700/60 shadow-xl backdrop-blur-md text-xs font-medium">
-          <Wifi className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--primary)]/20 shadow-xl backdrop-blur-md text-xs font-medium">
+          <Wifi className="w-3.5 h-3.5 text-[var(--primary)]" />
           <span>Connection restored. Back online.</span>
         </div>
       ) : null}

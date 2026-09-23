@@ -12,13 +12,13 @@ export function PrivacyBadge({ className, variant = 'compact' }: PrivacyBadgePro
     return (
       <span
         className={cn(
-          'inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20',
+          'inline-flex items-center gap-1.5 text-xs font-medium text-[var(--primary)] bg-[var(--primary-soft)] px-2.5 py-1 rounded-md border border-[var(--primary)]/20',
           className
         )}
         title="Zero-Retention Guarantee: No inputs are transmitted or persisted."
       >
         <ShieldCheck className="w-3.5 h-3.5" />
-        <span>100% Private · Zero Storage</span>
+        <span>Runs in your browser</span>
       </span>
     );
   }
@@ -26,19 +26,21 @@ export function PrivacyBadge({ className, variant = 'compact' }: PrivacyBadgePro
   return (
     <div
       className={cn(
-        'flex items-center gap-3 p-3.5 rounded-lg border border-emerald-500/20 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300',
+        'flex items-start gap-3 p-3.5 rounded-lg border border-[var(--primary)]/20 bg-[var(--primary-soft)]/50',
         className
       )}
     >
-      <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
-        <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+      <div className="w-8 h-8 rounded-full bg-[var(--primary-soft)] flex items-center justify-center shrink-0 mt-0.5">
+        <ShieldCheck className="w-4 h-4 text-[var(--primary)]" />
       </div>
       <div className="text-xs leading-relaxed">
-        <span className="font-semibold block text-slate-900 dark:text-slate-100 mb-0.5">
+        <span className="font-semibold block text-[var(--foreground)] mb-0.5">
           Zero-Retention Privacy Guarantee
         </span>
-        This tool executes entirely in your browser memory. Your data never touches any server, database, or analytics
-        service.
+        <span className="text-[var(--foreground-muted)]">
+          This tool executes entirely in your browser memory. Your data never touches any
+          server, database, or analytics service.
+        </span>
       </div>
     </div>
   );

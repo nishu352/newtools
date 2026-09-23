@@ -89,7 +89,7 @@ export function ColorConverter() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="e.g. #10b981 or rgb(16, 185, 129)..."
-                className="w-full bg-slate-50 dark:bg-slate-950 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-950 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
               />
             </div>
           </div>
@@ -118,7 +118,7 @@ export function ColorConverter() {
 
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Hue Degree</span>
-            <span className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-400">{fullColor.hsl.h}°</span>
+            <span className="text-sm font-bold font-mono text-[var(--primary)] dark:text-[var(--primary)]">{fullColor.hsl.h}°</span>
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@ export function ColorConverter() {
                   onClick={() => handleCopy(key, value)}
                   className={`text-xs px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all ${
                     isCopied
-                      ? 'bg-emerald-500 text-white'
+                      ? 'bg-[var(--primary)] text-white'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >

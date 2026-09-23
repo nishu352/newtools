@@ -17,7 +17,7 @@ export default function PrivacyPage() {
       <Breadcrumbs items={[{ name: 'Privacy Policy' }]} />
 
       <div className="my-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] mb-4">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>ZERO-RETENTION ARCHITECTURE</span>
         </div>
@@ -32,9 +32,9 @@ export default function PrivacyPage() {
 
       <div className="space-y-8 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
         {/* The Golden Rule */}
-        <div className="p-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/5">
+        <div className="p-6 rounded-2xl border border-[var(--primary)]/20 bg-[var(--primary-soft)]">
           <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2 mb-2">
-            <Lock className="w-5 h-5 text-emerald-500" />
+            <Lock className="w-5 h-5 text-[var(--primary)]" />
             The Core Rule: We Do Not Retain Your Tool Inputs
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -56,24 +56,24 @@ export default function PrivacyPage() {
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-400 mb-4">
             <li className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500" />
+              <Check className="w-4 h-4 text-[var(--primary)]" />
               <span>JSON Formatting, Minification, & Validation</span>
             </li>
             <li className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500" />
+              <Check className="w-4 h-4 text-[var(--primary)]" />
               <span>Base64 Encoding & Decoding</span>
             </li>
             <li className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500" />
+              <Check className="w-4 h-4 text-[var(--primary)]" />
               <span>Word & Character Counts, Text Transformations</span>
             </li>
             <li className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500" />
+              <Check className="w-4 h-4 text-[var(--primary)]" />
               <span>Calculators, Unit Conversions, & Math Tools</span>
             </li>
           </ul>
           <p className="text-xs text-slate-500">
-            For all tools marked with the <strong className="text-emerald-600 dark:text-emerald-400">In-Browser</strong>{' '}
+            For all tools marked with the <strong className="text-[var(--primary)] dark:text-[var(--primary)]">In-Browser</strong>{' '}
             badge, open your browser&apos;s DevTools Network tab: you will see exactly zero requests sent when you type or
             execute conversions.
           </p>

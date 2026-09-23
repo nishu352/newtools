@@ -13,12 +13,12 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center text-xs text-slate-500 dark:text-slate-400 py-3">
-      <ol className="flex items-center gap-1.5 flex-wrap">
+    <nav aria-label="Breadcrumb" className="flex items-center py-3 -mx-1">
+      <ol className="flex items-center gap-0.5 flex-wrap">
         <li>
           <Link
             href="/"
-            className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+            className="inline-flex items-center gap-1 px-1 py-1 min-h-[36px] text-sm text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
           >
             <Home className="w-3.5 h-3.5" />
             <span className="sr-only">Home</span>
@@ -29,17 +29,20 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
           const isLast = index === items.length - 1;
 
           return (
-            <li key={index} className="flex items-center gap-1.5">
-              <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+            <li key={index} className="flex items-center gap-0.5">
+              <ChevronRight className="w-3.5 h-3.5 text-[var(--foreground-subtle)] shrink-0" />
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors truncate max-w-[200px]"
+                  className="px-1 py-1 min-h-[36px] inline-flex items-center text-sm text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] truncate max-w-[180px] sm:max-w-[240px]"
                 >
                   {item.name}
                 </Link>
               ) : (
-                <span className="font-medium text-slate-900 dark:text-slate-100 truncate max-w-[200px]" aria-current="page">
+                <span
+                  className="px-1 text-sm font-medium text-[var(--foreground)] truncate max-w-[180px] sm:max-w-[240px]"
+                  aria-current="page"
+                >
                   {item.name}
                 </span>
               )}

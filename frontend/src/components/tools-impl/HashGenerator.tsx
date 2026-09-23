@@ -74,7 +74,7 @@ export function HashGenerator() {
                 type="checkbox"
                 checked={uppercase}
                 onChange={(e) => setUppercase(e.target.checked)}
-                className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+                className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
               />
               <span>UPPERCASE Hex</span>
             </label>
@@ -97,7 +97,7 @@ export function HashGenerator() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type or paste text to generate cryptographic hashes..."
-          className="w-full h-32 p-3.5 font-sans text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-y"
+          className="w-full h-32 p-3.5 font-sans text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-y"
         />
       </div>
 
@@ -112,7 +112,7 @@ export function HashGenerator() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <HashIcon className="w-4 h-4 text-emerald-500" />
+                  <HashIcon className="w-4 h-4 text-[var(--primary)]" />
                   <span className="font-semibold text-xs text-slate-900 dark:text-slate-100">{algo.name}</span>
                   <span className="text-[10px] text-slate-400">({algo.bits}-bit)</span>
                 </div>
@@ -126,7 +126,7 @@ export function HashGenerator() {
                 >
                   {copiedKey === algo.key ? (
                     <>
-                      <Check className="w-3 h-3 text-emerald-400" />
+                      <Check className="w-3 h-3 text-[var(--primary)]" />
                       Copied!
                     </>
                   ) : (
@@ -147,7 +147,7 @@ export function HashGenerator() {
       </div>
 
       <div className="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 text-xs text-slate-500">
-        <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
+        <ShieldCheck className="w-4 h-4 text-[var(--primary)] shrink-0" />
         <span>
           Hashing occurs directly inside your browser using the native Web Crypto API (SubtleCrypto). No text is ever
           transmitted to any external server.

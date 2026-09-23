@@ -131,7 +131,7 @@ export function ColorPaletteGenerator() {
               onClick={() => setMode(m.id)}
               className={`text-xs px-3.5 py-2 rounded-xl font-medium transition-all ${
                 mode === m.id
-                  ? 'bg-emerald-500 text-white shadow-xs'
+                  ? 'bg-[var(--primary)] text-white shadow-xs'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
@@ -158,7 +158,7 @@ export function ColorPaletteGenerator() {
             onClick={handleCopyAll}
             className={`text-xs px-3 py-1.5 rounded-lg font-medium flex items-center gap-1.5 transition-all ${
               copiedAll
-                ? 'bg-emerald-500 text-white'
+                ? 'bg-[var(--primary)] text-white'
                 : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
             }`}
           >
@@ -186,7 +186,7 @@ export function ColorPaletteGenerator() {
                     className="p-1.5 rounded-lg bg-black/30 text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs hover:bg-black/50"
                     title="Copy HEX"
                   >
-                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-[var(--primary)]" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
 
@@ -200,7 +200,7 @@ export function ColorPaletteGenerator() {
                     <button
                       type="button"
                       onClick={() => handleCopySingle(idx, color.hex)}
-                      className="text-xs text-slate-400 hover:text-emerald-500 font-sans"
+                      className="text-xs text-slate-400 hover:text-[var(--primary)] font-sans"
                     >
                       {isCopied ? 'Copied' : 'Copy'}
                     </button>

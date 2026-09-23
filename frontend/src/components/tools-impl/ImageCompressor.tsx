@@ -242,11 +242,11 @@ export function ImageCompressor() {
           onClick={() => fileInputRef.current?.click()}
           className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
             isDragOver
-              ? 'border-emerald-500 bg-emerald-500/5'
+              ? 'border-[var(--primary)]/30 bg-[var(--primary)]/5'
               : 'border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 bg-slate-50 dark:bg-slate-900/40'
           }`}
         >
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center">
             <Upload className="w-8 h-8" />
           </div>
           <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">
@@ -268,7 +268,7 @@ export function ImageCompressor() {
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                <Sliders className="w-4 h-4 text-emerald-500" />
+                <Sliders className="w-4 h-4 text-[var(--primary)]" />
                 Compression Controls
               </div>
               <div className="flex items-center gap-2">
@@ -310,7 +310,7 @@ export function ImageCompressor() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   <span>Quality</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-mono">{quality}%</span>
+                  <span className="text-[var(--primary)] dark:text-[var(--primary)] font-mono">{quality}%</span>
                 </div>
                 <input
                   type="range"
@@ -379,23 +379,23 @@ export function ImageCompressor() {
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--primary)] dark:text-[var(--primary)]">
                     Compressed
                   </span>
                   {percentSaved > 0 && (
-                    <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-emerald-700 dark:text-[var(--primary)] bg-[var(--primary)]/10 px-2 py-0.5 rounded-full">
                       -{percentSaved}%
                     </span>
                   )}
                 </div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold">
+                <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] dark:text-[var(--primary)] font-semibold">
                   {compressedResult ? formatBytes(compressedResult.size) : 'Processing...'}
                 </span>
               </div>
               <div className="aspect-video w-full rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center border border-slate-100 dark:border-slate-800">
                 {isCompressing ? (
                   <div className="flex flex-col items-center gap-2 text-slate-400 text-sm">
-                    <RefreshCw className="w-6 h-6 animate-spin text-emerald-500" />
+                    <RefreshCw className="w-6 h-6 animate-spin text-[var(--primary)]" />
                     <span>Compressing...</span>
                   </div>
                 ) : compressedResult ? (
@@ -419,9 +419,9 @@ export function ImageCompressor() {
           </div>
 
           {/* Download Action Bar */}
-          <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 flex flex-wrap items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-[var(--primary)]/5 border border-[var(--primary)]/30/20 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[var(--primary)] text-white flex items-center justify-center shrink-0">
                 <CheckCircle className="w-5 h-5" />
               </div>
               <div>

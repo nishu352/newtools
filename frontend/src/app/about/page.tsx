@@ -17,7 +17,7 @@ export default function AboutPage() {
       <Breadcrumbs items={[{ name: 'About' }]} />
 
       <div className="my-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] mb-4">
           <Sparkles className="w-3.5 h-3.5" />
           <span>OUR MISSION</span>
         </div>
@@ -39,7 +39,7 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center mb-3">
                 <Zap className="w-5 h-5" />
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">1. FAST</h3>
@@ -50,7 +50,7 @@ export default function AboutPage() {
             </div>
 
             <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center mb-3">
                 <Sparkles className="w-5 h-5" />
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">2. FREE</h3>
@@ -60,7 +60,7 @@ export default function AboutPage() {
             </div>
 
             <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center mb-3">
                 <Shield className="w-5 h-5" />
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">3. PRIVATE</h3>
@@ -70,7 +70,7 @@ export default function AboutPage() {
             </div>
 
             <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] dark:text-[var(--primary)] flex items-center justify-center mb-3">
                 <Cpu className="w-5 h-5" />
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">4. USEFUL</h3>
@@ -93,15 +93,15 @@ export default function AboutPage() {
           </p>
           <div className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <CheckCircle2 className="w-4 h-4 text-[var(--primary)]" />
               <span>Full TypeScript type safety across frontend and backend</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <CheckCircle2 className="w-4 h-4 text-[var(--primary)]" />
               <span>Strict CSP security headers and zero third-party telemetry scripts</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <CheckCircle2 className="w-4 h-4 text-[var(--primary)]" />
               <span>WCAG AAA compliant dark and light themes with responsive mobile-first layouts</span>
             </div>
           </div>

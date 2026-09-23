@@ -48,7 +48,7 @@ export function AverageCalculator() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="e.g. 10, 20.5, -5, 40..."
-          className="w-full h-32 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-y"
+          className="w-full h-32 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-y"
         />
       </div>
 
@@ -74,8 +74,8 @@ export function AverageCalculator() {
       {/* Statistic Metric Cards */}
       {stats && (
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-          <div className="p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex flex-col justify-between">
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+          <div className="p-4 rounded-xl border border-[var(--primary)]/30/30 bg-[var(--primary)]/5 flex flex-col justify-between">
+            <span className="text-xs font-semibold text-[var(--primary)] dark:text-[var(--primary)] uppercase tracking-wider">
               Mean (Avg)
             </span>
             <span className="text-2xl font-bold text-slate-900 dark:text-slate-100 my-1">
@@ -87,7 +87,7 @@ export function AverageCalculator() {
               onClick={() => handleCopy(stats.mean, 'mean')}
               className="text-[11px] h-6 px-1.5 mt-1"
             >
-              {copiedKey === 'mean' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'mean' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </Button>
           </div>
@@ -103,7 +103,7 @@ export function AverageCalculator() {
               onClick={() => handleCopy(stats.median, 'median')}
               className="text-[11px] h-6 px-1.5 mt-1"
             >
-              {copiedKey === 'median' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'median' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </Button>
           </div>
@@ -119,7 +119,7 @@ export function AverageCalculator() {
               onClick={() => handleCopy(stats.sum, 'sum')}
               className="text-[11px] h-6 px-1.5 mt-1"
             >
-              {copiedKey === 'sum' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+              {copiedKey === 'sum' ? <Check className="w-3 h-3 text-[var(--primary)]" /> : <Copy className="w-3 h-3" />}
               <span>Copy</span>
             </Button>
           </div>

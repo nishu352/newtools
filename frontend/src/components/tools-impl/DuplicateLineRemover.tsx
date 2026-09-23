@@ -46,7 +46,7 @@ export function DuplicateLineRemover() {
               type="checkbox"
               checked={caseSensitive}
               onChange={(e) => setCaseSensitive(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
             />
             <span>Case Sensitive</span>
           </label>
@@ -56,7 +56,7 @@ export function DuplicateLineRemover() {
               type="checkbox"
               checked={trimWhitespace}
               onChange={(e) => setTrimWhitespace(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
             />
             <span>Trim Whitespace</span>
           </label>
@@ -66,7 +66,7 @@ export function DuplicateLineRemover() {
               type="checkbox"
               checked={removeEmptyLines}
               onChange={(e) => setRemoveEmptyLines(e.target.checked)}
-              className="rounded border-slate-300 dark:border-slate-700 text-emerald-600 focus:ring-emerald-500"
+              className="rounded border-slate-300 dark:border-slate-700 text-[var(--primary)] focus:ring-[var(--primary)]"
             />
             <span>Remove Empty Lines</span>
           </label>
@@ -80,7 +80,7 @@ export function DuplicateLineRemover() {
           <span className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
             Unique: <strong>{result.uniqueCount}</strong>
           </span>
-          <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-semibold">
+          <span className="px-2.5 py-1 rounded-md bg-[var(--primary)]/10 border border-[var(--primary)]/30/20 text-emerald-700 dark:text-[var(--primary)] font-semibold">
             Removed: -{result.duplicatesRemoved}
           </span>
         </div>
@@ -110,7 +110,7 @@ export function DuplicateLineRemover() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste multiple lines of text here..."
-            className="w-full h-80 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-y"
+            className="w-full h-80 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-y"
           />
         </div>
 
@@ -129,7 +129,7 @@ export function DuplicateLineRemover() {
             >
               {copied ? (
                 <>
-                  <Check className="w-3 h-3 text-emerald-400" />
+                  <Check className="w-3 h-3 text-[var(--primary)]" />
                   Copied!
                 </>
               ) : (

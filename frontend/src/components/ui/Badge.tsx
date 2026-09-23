@@ -2,17 +2,18 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'secondary' | 'outline' | 'success' | 'warning' | 'muted';
+  variant?: 'default' | 'secondary' | 'outline' | 'success' | 'warning' | 'muted' | 'primary';
 }
 
 export function Badge({ className, variant = 'default', ...props }: BadgeProps) {
   const variantStyles = {
-    default: 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900',
-    secondary: 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200',
-    outline: 'border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300',
-    success: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20',
-    warning: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20',
-    muted: 'bg-slate-100 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400',
+    default:   'bg-[var(--foreground)] text-[var(--surface)] dark:bg-[var(--surface-elevated)] dark:text-[var(--foreground)]',
+    primary:   'bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--primary)]/20',
+    secondary: 'bg-[var(--surface-muted)] text-[var(--foreground-muted)] dark:bg-[var(--surface-elevated)] dark:text-[var(--foreground-muted)]',
+    outline:   'border border-[var(--border)] text-[var(--foreground-muted)]',
+    success:   'bg-[var(--success-soft)] text-[var(--success)] border border-[var(--success)]/20',
+    warning:   'bg-[var(--warning-soft)] text-[var(--warning)] border border-[var(--warning)]/20',
+    muted:     'bg-[var(--surface-muted)] text-[var(--foreground-subtle)]',
   };
 
   return (

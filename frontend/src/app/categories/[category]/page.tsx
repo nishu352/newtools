@@ -24,10 +24,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const category = toolRegistry.getCategoryBySlug(slug);
 
   if (!category) {
-    return generatePageMetadata({
-      title: 'Category Not Found',
-      noIndex: true,
-    });
+    return generatePageMetadata({ title: 'Category Not Found', noIndex: true });
   }
 
   return generatePageMetadata({
@@ -41,14 +38,12 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
   const { category: slug } = await params;
   const category = toolRegistry.getCategoryBySlug(slug);
 
-  if (!category) {
-    notFound();
-  }
+  if (!category) notFound();
 
   const categoryTools = toolRegistry.getToolsByCategory(slug as ToolCategory);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Breadcrumbs
         items={[
           { name: 'Categories', href: '/categories' },
@@ -56,16 +51,16 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
         ]}
       />
 
-      <div className="my-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+      <div className="my-6 pb-6 border-b border-[var(--border)]">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center">
             <ToolIcon name={category.icon} className="w-5 h-5" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
             {category.name}
           </h1>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+        <p className="text-sm text-[var(--foreground-muted)] max-w-2xl leading-relaxed">
           {category.description}
         </p>
       </div>

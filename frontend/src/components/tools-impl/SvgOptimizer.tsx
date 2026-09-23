@@ -137,14 +137,14 @@ export function SvgOptimizer() {
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Optimized Size</span>
-            <span className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
+            <span className="text-base font-bold font-mono text-[var(--primary)] dark:text-[var(--primary)]">
               {optimization.optimizedBytes.toLocaleString()} B
             </span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Reduction</span>
-            <span className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
+            <span className="text-base font-bold font-mono text-[var(--primary)] dark:text-[var(--primary)]">
               -{optimization.percentSaved}%
             </span>
           </div>
@@ -152,7 +152,7 @@ export function SvgOptimizer() {
           <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
             <div>
               <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Sanitization</span>
-              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-0.5">
+              <span className="text-xs font-semibold text-[var(--primary)] dark:text-[var(--primary)] flex items-center gap-1 mt-0.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Script-Safe
               </span>
@@ -190,7 +190,7 @@ export function SvgOptimizer() {
             onChange={(e) => setInputSvg(e.target.value)}
             placeholder="Paste your SVG code here (<svg>...</svg>)..."
             spellCheck={false}
-            className="flex-1 w-full bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+            className="flex-1 w-full bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
           />
         </div>
 
@@ -225,7 +225,7 @@ export function SvgOptimizer() {
 
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" onClick={handleCopy} disabled={!outputSvg} className="text-xs">
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500 mr-1" /> : <Copy className="w-3.5 h-3.5 mr-1" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[var(--primary)] mr-1" /> : <Copy className="w-3.5 h-3.5 mr-1" />}
                 {copied ? 'Copied' : 'Copy'}
               </Button>
               <Button variant="primary" size="sm" onClick={handleDownload} disabled={!outputSvg} className="text-xs">

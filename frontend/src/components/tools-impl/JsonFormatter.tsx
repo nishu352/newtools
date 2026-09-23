@@ -140,7 +140,7 @@ export function JsonFormatter() {
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
                 Copied!
               </>
             ) : (
@@ -177,7 +177,7 @@ export function JsonFormatter() {
             value={input}
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder="Paste your JSON here..."
-            className="w-full h-96 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-y"
+            className="w-full h-96 p-3.5 font-mono text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-y"
             spellCheck={false}
           />
         </div>
