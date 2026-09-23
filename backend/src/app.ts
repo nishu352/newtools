@@ -51,6 +51,17 @@ export async function buildApp(): Promise<FastifyInstance> {
   });
 
   // Register Routes
+  app.get('/', async (_req, reply) => {
+    return reply.status(200).send({
+      name: 'OmniTools Fastify Backend API',
+      status: 'online',
+      health: '/health',
+      meta: '/api/v1/meta/platform',
+      version: '1.0.0',
+      timestamp: new Date().toISOString(),
+    });
+  });
+
   await app.register(healthRoutes);
   await app.register(metaRoutes, { prefix: '/api/v1' });
 

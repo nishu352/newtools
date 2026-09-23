@@ -18,6 +18,12 @@ export async function registerCors(app: FastifyInstance): Promise<void> {
         return;
       }
 
+      // Automatically allow Vercel deployment origins (production & preview branches)
+      if (/\.vercel\.app$/.test(origin)) {
+        callback(null, true);
+        return;
+      }
+
       // For development, allow localhost origins
       if (env.NODE_ENV === 'development' && /^http:\/\/localhost:\d+$/.test(origin)) {
         callback(null, true);

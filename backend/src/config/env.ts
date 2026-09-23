@@ -5,6 +5,13 @@ import path from 'path';
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
+// Railway Database URL fallbacks (Railway injects DATABASE_PUBLIC_URL or DATABASE_PRIVATE_URL)
+if (!process.env.DATABASE_URL && process.env.DATABASE_PUBLIC_URL) {
+  process.env.DATABASE_URL = process.env.DATABASE_PUBLIC_URL;
+} else if (!process.env.DATABASE_URL && process.env.DATABASE_PRIVATE_URL) {
+  process.env.DATABASE_URL = process.env.DATABASE_PRIVATE_URL;
+}
+
 const envSchema = z.object({
   PORT: z.coerce.number().default(4000),
   HOST: z.string().default('0.0.0.0'),
