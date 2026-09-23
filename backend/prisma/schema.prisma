@@ -1,0 +1,84 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ExecutionMode {
+  CLIENT
+  SERVER
+  HYBRID
+}
+
+enum ToolStatus {
+  ACTIVE
+  BETA
+  COMING_SOON
+  MAINTENANCE
+}
+
+enum AdminRole {
+  SUPERADMIN
+  ADMIN
+  EDITOR
+}
+
+model Category {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  description  String
+  icon         String   @default("folder")
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  tools        Tool[]
+
+  @@index([slug])
+  @@map("categories")
+}
+
+model Tool {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name          String
+  description   String
+  categorySlug  String
+  category      Category      @relation(fields: [categorySlug], references: [slug])
+  executionMode ExecutionMode @default(CLIENT)
+  status        ToolStatus    @default(ACTIVE)
+  icon          String        @default("wrench")
+  isFeatured    Boolean       @default(false)
+  metaTitle     String?
+  metaDesc      String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([slug])
+  @@index([categorySlug])
+  @@map("tools")
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  role         AdminRole @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("admin_users")
+}
+
+model SiteConfig {
+  key         String   @id
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt
+
+  @@map("site_configs")
+}
