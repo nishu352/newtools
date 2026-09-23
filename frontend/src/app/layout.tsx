@@ -4,6 +4,8 @@ import './globals.css';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { PwaRegister } from '@/components/layout/PwaRegister';
+import { OfflineIndicator } from '@/components/layout/OfflineIndicator';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { generateWebSiteSchema } from '@/lib/seo/schema';
 
@@ -25,6 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#10b981" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
@@ -32,6 +36,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased selection:bg-emerald-500/20 selection:text-emerald-700 dark:selection:text-emerald-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <PwaRegister />
+          <OfflineIndicator />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

@@ -21,6 +21,12 @@ import {
   Tag,
   ListFilter,
   GitCompare,
+  Palette,
+  Pipette,
+  Database,
+  TrendingUp,
+  Sparkles,
+  Sliders,
   LucideProps,
 } from 'lucide-react';
 
@@ -46,6 +52,12 @@ const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   Tag,
   ListFilter,
   GitCompare,
+  Palette,
+  Pipette,
+  Database,
+  TrendingUp,
+  Sparkles,
+  Sliders,
 };
 
 interface ToolIconProps extends LucideProps {

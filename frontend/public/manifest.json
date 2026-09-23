@@ -1,0 +1,17 @@
+{
+  "name": "OmniTools — Fast, Free & Private Online Utilities",
+  "short_name": "OmniTools",
+  "description": "Zero-retention online tools platform with in-browser processing for calculators, developer, and media utilities.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -391,4 +391,269 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'One-click copy of unified diff report',
     ],
   },
+
+  // 14. Image Compressor
+  {
+    id: 'tool-image-compressor',
+    slug: 'image-compressor',
+    name: 'Image Compressor',
+    shortDescription: 'Compress JPEG, PNG, and WebP images locally without uploading them.',
+    description:
+      'Reduce image file sizes directly in your browser while keeping full control over quality and output format. Images never leave your device.',
+    category: 'image-graphics',
+    icon: 'Sliders',
+    keywords: ['image compressor', 'compress image', 'compress png', 'compress jpeg', 'webp converter', 'shrink image'],
+    executionMode: 'client',
+    status: 'active',
+    isFeatured: true,
+    seo: {
+      title: 'Free In-Browser Image Compressor — Zero Server Uploads',
+      description:
+        'Compress JPEG, PNG, and WebP images directly in your browser. Fast, private, with adjustable quality and instant preview.',
+      keywords: ['image compressor', 'compress images online', 'client side image optimizer', 'compress webp'],
+    },
+    features: [
+      '100% in-browser processing via HTML5 Canvas',
+      'Supports JPEG, PNG, and WebP with custom quality control',
+      'Proportional dimension resizing to reduce high-res photo sizes',
+      'Side-by-side Before/After preview with exact byte reduction stats',
+      'One-click download of optimized image files',
+    ],
+    faqs: [
+      {
+        question: 'Are my images uploaded to any server?',
+        answer: 'No. All compression and format conversion occurs 100% inside your browser memory using HTML Canvas APIs. Zero bytes are uploaded.',
+      },
+      {
+        question: 'Which image formats are supported?',
+        answer: 'You can upload and compress JPEG, PNG, and WebP files, and choose your preferred output format.',
+      },
+    ],
+  },
+
+  // 15. SVG Optimizer / Viewer
+  {
+    id: 'tool-svg-optimizer',
+    slug: 'svg-optimizer',
+    name: 'SVG Optimizer & Viewer',
+    shortDescription: 'Sanitize, minify, and format SVG markup with safe sandbox preview.',
+    description:
+      'Clean and optimize SVG vector files by removing editor metadata, comments, and empty attributes. Includes XSS sanitization and sandboxed rendering.',
+    category: 'image-graphics',
+    icon: 'Sparkles',
+    keywords: ['svg optimizer', 'svg viewer', 'minify svg', 'clean svg', 'sanitize svg', 'svg formatter'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free SVG Optimizer & Viewer — Sanitize & Minify Vector Code',
+      description:
+        'Minify, format, and sanitize SVG markup with real-time size reduction stats and safe sandboxed vector preview.',
+      keywords: ['svg optimizer', 'minify svg online', 'svg viewer', 'clean svg code'],
+    },
+    features: [
+      'Strips XML prologs, DOCTYPEs, comments, and editor namespaces',
+      'Automatic XSS sanitization removing malicious scripts and event handlers',
+      'Safe isolated preview rendered in a sandboxed iframe',
+      'Format/beautify mode with 2-space indentation',
+      'Real-time byte reduction metrics and one-click download',
+    ],
+  },
+
+  // 16. Color Converter
+  {
+    id: 'tool-color-converter',
+    slug: 'color-converter',
+    name: 'Color Converter',
+    shortDescription: 'Convert colors between HEX, RGB, HSL, and OKLCH with live preview.',
+    description:
+      'Enter any color in HEX, RGB, HSL, or OKLCH and get synchronized values across all formats. Features alpha transparency and WCAG contrast check.',
+    category: 'developer',
+    icon: 'Pipette',
+    keywords: ['color converter', 'hex to rgb', 'rgb to hex', 'hsl converter', 'oklch converter', 'color picker'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free Online Color Converter — HEX, RGB, HSL & OKLCH',
+      description:
+        'Convert colors instantly between HEX, RGB, HSL, and modern OKLCH color spaces. Accurate CSS Color Module 4 math.',
+      keywords: ['color converter', 'hex to rgb', 'rgb to hsl', 'oklch to hex', 'css color converter'],
+    },
+    features: [
+      'Bidirectional conversion between HEX, RGB, HSL, and OKLCH',
+      'Supports 3, 4, 6, and 8-digit HEX with alpha channels',
+      'Accurate CIE XYZ D65 and Oklab matrix calculations',
+      'WCAG 2.1 relative luminance and contrast text suggestion',
+      'One-click copy for all CSS color strings',
+    ],
+  },
+
+  // 17. Color Palette Generator
+  {
+    id: 'tool-color-palette-generator',
+    slug: 'color-palette-generator',
+    name: 'Color Palette Generator',
+    shortDescription: 'Generate harmonious color palettes using classic color theory rules.',
+    description:
+      'Create deterministic color schemes from any base color: complementary, analogous, split-complementary, triadic, and tints & shades.',
+    category: 'developer',
+    icon: 'Palette',
+    keywords: ['color palette generator', 'color schemes', 'complementary colors', 'analogous colors', 'triadic palette'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free Color Palette Generator — Harmonies, Tints & Shades',
+      description:
+        'Generate design palettes using color theory: complementary, analogous, triadic, and monochromatic shades. Copy single colors or full palette.',
+      keywords: ['color palette generator', 'color harmony tool', 'palette creator', 'tints and shades'],
+    },
+    features: [
+      'Deterministic color harmonies: Complementary, Analogous, Split-Comp, Triadic',
+      'Lightness gradient tints and shades generator',
+      'Light vs Dark background preview toggle',
+      'Individual HEX/RGB/HSL copy and bulk palette export',
+      'Random color generator and quick starting presets',
+    ],
+  },
+
+  // 18. EMI & Loan Calculator
+  {
+    id: 'tool-emi-calculator',
+    slug: 'emi-calculator',
+    name: 'EMI & Loan Amortization Calculator',
+    shortDescription: 'Calculate monthly loan installments, total interest, and amortization schedule.',
+    description:
+      'Estimate monthly payments for home, auto, or personal loans. Visual breakdown of principal vs interest, optional prepayment savings, and month-by-month schedule.',
+    category: 'finance',
+    icon: 'PiggyBank',
+    keywords: ['emi calculator', 'loan calculator', 'amortization schedule', 'mortgage calculator', 'loan repayment'],
+    executionMode: 'client',
+    status: 'active',
+    isFeatured: true,
+    seo: {
+      title: 'Free Loan & EMI Calculator — Monthly Amortization Schedule',
+      description:
+        'Calculate monthly EMI payments, total interest payable, and full loan amortization schedule. See impact of extra prepayments.',
+      keywords: ['emi calculator', 'loan amortization calculator', 'monthly loan payment', 'mortgage payment calculator'],
+    },
+    features: [
+      'Accurate standard compound loan amortization math',
+      'Handles zero-interest promotional loans cleanly',
+      'Prepayment simulator showing total interest saved and reduced tenure',
+      'Visual proportional breakdown bar (Principal vs Interest)',
+      'Paginated month-by-month balance and payment schedule',
+    ],
+  },
+
+  // 19. Compound Interest Calculator
+  {
+    id: 'tool-compound-interest-calculator',
+    slug: 'compound-interest-calculator',
+    name: 'Compound Interest Calculator',
+    shortDescription: 'Project investment growth with compounding frequencies and regular deposits.',
+    description:
+      'Forecast long-term savings with daily, monthly, quarterly, or annual compounding. See the impact of recurring deposits on total future balance.',
+    category: 'finance',
+    icon: 'TrendingUp',
+    keywords: ['compound interest calculator', 'investment calculator', 'savings calculator', 'interest calculator', 'wealth growth'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free Compound Interest Calculator — Investment Growth Forecast',
+      description:
+        'Calculate compound interest on savings and investments. Supports annual, monthly, and daily compounding plus recurring contributions.',
+      keywords: ['compound interest calculator', 'investment return calculator', 'savings growth calculator'],
+    },
+    features: [
+      'Supports 5 compounding frequencies: annually, semi-annually, quarterly, monthly, daily',
+      'Monthly and annual recurring deposit simulations',
+      'Visual breakdown of initial principal, total contributions, and interest earned',
+      'Year-by-year accumulation and growth table',
+      'Zero-interest baseline resilience',
+    ],
+  },
+
+  // 20. YAML to JSON Converter
+  {
+    id: 'tool-yaml-to-json',
+    slug: 'yaml-to-json',
+    name: 'YAML to JSON Converter',
+    shortDescription: 'Convert YAML configuration documents into formatted JSON syntax.',
+    description:
+      'Safely parse and convert YAML documents into structured JSON with adjustable indentation, syntax error detection, and file download.',
+    category: 'developer',
+    icon: 'Code2',
+    keywords: ['yaml to json', 'convert yaml to json', 'yaml parser', 'yaml converter'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free YAML to JSON Converter — Fast & Private In-Browser Tool',
+      description:
+        'Convert YAML to formatted JSON directly in your browser. Real-time syntax validation, customizable indentation, and one-click download.',
+      keywords: ['yaml to json', 'convert yaml to json online', 'yaml json converter'],
+    },
+    features: [
+      'Strict YAML 1.2 parsing via standard YAML engine',
+      'Detailed syntax error reporting with line and column indicators',
+      'Adjustable JSON indentation (2 spaces or 4 spaces)',
+      'One-click copy and .json file export',
+      'Completely client-side; your configuration files are never sent to a server',
+    ],
+  },
+
+  // 21. JSON to YAML Converter
+  {
+    id: 'tool-json-to-yaml',
+    slug: 'json-to-yaml',
+    name: 'JSON to YAML Converter',
+    shortDescription: 'Convert JSON data structures into clean YAML documents.',
+    description:
+      'Transform JSON objects and arrays into clean, human-readable YAML documents. Features instant error pinpointing, copy, and download.',
+    category: 'developer',
+    icon: 'Code2',
+    keywords: ['json to yaml', 'convert json to yaml', 'json converter', 'json to yml'],
+    executionMode: 'client',
+    status: 'active',
+    seo: {
+      title: 'Free JSON to YAML Converter — Fast & Private In-Browser Tool',
+      description:
+        'Convert JSON data into clean YAML documents in your browser. Syntax error detection, copy to clipboard, and instant download.',
+      keywords: ['json to yaml', 'convert json to yaml online', 'json yaml converter'],
+    },
+    features: [
+      'Standard JSON parsing with error position pointers',
+      'Outputs clean, indented YAML 1.2 format',
+      'Sample JSON loader for instant evaluation',
+      'One-click copy and .yaml file download',
+      '100% private in-browser memory execution',
+    ],
+  },
+
+  // 22. SQL Query Formatter
+  {
+    id: 'tool-sql-formatter',
+    slug: 'sql-formatter',
+    name: 'SQL Query Formatter',
+    shortDescription: 'Format and beautify SQL queries with standard indentation and uppercase keywords.',
+    description:
+      'Make complex SQL queries readable. Formats SELECT, JOIN, WHERE, GROUP BY, subqueries, and statements with clean indentation, or minify into a single line.',
+    category: 'developer',
+    icon: 'Database',
+    keywords: ['sql formatter', 'format sql', 'beautify sql', 'sql minifier', 'sql query formatter', 'clean sql'],
+    executionMode: 'client',
+    status: 'active',
+    isFeatured: true,
+    seo: {
+      title: 'Free SQL Query Formatter & Minifier — Clean, Private SQL Beautifier',
+      description:
+        'Format and beautify SQL queries with consistent indentation and uppercase keywords. Inert client-side processing without database connection.',
+      keywords: ['sql formatter', 'format sql online', 'beautify sql', 'sql query cleaner'],
+    },
+    features: [
+      'Standardized keyword capitalization (SELECT, FROM, WHERE, JOIN, GROUP BY...)',
+      'Subquery indentation and nested parentheses alignment',
+      'Single-line minification mode that strips comments and collapses whitespace',
+      'Live character and line counter metrics',
+      'Strictly inert client-side text processing with zero database execution',
+    ],
+  },
 ];

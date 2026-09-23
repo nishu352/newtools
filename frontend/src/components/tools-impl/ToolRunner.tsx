@@ -15,6 +15,15 @@ import { DiscountCalculator } from './DiscountCalculator';
 import { CaseConverter } from './CaseConverter';
 import { DuplicateLineRemover } from './DuplicateLineRemover';
 import { TextDiffTool } from './TextDiffTool';
+import { ImageCompressor } from './ImageCompressor';
+import { SvgOptimizer } from './SvgOptimizer';
+import { ColorConverter } from './ColorConverter';
+import { ColorPaletteGenerator } from './ColorPaletteGenerator';
+import { EmiCalculator } from './EmiCalculator';
+import { CompoundInterestCalculator } from './CompoundInterestCalculator';
+import { YamlToJsonConverter } from './YamlToJsonConverter';
+import { JsonToYamlConverter } from './JsonToYamlConverter';
+import { SqlQueryFormatter } from './SqlQueryFormatter';
 import { ExecutionBadge } from '../tools/ExecutionBadge';
 import { PrivacyBadge } from '../tools/PrivacyBadge';
 import { Clock, BellRing, Sparkles } from 'lucide-react';
@@ -42,6 +51,17 @@ export function ToolRunner({ tool }: ToolRunnerProps) {
   if (tool.slug === 'duplicate-line-remover') return <DuplicateLineRemover />;
   if (tool.slug === 'text-diff') return <TextDiffTool />;
 
+  // Phase 3 Media, Finance, Data Tools
+  if (tool.slug === 'image-compressor') return <ImageCompressor />;
+  if (tool.slug === 'svg-optimizer') return <SvgOptimizer />;
+  if (tool.slug === 'color-converter') return <ColorConverter />;
+  if (tool.slug === 'color-palette-generator') return <ColorPaletteGenerator />;
+  if (tool.slug === 'emi-calculator') return <EmiCalculator />;
+  if (tool.slug === 'compound-interest-calculator') return <CompoundInterestCalculator />;
+  if (tool.slug === 'yaml-to-json') return <YamlToJsonConverter />;
+  if (tool.slug === 'json-to-yaml') return <JsonToYamlConverter />;
+  if (tool.slug === 'sql-formatter') return <SqlQueryFormatter />;
+
   // Placeholder for roadmap / future tools
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30">
@@ -57,7 +77,7 @@ export function ToolRunner({ tool }: ToolRunnerProps) {
       </div>
 
       <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-        {tool.name} is arriving in Phase 3
+        {tool.name} is on the Roadmap
       </h3>
 
       <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mb-6 leading-relaxed">

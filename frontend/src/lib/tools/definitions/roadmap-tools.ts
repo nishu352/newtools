@@ -2,40 +2,6 @@ import { ToolDefinition } from '../types';
 
 export const ROADMAP_TOOLS: ToolDefinition[] = [
   {
-    id: 'tool-emi-calc',
-    slug: 'emi-calculator',
-    name: 'EMI & Loan Calculator',
-    shortDescription: 'Calculate monthly installment payments, interest breakdown, and amortization schedule.',
-    description: 'Accurate loan EMI calculator with monthly breakdown and total interest calculations.',
-    category: 'finance',
-    icon: 'PiggyBank',
-    keywords: ['emi', 'loan', 'calculator', 'mortgage', 'interest rate'],
-    executionMode: 'client',
-    status: 'coming_soon',
-    seo: {
-      title: 'Free Loan & EMI Calculator',
-      description: 'Calculate loan EMI and monthly interest schedules.',
-      keywords: ['emi calculator', 'loan calculator'],
-    },
-  },
-  {
-    id: 'tool-image-compressor',
-    slug: 'image-compressor',
-    name: 'Image Compressor',
-    shortDescription: 'Compress PNG, JPEG, and WebP images client-side using browser canvas.',
-    description: 'Reduce image file sizes directly in browser memory without sending files to any server.',
-    category: 'image-graphics',
-    icon: 'FileImage',
-    keywords: ['image compressor', 'compress png', 'compress jpeg', 'webp'],
-    executionMode: 'client',
-    status: 'coming_soon',
-    seo: {
-      title: 'Private In-Browser Image Compressor',
-      description: 'Compress images client-side without uploading files to a server.',
-      keywords: ['image compressor', 'client side image compression'],
-    },
-  },
-  {
     id: 'tool-pdf-merge',
     slug: 'pdf-merger',
     name: 'PDF Merger',
