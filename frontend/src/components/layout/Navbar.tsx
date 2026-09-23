@@ -19,10 +19,12 @@ export function Navbar() {
     { href: '/contact', label: 'Contact' },
   ];
 
-  // Close mobile menu on route change
-  // eslint-disable-next-line react-hooks/set-state-in-effect
+  // Close mobile menu on route change — wrapped in startTransition so it's
+  // deferred and doesn't cause cascading synchronous renders.
   React.useEffect(() => {
-    setMobileMenuOpen(false);
+    React.startTransition(() => {
+      setMobileMenuOpen(false);
+    });
   }, [pathname]);
 
   // Trap scroll when mobile menu open
