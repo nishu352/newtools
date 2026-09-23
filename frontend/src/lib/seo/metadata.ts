@@ -1,6 +1,20 @@
 import { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitools.dev';
+export function getBaseUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    const url = process.env.NEXT_PUBLIC_SITE_URL;
+    return url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return 'https://omnitools.dev';
+}
+
+const BASE_URL = getBaseUrl();
 const SITE_NAME = 'OmniTools';
 const DEFAULT_TITLE = 'OmniTools — Fast, Free & 100% Private Online Tools Platform';
 const DEFAULT_DESCRIPTION =
@@ -42,6 +56,16 @@ export function generatePageMetadata(options: PageMetadataOptions = {}): Metadat
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: canonicalUrl,
+    },
+    icons: {
+      icon: [
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
+      ],
+      shortcut: '/favicon.svg',
+      apple: [
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
     },
     openGraph: {
       title,

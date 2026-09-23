@@ -59,3 +59,15 @@ npx prisma generate
 npm run dev:frontend   # Next.js at http://localhost:3000
 npm run dev:backend    # Fastify at http://localhost:4000
 ```
+
+## Deploying Frontend on Vercel
+
+The frontend is fully configured and ready for 1-click deployment on [Vercel](https://vercel.com):
+
+1. Push this repository to GitHub.
+2. In the Vercel Dashboard, click **New Project** and import the repository.
+3. Configuration:
+   - **Framework Preset**: Next.js
+   - **Root Directory**: Leave as `./` (or select `frontend`) — both work seamlessly out-of-the-box thanks to root and frontend `vercel.json`.
+4. Click **Deploy**. Vercel will automatically build the Next.js app and serve it with Edge caching, custom favicon, PWA manifest, and dynamic SEO metadata.
+

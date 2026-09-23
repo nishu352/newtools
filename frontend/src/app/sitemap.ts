@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
 import { toolRegistry } from '@/lib/tools/registry';
+import { getBaseUrl } from '@/lib/seo/metadata';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitools.dev';
+const BASE_URL = getBaseUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
