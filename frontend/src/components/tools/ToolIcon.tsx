@@ -16,6 +16,11 @@ import {
   FileImage,
   Code2,
   Type,
+  Hash,
+  Scale,
+  Tag,
+  ListFilter,
+  GitCompare,
   LucideProps,
 } from 'lucide-react';
 
@@ -36,6 +41,11 @@ const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   FileImage,
   Code2,
   Type,
+  Hash,
+  Scale,
+  Tag,
+  ListFilter,
+  GitCompare,
 };
 
 interface ToolIconProps extends LucideProps {

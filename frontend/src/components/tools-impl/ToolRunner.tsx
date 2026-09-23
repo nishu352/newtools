@@ -5,6 +5,16 @@ import { ToolDefinition } from '@/lib/tools/types';
 import { JsonFormatter } from './JsonFormatter';
 import { Base64Tool } from './Base64Tool';
 import { WordCounter } from './WordCounter';
+import { UuidGenerator } from './UuidGenerator';
+import { UrlEncoderDecoder } from './UrlEncoderDecoder';
+import { HashGenerator } from './HashGenerator';
+import { PercentageCalculator } from './PercentageCalculator';
+import { AverageCalculator } from './AverageCalculator';
+import { RatioCalculator } from './RatioCalculator';
+import { DiscountCalculator } from './DiscountCalculator';
+import { CaseConverter } from './CaseConverter';
+import { DuplicateLineRemover } from './DuplicateLineRemover';
+import { TextDiffTool } from './TextDiffTool';
 import { ExecutionBadge } from '../tools/ExecutionBadge';
 import { PrivacyBadge } from '../tools/PrivacyBadge';
 import { Clock, BellRing, Sparkles } from 'lucide-react';
@@ -15,19 +25,24 @@ interface ToolRunnerProps {
 }
 
 export function ToolRunner({ tool }: ToolRunnerProps) {
-  if (tool.slug === 'json-formatter') {
-    return <JsonFormatter />;
-  }
+  // Phase 1 Foundation Tools
+  if (tool.slug === 'json-formatter') return <JsonFormatter />;
+  if (tool.slug === 'base64-converter') return <Base64Tool />;
+  if (tool.slug === 'word-counter') return <WordCounter />;
 
-  if (tool.slug === 'base64-converter') {
-    return <Base64Tool />;
-  }
+  // Phase 2 Production Batch Tools
+  if (tool.slug === 'uuid-generator') return <UuidGenerator />;
+  if (tool.slug === 'url-encoder-decoder') return <UrlEncoderDecoder />;
+  if (tool.slug === 'hash-generator') return <HashGenerator />;
+  if (tool.slug === 'percentage-calculator') return <PercentageCalculator />;
+  if (tool.slug === 'average-calculator') return <AverageCalculator />;
+  if (tool.slug === 'ratio-calculator') return <RatioCalculator />;
+  if (tool.slug === 'discount-calculator') return <DiscountCalculator />;
+  if (tool.slug === 'case-converter') return <CaseConverter />;
+  if (tool.slug === 'duplicate-line-remover') return <DuplicateLineRemover />;
+  if (tool.slug === 'text-diff') return <TextDiffTool />;
 
-  if (tool.slug === 'word-counter') {
-    return <WordCounter />;
-  }
-
-  // Placeholder for roadmap / coming-soon tools
+  // Placeholder for roadmap / future tools
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30">
       <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 mb-4">
@@ -42,7 +57,7 @@ export function ToolRunner({ tool }: ToolRunnerProps) {
       </div>
 
       <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-        {tool.name} is arriving in Phase 2
+        {tool.name} is arriving in Phase 3
       </h3>
 
       <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mb-6 leading-relaxed">
