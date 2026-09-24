@@ -5,7 +5,6 @@ import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { PwaRegister } from '@/components/layout/PwaRegister';
-import { OfflineIndicator } from '@/components/layout/OfflineIndicator';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { generateWebSiteSchema } from '@/lib/seo/schema';
 import { AnalyticsScripts } from '@/components/monetization/AnalyticsScripts';
@@ -46,7 +45,6 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <PwaRegister />
-          <OfflineIndicator />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
