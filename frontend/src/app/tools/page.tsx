@@ -6,39 +6,26 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = generatePageMetadata({
-  title: 'All Online Tools Directory — Free & Client-Side',
+  title: 'Tools Directory — OmniTools',
   description:
-    'Explore all online developer, text, math, and utility tools. Fully private, browser-based execution with zero server retention.',
+    'Browse all online utilities: PDF tools, converters, image optimizers, calculators, and developer tools.',
   path: '/tools',
 });
 
 export default function ToolsPage() {
   const allTools = toolRegistry.getAllTools();
-  const activeCount = toolRegistry.getActiveTools().length;
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <Breadcrumbs items={[{ name: 'Tools Directory', href: '/tools' }]} />
+    <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
+      <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Tools' }]} />
 
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
+      <div className="pb-4 border-b border-[var(--border)]">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-tight">
           Tools Directory
         </h1>
-        <p className="text-sm text-[var(--foreground-muted)] mt-2 max-w-2xl leading-relaxed">
-          Browse our complete catalog of developer tools, text utilities, and calculators. All tools
-          feature 100% client-side execution with zero data storage.
+        <p className="mt-1 text-sm text-[var(--foreground-muted)] max-w-2xl">
+          Browse and filter all {allTools.length} utilities.
         </p>
-        <div className="flex items-center gap-3 mt-3 text-xs text-[var(--foreground-muted)]">
-          <span>
-            Total:{' '}
-            <strong className="text-[var(--foreground)]">{allTools.length}</strong>
-          </span>
-          <span>·</span>
-          <span>
-            Active in-browser:{' '}
-            <strong className="text-[var(--primary)]">{activeCount}</strong>
-          </span>
-        </div>
       </div>
 
       <ToolSearch initialTools={allTools} />

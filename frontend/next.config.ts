@@ -135,6 +135,86 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/tools/pdf',
+        destination: '/pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/merge',
+        destination: '/tools/merge-pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/split',
+        destination: '/tools/split-pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/compress',
+        destination: '/tools/compress-pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/organize',
+        destination: '/tools/reorder-pdf-pages',
+        permanent: true,
+      },
+      {
+        source: '/pdf/remove-pages',
+        destination: '/tools/delete-pdf-pages',
+        permanent: true,
+      },
+      {
+        source: '/pdf/extract-pages',
+        destination: '/tools/extract-pdf-pages',
+        permanent: true,
+      },
+      {
+        source: '/pdf/rotate',
+        destination: '/tools/rotate-pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/watermark',
+        destination: '/tools/pdf-watermark',
+        permanent: true,
+      },
+      {
+        source: '/pdf/page-numbers',
+        destination: '/tools/pdf-page-numbering',
+        permanent: true,
+      },
+      {
+        source: '/pdf/header-footer',
+        destination: '/tools/pdf-header-footer',
+        permanent: true,
+      },
+      {
+        source: '/pdf/metadata',
+        destination: '/tools/pdf-metadata-viewer',
+        permanent: true,
+      },
+      {
+        source: '/pdf/to-text',
+        destination: '/tools/pdf-to-text',
+        permanent: true,
+      },
+      {
+        source: '/pdf/image-to-pdf',
+        destination: '/tools/image-to-pdf',
+        permanent: true,
+      },
+      {
+        source: '/pdf/page-size',
+        destination: '/tools/pdf-page-size',
+        permanent: true,
+      },
+    ];
+  },
+
   // Compress output for faster delivery
   compress: true,
 

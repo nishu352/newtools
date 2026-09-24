@@ -12,8 +12,8 @@ export interface ProcessingStateProps {
 }
 
 export function ProcessingState({
-  message = 'Processing your file...',
-  submessage = 'This runs locally in your browser memory and will complete in a few moments.',
+  message = 'Processing...',
+  submessage = 'Please wait while your file is being processed.',
   progressPercent,
   className,
 }: ProcessingStateProps) {
@@ -28,7 +28,7 @@ export function ProcessingState({
       role="status"
       aria-live="polite"
       className={cn(
-        'w-full p-8 sm:p-12 rounded-2xl bg-[var(--surface-muted)]/50 border border-[var(--border)] text-center flex flex-col items-center justify-center space-y-4 animate-fade-in',
+        'w-full p-8 sm:p-10 rounded-xl bg-[var(--surface-muted)]/40 border border-[var(--border)] text-center flex flex-col items-center justify-center space-y-4',
         className
       )}
     >

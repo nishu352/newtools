@@ -58,7 +58,7 @@ export function ResultPanel({
       role="region"
       aria-label="Result Panel"
       className={cn(
-        'w-full p-6 sm:p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs animate-fade-in space-y-6',
+        'w-full p-6 sm:p-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-5',
         className
       )}
     >

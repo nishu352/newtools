@@ -147,10 +147,10 @@ export function FileToolShell({
         onDragLeave={handleDrag}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`relative border-2 border-dashed rounded-2xl p-6 sm:p-10 text-center cursor-pointer transition-all duration-200 select-none ${
+        className={`relative border-2 border-dashed rounded-xl p-6 sm:p-10 text-center cursor-pointer transition-colors duration-150 select-none ${
           dragActive
-            ? 'border-[var(--primary)] bg-[var(--primary-soft)]/20 scale-[0.99]'
-            : 'border-[var(--border)] hover:border-[var(--primary)] bg-[var(--surface-muted)]/30 hover:bg-[var(--surface-muted)]/60'
+            ? 'border-[var(--primary)] bg-[var(--primary-soft)]/20'
+            : 'border-[var(--border)] hover:border-[var(--primary)] bg-[var(--surface-muted)]/30 hover:bg-[var(--surface-muted)]/50'
         }`}
       >
         <input
@@ -163,17 +163,17 @@ export function FileToolShell({
           aria-label="Upload files"
         />
 
-        <div className="flex flex-col items-center justify-center space-y-3">
-          <div className="w-12 h-12 rounded-xl bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center shadow-xs">
-            <Upload className="w-6 h-6" />
+        <div className="flex flex-col items-center justify-center space-y-2.5">
+          <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center">
+            <Upload className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-[var(--foreground)]">
+            <p className="text-sm font-medium text-[var(--foreground)]">
               <span className="hidden sm:inline">Drag & drop your {multiple ? 'files' : 'file'} here, or </span>
-              <span className="text-[var(--primary)] underline sm:no-underline">browse device</span>
+              <span className="text-[var(--primary)] font-semibold underline sm:no-underline">browse file</span>
             </p>
-            <p className="text-xs text-[var(--foreground-subtle)] mt-1">
-              Supports: {accept} • 100% private, processed in your browser
+            <p className="text-xs text-[var(--foreground-muted)] mt-1">
+              Supported format: {accept}
             </p>
           </div>
         </div>

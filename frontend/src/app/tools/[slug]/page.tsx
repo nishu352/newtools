@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { toolRegistry } from '@/lib/tools/registry';
 import { resourceRegistry } from '@/lib/resources/registry';
 import { ToolRunner } from '@/components/tools-impl/ToolRunner';
-import { ToolCard } from '@/components/tools/ToolCard';
+import { ToolRow } from '@/components/tools/ToolRow';
 import { ToolWorkspaceHeader } from '@/components/tools/ToolWorkspaceHeader';
 import { Accordion, AccordionItem } from '@/components/ui/Accordion';
 import { generatePageMetadata } from '@/lib/seo/metadata';
@@ -86,15 +86,15 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         />
       )}
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-        {/* ── 1. Standardized Tool Header (Breadcrumb + Title + Privacy/Capability Badges) ── */}
+      <div className="max-w-[850px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        {/* ── 1. Standardized Tool Header ── */}
         <ToolWorkspaceHeader
           tool={tool}
           categoryName={category ? category.name : tool.category}
         />
 
         {/* ── 2. Tool Workspace (The centerpiece — ABOVE THE FOLD) ── */}
-        <div className="p-4 sm:p-7 rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xs mb-8">
+        <div className="p-4 sm:p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] mb-8">
           <ToolRunner tool={tool} />
         </div>
 
@@ -340,9 +340,9 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-0.5">
               {relatedTools.map((relTool) => (
-                <ToolCard key={relTool.id} tool={relTool} />
+                <ToolRow key={relTool.id} tool={relTool} />
               ))}
             </div>
           </div>
