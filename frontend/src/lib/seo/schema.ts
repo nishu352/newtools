@@ -1,6 +1,7 @@
-import { ToolDefinition } from '../tools/types';
+import { ToolDefinition, ToolFaqItem } from '../tools/types';
+import { getBaseUrl } from './metadata';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitools.dev';
+const BASE_URL = getBaseUrl();
 
 export function generateWebSiteSchema() {
   return {
@@ -9,11 +10,16 @@ export function generateWebSiteSchema() {
     name: 'OmniTools',
     url: BASE_URL,
     description: 'Fast, privacy-first online tools platform with zero server retention.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${BASE_URL}/tools?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
+  };
+}
+
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'OmniTools',
+    url: BASE_URL,
+    description: 'Fast, free, and private online tools for developers, writers, and everyday calculations.',
   };
 }
 
@@ -48,3 +54,23 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
     })),
   };
 }
+
+/**
+ * Generate FAQPage JSON-LD from an array of FAQ items.
+ * Only call this when FAQ content is genuinely visible on the page.
+ */
+export function generateFaqSchema(faqs: ToolFaqItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+

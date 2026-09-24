@@ -14,10 +14,11 @@ export function Navbar() {
   const navLinks = [
     { href: '/tools', label: 'All Tools' },
     { href: '/categories', label: 'Categories' },
-    { href: '/privacy', label: 'Privacy' },
+    { href: '/resources', label: 'Resources' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
+
 
   // Close mobile menu on route change — wrapped in startTransition so it's
   // deferred and doesn't cause cascading synchronous renders.

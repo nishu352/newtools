@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { toolRegistry } from '@/lib/tools/registry';
 import { ToolCard } from '@/components/tools/ToolCard';
 import { ToolIcon } from '@/components/tools/ToolIcon';
+import { AdSlot } from '@/components/monetization/AdSlot';
 import { ShieldCheck, Cpu, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
@@ -118,6 +119,9 @@ export default function HomePage() {
           })}
         </div>
       </section>
+
+      {/* ── Ad Slot (home-content, subtle placement between sections) ── */}
+      <AdSlot slot="home-content" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full" />
 
       {/* ── Privacy section ── */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">

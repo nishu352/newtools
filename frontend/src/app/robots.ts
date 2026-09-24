@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
+import { getBaseUrl } from '@/lib/seo/metadata';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitools.dev';
+const BASE_URL = getBaseUrl();
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,8 +9,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        disallow: ['/api/'],
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }
+

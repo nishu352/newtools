@@ -8,13 +8,16 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/tools/engines/__tests__/*.test.ts"
+    "validate": "tsx scripts/validate-content.ts",
+    "test": "tsx --test src/lib/tools/engines/__tests__/*.test.ts src/lib/monetization/__tests__/*.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "jszip": "^3.10.2",
     "lucide-react": "^1.47.0",
     "next": "16.3.6",
     "next-themes": "^0.4.6",
+    "pdf-lib": "^1.17.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.7.0",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jszip": "^3.4.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

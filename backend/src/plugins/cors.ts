@@ -5,15 +5,22 @@ import { env } from '../config/env.js';
 export async function registerCors(app: FastifyInstance): Promise<void> {
   await app.register(cors, {
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, health checks)
+      // Allow requests with no origin (like mobile apps, curl, server-to-server health checks)
       if (!origin) {
         callback(null, true);
         return;
       }
 
-      // Check configured origins
       const allowedOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim());
-      if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+
+      // Explicit match in configured origins
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      // Wildcard permitted ONLY in non-production environments
+      if (allowedOrigins.includes('*') && env.NODE_ENV !== 'production') {
         callback(null, true);
         return;
       }
@@ -24,7 +31,7 @@ export async function registerCors(app: FastifyInstance): Promise<void> {
         return;
       }
 
-      // For development, allow localhost origins
+      // In development, allow localhost origins
       if (env.NODE_ENV === 'development' && /^http:\/\/localhost:\d+$/.test(origin)) {
         callback(null, true);
         return;

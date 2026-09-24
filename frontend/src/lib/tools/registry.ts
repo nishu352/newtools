@@ -1,6 +1,7 @@
 import { CategoryDefinition, ToolCategory, ToolDefinition } from './types';
 import { CATEGORY_LIST } from './definitions/categories';
 import { CLIENT_FOUNDATION_TOOLS } from './definitions/client-tools';
+import { PHASE6_TOOLS } from './definitions/phase6-tools';
 import { ROADMAP_TOOLS } from './definitions/roadmap-tools';
 
 class ToolRegistry {
@@ -14,7 +15,7 @@ class ToolRegistry {
     }
 
     // Register initial tools
-    for (const tool of [...CLIENT_FOUNDATION_TOOLS, ...ROADMAP_TOOLS]) {
+    for (const tool of [...CLIENT_FOUNDATION_TOOLS, ...PHASE6_TOOLS, ...ROADMAP_TOOLS]) {
       this.registerTool(tool);
     }
   }
@@ -80,7 +81,30 @@ class ToolRegistry {
       return matchesName || matchesDescription || matchesKeywords || matchesSlug;
     });
   }
+
+  /**
+   * Returns related tools for a given tool slug.
+   * Prefers explicit `relatedToolSlugs` from the tool definition.
+   * Falls back to other active tools in the same category (max 3).
+   */
+  public getRelatedTools(slug: string, limit = 3): ToolDefinition[] {
+    const tool = this.getToolBySlug(slug);
+    if (!tool) return [];
+
+    if (tool.relatedToolSlugs && tool.relatedToolSlugs.length > 0) {
+      return tool.relatedToolSlugs
+        .map((s) => this.getToolBySlug(s))
+        .filter((t): t is ToolDefinition => t !== undefined && t.status !== 'coming_soon')
+        .slice(0, limit);
+    }
+
+    // Fallback: same-category active tools excluding self
+    return this.getActiveTools()
+      .filter((t) => t.category === tool.category && t.slug !== slug)
+      .slice(0, limit);
+  }
 }
 
 // Singleton registry instance
 export const toolRegistry = new ToolRegistry();
+

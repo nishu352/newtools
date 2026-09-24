@@ -8,6 +8,8 @@ import { PwaRegister } from '@/components/layout/PwaRegister';
 import { OfflineIndicator } from '@/components/layout/OfflineIndicator';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { generateWebSiteSchema } from '@/lib/seo/schema';
+import { AnalyticsScripts } from '@/components/monetization/AnalyticsScripts';
+import { AdSenseScript } from '@/components/monetization/AdSenseScript';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,6 +46,10 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
+
+        {/* Monetization scripts — afterInteractive, never render-blocking */}
+        <AnalyticsScripts />
+        <AdSenseScript />
       </body>
     </html>
   );

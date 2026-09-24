@@ -31,13 +31,55 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'Is my JSON data uploaded to a server?',
-        answer: 'No. This tool runs 100% inside your browser using JavaScript. No network requests are made with your data.',
+        answer:
+          'No. This tool runs 100% inside your browser using JavaScript. No network requests are made with your data.',
       },
       {
         question: 'Can this tool validate large JSON files?',
-        answer: 'Yes, it handles large JSON files up to several megabytes smoothly within your browser memory.',
+        answer:
+          'Yes, it handles large JSON files up to several megabytes smoothly within your browser memory.',
+      },
+      {
+        question: 'What is the difference between Format and Minify?',
+        answer:
+          'Format (beautify) adds readable indentation and line breaks. Minify removes all whitespace to produce the smallest possible JSON string — useful for API payloads and storage.',
+      },
+      {
+        question: 'Does the validator show where an error is?',
+        answer:
+          'Yes. If your JSON contains a syntax error, the tool shows the exact position (line and column) of the problem.',
       },
     ],
+    content: {
+      intro:
+        'Paste any JSON string — from an API response, config file, or log — and instantly format it into readable, indented output or compact it for production use.',
+      useCases:
+        'JSON Formatter is useful when you receive a minified API response and need to inspect its structure, when you want to catch a syntax error before deploying a config file, or when you need to minify a payload to reduce bandwidth.',
+      howToUse: [
+        { step: 1, title: 'Paste your JSON', description: 'Paste the JSON string into the input panel on the left.' },
+        { step: 2, title: 'Choose an action', description: 'Click "Format" to beautify with indentation, or "Minify" to compact into a single line.' },
+        { step: 3, title: 'Copy the result', description: 'Click "Copy" to put the output on your clipboard, or use the download button for larger payloads.' },
+      ],
+      examples: [
+        {
+          title: 'Format a minified API response',
+          input: '{"user":{"id":1,"name":"Alice","roles":["admin","editor"]}}',
+          output: '{\n  "user": {\n    "id": 1,\n    "name": "Alice",\n    "roles": [\n      "admin",\n      "editor"\n    ]\n  }\n}',
+          description: 'A minified JSON object becomes readable with 2-space indentation.',
+        },
+      ],
+      notes: [
+        'JSON requires double quotes for all keys and string values — single quotes are not valid.',
+        'Trailing commas and comments are not part of the JSON standard and will cause validation errors.',
+        'Very large inputs (tens of MB) may be slow — the browser has to parse the entire string in memory.',
+      ],
+      limitations: [
+        'Cannot handle binary content or non-UTF-8 encoded files.',
+        'Does not validate against a JSON Schema — it validates JSON syntax only.',
+      ],
+    },
+    relatedToolSlugs: ['yaml-to-json', 'json-to-yaml', 'base64-converter', 'sql-formatter'],
+    relatedGuideSlug: 'json-formatting-explained',
   },
 
   // 2. Base64 Encoder & Decoder
@@ -70,9 +112,49 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'Is Base64 encryption?',
-        answer: 'No. Base64 is an encoding scheme, not encryption. It is used to safely represent binary data in ASCII text format.',
+        answer:
+          'No. Base64 is an encoding scheme, not encryption. It transforms binary data into printable ASCII characters. Anyone with the encoded string can decode it.',
+      },
+      {
+        question: 'What is URL-safe Base64?',
+        answer:
+          'Standard Base64 uses + and / characters which have special meaning in URLs. URL-safe Base64 (RFC 4648) replaces + with - and / with _ so the encoded string can be safely used in query parameters.',
+      },
+      {
+        question: 'Why does my decoded output look garbled?',
+        answer:
+          'The input was probably encoded from binary data (an image or file), not text. Base64 decoding of binary produces unreadable byte sequences when displayed as UTF-8.',
       },
     ],
+    content: {
+      intro:
+        'Base64 encoding converts binary data or text into a set of 64 printable ASCII characters. This tool encodes and decodes instantly as you type — no server involved.',
+      useCases:
+        'Base64 is used to include binary content (images, certificates) in JSON or XML, to embed fonts in CSS, to pass data in email headers, and to encode API tokens for Basic Auth headers.',
+      howToUse: [
+        { step: 1, title: 'Choose direction', description: 'Select "Encode" to turn text into Base64, or "Decode" to convert Base64 back to text.' },
+        { step: 2, title: 'Type or paste input', description: 'Enter your text or Base64 string in the input box.' },
+        { step: 3, title: 'Copy the output', description: 'The result updates live. Click "Copy" to use it.' },
+      ],
+      examples: [
+        {
+          title: 'Encode a Basic Auth credential',
+          input: 'username:password',
+          output: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+          description: 'HTTP Basic Auth headers use Base64 to encode "username:password". The result is set in the Authorization header as "Basic dXNlcm5hbWU6cGFzc3dvcmQ=".',
+        },
+      ],
+      notes: [
+        'Base64 increases data size by approximately 33% compared to the original.',
+        'The = characters at the end are padding to make the output length a multiple of 4.',
+      ],
+      limitations: [
+        'This tool encodes and decodes text only. Binary file encoding (images, PDFs) is not supported.',
+        'Very long strings may wrap in the output box — the actual string has no line breaks.',
+      ],
+    },
+    relatedToolSlugs: ['url-encoder-decoder', 'hash-generator', 'json-formatter'],
+    relatedGuideSlug: 'what-is-base64',
   },
 
   // 3. Word & Text Counter
@@ -102,6 +184,37 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Sentence and paragraph counters',
       'Quick case transformation helpers',
     ],
+    faqs: [
+      {
+        question: 'How is reading time calculated?',
+        answer:
+          'Reading time is estimated at 200 words per minute, which is a common average for adult silent reading. Speaking time uses 130 words per minute.',
+      },
+      {
+        question: 'Does the character count include spaces?',
+        answer:
+          'Both counts are shown: characters with spaces and characters without spaces. Use the one that matches your requirement (e.g., Twitter counts with spaces, some limits count without).',
+      },
+    ],
+    content: {
+      intro:
+        'Paste an essay, article, or any text and get an instant breakdown: word count, character count, sentence count, paragraphs, and estimated reading time.',
+      howToUse: [
+        { step: 1, title: 'Paste or type text', description: 'Enter your content in the text area.' },
+        { step: 2, title: 'Read the statistics', description: 'All counts update instantly. No button press needed.' },
+      ],
+      examples: [
+        {
+          title: 'Blog post estimate',
+          description: 'A 1,000-word blog post takes roughly 5 minutes to read at average reading speed and about 7–8 minutes to read aloud.',
+        },
+      ],
+      notes: [
+        'Reading speed varies significantly between individuals. The 200 wpm estimate is for informational content, not technical documentation.',
+        'Sentences are detected by period, exclamation mark, or question mark followed by a space.',
+      ],
+    },
+    relatedToolSlugs: ['case-converter', 'duplicate-line-remover', 'text-diff'],
   },
 
   // 4. UUID Generator
@@ -134,9 +247,41 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'Are these UUIDs cryptographically secure?',
-        answer: 'Yes. They are generated using the browser native crypto.randomUUID() / crypto.getRandomValues API, conforming strictly to RFC 4122 v4.',
+        answer:
+          'Yes. They use the browser\'s native crypto.randomUUID() or crypto.getRandomValues() API, conforming to RFC 4122 v4.',
+      },
+      {
+        question: 'Can two generated UUIDs ever be identical?',
+        answer:
+          'The probability of a collision is approximately 1 in 2^122 — effectively zero for any practical use case. UUID v4 is safe to use as a unique identifier without a central authority.',
+      },
+      {
+        question: 'What is the difference between UUID and GUID?',
+        answer:
+          'They are functionally identical. UUID (Universally Unique Identifier) is the formal name from RFC 4122. GUID (Globally Unique Identifier) is Microsoft\'s term for the same concept.',
       },
     ],
+    content: {
+      intro:
+        'A UUID v4 is a 128-bit identifier generated from random numbers. This tool uses your browser\'s cryptographic random number generator — no server call needed.',
+      howToUse: [
+        { step: 1, title: 'Set quantity', description: 'Choose how many UUIDs to generate (1–100).' },
+        { step: 2, title: 'Choose format', description: 'Pick lowercase or uppercase, with or without hyphens.' },
+        { step: 3, title: 'Generate & copy', description: 'Click Generate, then copy individual UUIDs or all at once.' },
+      ],
+      examples: [
+        {
+          title: 'Standard UUID v4',
+          output: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+          description: 'Standard hyphenated lowercase UUID v4 — the most common format for database primary keys and REST API identifiers.',
+        },
+      ],
+      notes: [
+        'UUID v4 identifiers are random, not based on time or machine identity.',
+        'Version 4 (random) UUIDs are the most widely supported format. Other versions (v1 time-based, v5 name-based) are not supported by this tool.',
+      ],
+    },
+    relatedToolSlugs: ['hash-generator', 'url-encoder-decoder', 'base64-converter'],
   },
 
   // 5. URL Encoder / Decoder
@@ -166,6 +311,39 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Malformed URI sequence error detection',
       'Zero server upload: Runs strictly in your browser',
     ],
+    faqs: [
+      {
+        question: 'What is the difference between encodeURI and encodeURIComponent?',
+        answer:
+          'encodeURI encodes a full URL and preserves characters like /, :, and ?. encodeURIComponent encodes a single parameter value and converts /, :, and ? into percent sequences — necessary when the value itself contains those characters.',
+      },
+      {
+        question: 'Why does a space become %20 or +?',
+        answer:
+          '%20 is the standard percent-encoding for a space in RFC 3986. The + sign is an older HTML form encoding (application/x-www-form-urlencoded) that also represents a space. This tool uses %20.',
+      },
+    ],
+    content: {
+      intro:
+        'URLs can only contain a limited set of ASCII characters. Special characters — spaces, accented letters, ampersands — must be percent-encoded before use in a URL.',
+      howToUse: [
+        { step: 1, title: 'Choose mode', description: 'Select "Encode component" for a single query value, or "Encode full URL" for a complete address.' },
+        { step: 2, title: 'Paste input', description: 'Enter the text or URL. The result updates instantly.' },
+        { step: 3, title: 'Copy and use', description: 'Copy the encoded or decoded string and use it in your application.' },
+      ],
+      examples: [
+        {
+          title: 'Encode a search query for a URL',
+          input: 'hello world & more',
+          output: 'hello%20world%20%26%20more',
+          description: 'Spaces become %20 and & becomes %26 so the value can be safely passed as a query parameter.',
+        },
+      ],
+      notes: [
+        'Hash (#) and question mark (?) are structural URL characters — encode them only if they are inside a parameter value, not part of the URL structure.',
+      ],
+    },
+    relatedToolSlugs: ['base64-converter', 'hash-generator', 'json-formatter'],
   },
 
   // 6. Hash Generator
@@ -195,6 +373,44 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'One-click copy for individual hash digests',
       '100% private: Never touches server memory',
     ],
+    faqs: [
+      {
+        question: 'Can I reverse a SHA-256 hash to get the original input?',
+        answer:
+          'No. SHA is a one-way hash function. Given a hash, it is computationally infeasible to recover the original message — that is its security property.',
+      },
+      {
+        question: 'Which algorithm should I use?',
+        answer:
+          'SHA-256 is the standard for most uses including file checksums, digital signatures, and password storage (when combined with a salt). SHA-512 provides a larger digest and is preferred for high-security contexts.',
+      },
+      {
+        question: 'Is this tool suitable for password hashing?',
+        answer:
+          'Not directly. Password storage requires a key-stretching function (bcrypt, Argon2, PBKDF2) which adds a cost factor and salt. Plain SHA-256 is too fast for secure password hashing.',
+      },
+    ],
+    content: {
+      intro:
+        'A cryptographic hash function maps any input to a fixed-size digest. The same input always produces the same hash; any change in the input produces a completely different hash.',
+      useCases:
+        'Hash generators are used to verify file integrity (compare the SHA-256 of a downloaded file against the official checksum), to fingerprint content, and to sign data in authentication systems.',
+      howToUse: [
+        { step: 1, title: 'Enter text', description: 'Type or paste the text you want to hash.' },
+        { step: 2, title: 'Read the digests', description: 'SHA-256, SHA-384, and SHA-512 outputs appear instantly.' },
+        { step: 3, title: 'Copy the hash', description: 'Click the copy icon next to the digest you need.' },
+      ],
+      examples: [
+        {
+          title: 'Verify a downloaded file',
+          description: 'Run the file contents through SHA-256. If the result matches the checksum published by the software author, the file has not been modified.',
+        },
+      ],
+      notes: [
+        'SHA-1 and MD5 are not supported — both have known collision vulnerabilities and should not be used for security purposes.',
+      ],
+    },
+    relatedToolSlugs: ['uuid-generator', 'base64-converter', 'url-encoder-decoder'],
   },
 
   // 7. Percentage Calculator
@@ -224,6 +440,42 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Percentage difference between two quantities',
       'Live calculation as you type with one-click copy',
     ],
+    faqs: [
+      {
+        question: 'What is 15% of 2,000?',
+        answer: '15% of 2,000 is 300. Calculation: 2000 × (15/100) = 300.',
+      },
+      {
+        question: 'How do I calculate a percentage increase?',
+        answer:
+          'Percentage increase = ((New Value − Old Value) / Old Value) × 100. For example, a price rising from ₹500 to ₹600 is a 20% increase.',
+      },
+      {
+        question: 'What is the difference between percentage change and percentage difference?',
+        answer:
+          'Percentage change has a clear before and after (direction matters). Percentage difference compares two values symmetrically — it has no direction.',
+      },
+    ],
+    content: {
+      intro:
+        'This calculator covers the four most common percentage problems: finding a percentage of a number, finding what percentage one number is of another, calculating percentage change, and comparing percentage difference.',
+      howToUse: [
+        { step: 1, title: 'Choose the calculation type', description: 'Select the tab that matches your question (e.g., "What is X% of Y?").' },
+        { step: 2, title: 'Enter the values', description: 'Fill in the known numbers.' },
+        { step: 3, title: 'Read the result', description: 'The answer updates immediately.' },
+      ],
+      examples: [
+        {
+          title: 'Calculate a discount',
+          description: 'A product costs ₹2,000 and is discounted by 15%. Enter 15 and 2000 in the "X% of Y" tab. Result: ₹300 discount, ₹1,700 sale price.',
+        },
+        {
+          title: 'Calculate a percentage increase',
+          description: 'Your salary was ₹50,000 and is now ₹58,000. Enter 50000 as old value and 58000 as new value. Result: 16% increase.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['discount-calculator', 'average-calculator', 'emi-calculator'],
   },
 
   // 8. Average Calculator
@@ -252,6 +504,25 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Supports negative values and floating-point decimals',
       'Flags non-numeric tokens without interrupting calculations',
     ],
+    faqs: [
+      {
+        question: 'What is the difference between mean and median?',
+        answer:
+          'The mean is the sum of all values divided by the count. The median is the middle value when values are sorted. Median is less affected by outliers — for example, a salary dataset with one very high earner will have a much higher mean than median.',
+      },
+    ],
+    content: {
+      intro:
+        'Enter a list of numbers separated by commas or newlines and get the mean, median, sum, min, max, and range instantly.',
+      examples: [
+        {
+          title: 'Calculate test score average',
+          input: '72, 85, 91, 68, 79',
+          description: 'Five test scores. Mean = (72+85+91+68+79) / 5 = 79. Median = 79 (middle value when sorted: 68, 72, 79, 85, 91).',
+        },
+      ],
+    },
+    relatedToolSlugs: ['percentage-calculator', 'ratio-calculator', 'compound-interest-calculator'],
   },
 
   // 9. Ratio Calculator
@@ -279,6 +550,20 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Solves proportion A:B = C:D for any missing term',
       'Handles integers and floating-point decimals',
     ],
+    content: {
+      intro: 'Simplify a ratio to its lowest terms, or solve a proportion equation where one value is unknown.',
+      examples: [
+        {
+          title: 'Simplify a screen resolution ratio',
+          description: '1920:1080 simplifies to 16:9 (GCD is 120). Useful for determining aspect ratios.',
+        },
+        {
+          title: 'Solve a scaling proportion',
+          description: 'A recipe calls for 2:3 of flour to sugar for 4 cups of flour. How much sugar? Solve 2:3 = 4:X → X = 6 cups.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['percentage-calculator', 'average-calculator', 'discount-calculator'],
   },
 
   // 10. Discount Calculator
@@ -306,6 +591,23 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Quick discount presets (10%, 20%, 25%, 50%, etc.)',
       'Clear breakdown of pre-tax and total amounts',
     ],
+    faqs: [
+      {
+        question: 'Does tax apply before or after the discount?',
+        answer:
+          'Tax is applied to the price after the discount. So a ₹1,000 item with 10% off and 18% tax: discounted price = ₹900, tax = ₹162, total = ₹1,062.',
+      },
+    ],
+    content: {
+      intro: 'Calculate the final price after a percentage discount, with optional tax included in the total.',
+      examples: [
+        {
+          title: 'Product discount with tax',
+          description: 'A jacket costs ₹3,500 and is 20% off. Discount = ₹700. Sale price = ₹2,800. With 18% GST, total = ₹3,304.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['percentage-calculator', 'emi-calculator', 'compound-interest-calculator'],
   },
 
   // 11. Case Converter
@@ -333,6 +635,30 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Live character and word counts',
       'One-click copy of transformed text',
     ],
+    faqs: [
+      {
+        question: 'What is the difference between camelCase and PascalCase?',
+        answer:
+          'camelCase starts with a lowercase letter (e.g., myVariableName). PascalCase starts every word with uppercase (e.g., MyVariableName). PascalCase is standard for class names; camelCase is common for variable and function names.',
+      },
+      {
+        question: 'When would I use kebab-case?',
+        answer:
+          'kebab-case (words joined by hyphens) is the standard for CSS class names, HTML attributes, and URL slugs.',
+      },
+    ],
+    content: {
+      intro: 'Paste any text and convert it to the case format you need — instantly, without installing anything.',
+      examples: [
+        {
+          title: 'Convert a title to a URL slug',
+          input: 'How to Use the JSON Formatter',
+          output: 'how-to-use-the-json-formatter',
+          description: 'Title text converted to kebab-case is ready to use as a URL slug.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['word-counter', 'duplicate-line-remover', 'text-diff'],
   },
 
   // 12. Duplicate Line Remover
@@ -361,9 +687,19 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Removes empty lines automatically if enabled',
       'Live comparison metrics: original, unique, and removed count',
     ],
+    content: {
+      intro: 'Paste a list with repeated lines and get a clean, deduplicated version with original order preserved.',
+      examples: [
+        {
+          title: 'Deduplicate a list of email addresses',
+          description: 'Copy a mailing list with duplicates, paste it, and download a clean unique list in seconds.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['word-counter', 'case-converter', 'text-diff'],
   },
 
-  // 13. Text Diff Comparison
+  // 13. Text Diff
   {
     id: 'tool-text-diff',
     slug: 'text-diff',
@@ -385,11 +721,20 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     },
     features: [
       'Line-by-line Longest Common Subsequence (LCS) algorithm',
-      'Color-coded diff viewer (+ additions in green, - deletions in red)',
+      'Color-coded diff viewer (+ additions, - deletions)',
       'Accurate line numbering for both documents',
       'Summary metrics (+X additions, -Y deletions, Z unchanged)',
       'One-click copy of unified diff report',
     ],
+    content: {
+      intro: 'Paste two versions of a document — an original and an edited version — and see exactly which lines were added, removed, or unchanged.',
+      howToUse: [
+        { step: 1, title: 'Paste original', description: 'Enter the original text in the left panel.' },
+        { step: 2, title: 'Paste modified', description: 'Enter the updated version in the right panel.' },
+        { step: 3, title: 'Compare', description: 'The diff appears below. Green lines were added, red lines were removed.' },
+      ],
+    },
+    relatedToolSlugs: ['word-counter', 'duplicate-line-remover', 'json-formatter'],
   },
 
   // 14. Image Compressor
@@ -400,7 +745,7 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     shortDescription: 'Compress JPEG, PNG, and WebP images locally without uploading them.',
     description:
       'Reduce image file sizes directly in your browser while keeping full control over quality and output format. Images never leave your device.',
-    category: 'image-graphics',
+    category: 'image',
     icon: 'Sliders',
     keywords: ['image compressor', 'compress image', 'compress png', 'compress jpeg', 'webp converter', 'shrink image'],
     executionMode: 'client',
@@ -422,13 +767,33 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'Are my images uploaded to any server?',
-        answer: 'No. All compression and format conversion occurs 100% inside your browser memory using HTML Canvas APIs. Zero bytes are uploaded.',
+        answer:
+          'No. All compression and format conversion occurs 100% inside your browser memory using HTML Canvas APIs. Zero bytes are uploaded.',
       },
       {
         question: 'Which image formats are supported?',
         answer: 'You can upload and compress JPEG, PNG, and WebP files, and choose your preferred output format.',
       },
+      {
+        question: 'What quality setting should I use?',
+        answer:
+          'For most web images, 75–85% quality provides a good balance between file size and visual fidelity. Drop to 60% for heavy optimization when visual quality is less critical.',
+      },
     ],
+    content: {
+      intro: 'Reduce image file size by adjusting quality and dimensions — all processing happens inside your browser so the image never leaves your device.',
+      howToUse: [
+        { step: 1, title: 'Select image', description: 'Click to pick a JPEG, PNG, or WebP file from your device.' },
+        { step: 2, title: 'Adjust quality', description: 'Use the quality slider (0–100) to set the compression level.' },
+        { step: 3, title: 'Download', description: 'Review the before/after sizes, then download the compressed file.' },
+      ],
+      notes: [
+        'PNG uses lossless compression. Quality slider affects JPEG and WebP; PNG files will be re-encoded but not quality-reduced.',
+        'Very large images (over 20 MP) may be slow to process in the browser.',
+      ],
+    },
+    relatedToolSlugs: ['svg-optimizer', 'color-converter', 'color-palette-generator'],
+    relatedGuideSlug: 'how-image-compression-works',
   },
 
   // 15. SVG Optimizer / Viewer
@@ -439,7 +804,7 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     shortDescription: 'Sanitize, minify, and format SVG markup with safe sandbox preview.',
     description:
       'Clean and optimize SVG vector files by removing editor metadata, comments, and empty attributes. Includes XSS sanitization and sandboxed rendering.',
-    category: 'image-graphics',
+    category: 'image',
     icon: 'Sparkles',
     keywords: ['svg optimizer', 'svg viewer', 'minify svg', 'clean svg', 'sanitize svg', 'svg formatter'],
     executionMode: 'client',
@@ -457,6 +822,13 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Format/beautify mode with 2-space indentation',
       'Real-time byte reduction metrics and one-click download',
     ],
+    content: {
+      intro: 'SVG files exported from design tools (Illustrator, Figma, Inkscape) often include metadata, comments, and namespace declarations you do not need on the web. This tool strips that overhead and previews the clean result.',
+      notes: [
+        'SVG sanitization removes event handlers (onload, onclick) and script tags — these are vectors for XSS attacks when rendering user-supplied SVG.',
+      ],
+    },
+    relatedToolSlugs: ['image-compressor', 'color-converter', 'color-palette-generator'],
   },
 
   // 16. Color Converter
@@ -485,6 +857,30 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'WCAG 2.1 relative luminance and contrast text suggestion',
       'One-click copy for all CSS color strings',
     ],
+    faqs: [
+      {
+        question: 'When should I use HSL instead of HEX?',
+        answer:
+          'HSL (Hue, Saturation, Lightness) is easier to manipulate programmatically. Adjusting the L value makes a color lighter or darker without changing the hue — useful for hover states and tints.',
+      },
+      {
+        question: 'What is OKLCH?',
+        answer:
+          'OKLCH is a perceptually uniform color space introduced in CSS Color Module 4. Changing the lightness in OKLCH keeps perceived brightness consistent across hues, unlike HSL.',
+      },
+    ],
+    content: {
+      intro: 'Enter a color in any format — HEX, RGB, HSL, or OKLCH — and get the equivalent values for all other formats instantly.',
+      examples: [
+        {
+          title: 'Convert a brand color to all CSS formats',
+          input: '#2563EB',
+          description: 'The Electric Blue from OmniTools\'s design system: RGB(37, 99, 235), HSL(221°, 83%, 53%), OKLCH(56%, 0.23, 264°).',
+        },
+      ],
+    },
+    relatedToolSlugs: ['color-palette-generator', 'image-compressor', 'svg-optimizer'],
+    relatedGuideSlug: 'hex-rgb-hsl-explained',
   },
 
   // 17. Color Palette Generator
@@ -513,6 +909,11 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Individual HEX/RGB/HSL copy and bulk palette export',
       'Random color generator and quick starting presets',
     ],
+    content: {
+      intro: 'Pick a base color and generate a complete color palette based on color theory — complementary, analogous, triadic, or monochromatic tints and shades.',
+    },
+    relatedToolSlugs: ['color-converter', 'image-compressor', 'svg-optimizer'],
+    relatedGuideSlug: 'hex-rgb-hsl-explained',
   },
 
   // 18. EMI & Loan Calculator
@@ -532,7 +933,7 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     seo: {
       title: 'Free Loan & EMI Calculator — Monthly Amortization Schedule',
       description:
-        'Calculate monthly EMI payments, total interest payable, and full loan amortization schedule. See impact of extra prepayments.',
+        'Calculate monthly EMI payments, total interest payable, and full loan amortization schedule. Includes prepayment simulator.',
       keywords: ['emi calculator', 'loan amortization calculator', 'monthly loan payment', 'mortgage payment calculator'],
     },
     features: [
@@ -542,6 +943,65 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Visual proportional breakdown bar (Principal vs Interest)',
       'Paginated month-by-month balance and payment schedule',
     ],
+    faqs: [
+      {
+        question: 'Does this calculator include processing fees or insurance?',
+        answer:
+          'No. It calculates the standard EMI from principal, interest rate, and tenure only. Processing fees, insurance, and prepayment charges are set by your lender and are not included.',
+      },
+      {
+        question: 'What loan types can this calculate?',
+        answer:
+          'Any loan that uses standard reducing-balance EMI: home loans, car loans, personal loans, and education loans. It does not model flat-rate interest or step-up EMI products.',
+      },
+      {
+        question: 'How accurate is the calculator?',
+        answer:
+          'The math is precise — it uses the standard amortization formula. However, actual loan terms depend on your lender\'s rounding, fees, and specific agreement.',
+      },
+      {
+        question: 'What is a prepayment and how does it reduce EMI?',
+        answer:
+          'A prepayment is an extra lump-sum payment made towards the principal. It reduces the outstanding balance, which in turn reduces the total interest paid and either lowers the remaining tenure or the monthly EMI.',
+      },
+    ],
+    content: {
+      intro:
+        'Calculate the monthly payment for any loan using the standard EMI formula. Enter the loan amount, interest rate, and tenure to see the full payment schedule.',
+      formula: 'EMI = P × r × (1+r)ⁿ / ((1+r)ⁿ − 1)',
+      formulaVars: [
+        { variable: 'P', meaning: 'Principal loan amount' },
+        { variable: 'r', meaning: 'Monthly interest rate (annual rate ÷ 12 ÷ 100)' },
+        { variable: 'n', meaning: 'Total number of monthly installments (years × 12)' },
+      ],
+      howToUse: [
+        { step: 1, title: 'Enter loan amount', description: 'The total amount you are borrowing.' },
+        { step: 2, title: 'Enter annual interest rate', description: 'The rate quoted by your lender per year (e.g., 8.5).' },
+        { step: 3, title: 'Enter tenure', description: 'Loan duration in years or months.' },
+        { step: 4, title: 'View results', description: 'See the monthly EMI, total amount payable, and total interest. Scroll down for the full month-by-month schedule.' },
+      ],
+      examples: [
+        {
+          title: 'Home loan estimate',
+          description: 'Loan: ₹40,00,000 at 8.5% p.a. for 20 years. Monthly EMI: ₹34,729. Total interest: ₹43,34,960. Total payable: ₹83,34,960.',
+        },
+        {
+          title: 'Car loan estimate',
+          description: 'Loan: ₹8,00,000 at 9% p.a. for 5 years. Monthly EMI: ₹16,607. Total interest: ₹1,96,420. Total payable: ₹9,96,420.',
+        },
+      ],
+      notes: [
+        'This is a planning estimate. Actual EMI from your lender may differ due to rounding, processing fees, or different calculation conventions.',
+        'The calculator assumes a fixed interest rate throughout the tenure. Variable-rate loans will have different actual payment schedules.',
+      ],
+      limitations: [
+        'Does not model balloon payments, step-up EMIs, or moratorium periods.',
+        'Interest calculations use reducing-balance method only.',
+        'This calculator provides estimates for general planning. It does not constitute financial advice.',
+      ],
+    },
+    relatedToolSlugs: ['compound-interest-calculator', 'percentage-calculator', 'discount-calculator'],
+    relatedGuideSlug: 'how-emi-is-calculated',
   },
 
   // 19. Compound Interest Calculator
@@ -570,9 +1030,51 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Year-by-year accumulation and growth table',
       'Zero-interest baseline resilience',
     ],
+    faqs: [
+      {
+        question: 'What is the difference between simple and compound interest?',
+        answer:
+          'Simple interest is calculated on the principal only. Compound interest is calculated on the principal plus previously accumulated interest — so interest earns interest. Over long periods, the difference is significant.',
+      },
+      {
+        question: 'Does compounding frequency matter?',
+        answer:
+          'Yes, but less than most people expect. Daily compounding yields slightly more than monthly, which yields slightly more than annually — but the rate itself has a far larger effect than frequency.',
+      },
+    ],
+    content: {
+      intro: 'See how an initial investment grows over time when interest compounds on top of itself, and optionally with regular deposits added each period.',
+      formula: 'A = P × (1 + r/n)^(n×t)',
+      formulaVars: [
+        { variable: 'A', meaning: 'Final amount (principal + interest)' },
+        { variable: 'P', meaning: 'Principal (initial investment)' },
+        { variable: 'r', meaning: 'Annual interest rate (as a decimal, e.g., 0.08 for 8%)' },
+        { variable: 'n', meaning: 'Number of compounding periods per year' },
+        { variable: 't', meaning: 'Time in years' },
+      ],
+      examples: [
+        {
+          title: 'Long-term savings example',
+          description: '₹1,00,000 invested at 8% p.a. compounded annually for 20 years grows to ₹4,66,096. The ₹3,66,096 gain is entirely from compound interest — no additional deposits.',
+        },
+        {
+          title: 'Regular SIP-style deposits',
+          description: '₹5,000 deposited monthly at 8% p.a. compounded monthly for 15 years: total invested ₹9,00,000, final balance ≈ ₹17,40,000 (estimate).',
+        },
+      ],
+      notes: [
+        'Results assume a constant interest rate throughout the investment period. Actual returns from market instruments will vary.',
+        'This calculator does not account for taxes on interest income.',
+      ],
+      limitations: [
+        'This calculator provides estimates for general planning purposes. Actual returns depend on the investment product, taxes, fees, and market conditions.',
+        'It does not constitute financial advice or a guarantee of returns.',
+      ],
+    },
+    relatedToolSlugs: ['emi-calculator', 'percentage-calculator', 'discount-calculator'],
   },
 
-  // 20. YAML to JSON Converter
+  // 20. YAML to JSON
   {
     id: 'tool-yaml-to-json',
     slug: 'yaml-to-json',
@@ -598,9 +1100,13 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'One-click copy and .json file export',
       'Completely client-side; your configuration files are never sent to a server',
     ],
+    content: {
+      intro: 'Paste a YAML document — a Kubernetes manifest, GitHub Actions workflow, or application config — and convert it to formatted JSON.',
+    },
+    relatedToolSlugs: ['json-to-yaml', 'json-formatter', 'sql-formatter'],
   },
 
-  // 21. JSON to YAML Converter
+  // 21. JSON to YAML
   {
     id: 'tool-json-to-yaml',
     slug: 'json-to-yaml',
@@ -626,6 +1132,10 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'One-click copy and .yaml file download',
       '100% private in-browser memory execution',
     ],
+    content: {
+      intro: 'Paste a JSON object and get a clean YAML document ready for use in configuration files.',
+    },
+    relatedToolSlugs: ['yaml-to-json', 'json-formatter', 'sql-formatter'],
   },
 
   // 22. SQL Query Formatter
@@ -645,7 +1155,7 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
     seo: {
       title: 'Free SQL Query Formatter & Minifier — Clean, Private SQL Beautifier',
       description:
-        'Format and beautify SQL queries with consistent indentation and uppercase keywords. Inert client-side processing without database connection.',
+        'Format and beautify SQL queries with consistent indentation and uppercase keywords. Client-side processing with zero database connection.',
       keywords: ['sql formatter', 'format sql online', 'beautify sql', 'sql query cleaner'],
     },
     features: [
@@ -655,5 +1165,27 @@ export const CLIENT_FOUNDATION_TOOLS: ToolDefinition[] = [
       'Live character and line counter metrics',
       'Strictly inert client-side text processing with zero database execution',
     ],
+    faqs: [
+      {
+        question: 'Does this tool connect to a database?',
+        answer:
+          'No. This is a text formatter — it processes the SQL string only. No database connection is made. Your queries are not executed.',
+      },
+      {
+        question: 'What SQL dialects are supported?',
+        answer:
+          'The formatter handles standard SQL keywords (SELECT, INSERT, UPDATE, DELETE, JOIN, etc.) and works with most relational databases. Dialect-specific functions (e.g., ISNULL vs COALESCE) are preserved as-is.',
+      },
+    ],
+    content: {
+      intro: 'Paste a SQL query and format it with consistent indentation, uppercase keywords, and readable line breaks — or compact it to a single line.',
+      examples: [
+        {
+          title: 'Format a multi-join query',
+          description: 'A dense one-liner SELECT with three JOINs and a WHERE clause becomes clearly indented with each clause on its own line.',
+        },
+      ],
+    },
+    relatedToolSlugs: ['json-formatter', 'yaml-to-json', 'json-to-yaml'],
   },
 ];
