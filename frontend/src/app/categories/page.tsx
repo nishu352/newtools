@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { toolRegistry } from '@/lib/tools/registry';
-import { ToolIcon } from '@/components/tools/ToolIcon';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = generatePageMetadata({
-  title: 'All Categories — OmniTools',
+  title: 'All Categories — OminiTools',
   description:
     'Browse all tool categories: PDF, Image, Document, Spreadsheet, Developer, Text, Finance, and Utilities.',
   path: '/categories',
@@ -18,68 +17,63 @@ export default function CategoriesPage() {
   const categories = toolRegistry.getCategories();
 
   return (
-    <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
+    <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Categories' }]} />
 
-      <div className="pb-4 border-b border-[var(--border)]">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-tight">
-          Tool Categories
+      <div className="mt-2 mb-8">
+        <h1 className="text-[24px] sm:text-[30px] font-semibold text-[var(--foreground)] tracking-tight">
+          All Categories
         </h1>
-        <p className="mt-1 text-sm text-[var(--foreground-muted)] max-w-2xl">
-          Browse online utilities organized by document and task category.
+        <p className="mt-1 text-[14px] text-[var(--foreground-muted)]">
+          Browse tools organized by type.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="space-y-6">
         {categories.map((cat) => {
           const tools = toolRegistry.getToolsByCategory(cat.slug);
-          const activeCount = tools.filter(
+          const activeTools = tools.filter(
             (t) => t.status === 'active' || t.status === 'beta'
-          ).length;
+          );
+
+          if (activeTools.length === 0) return null;
 
           return (
-            <div
-              key={cat.slug}
-              className="p-5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between hover:border-[var(--border-strong)] transition-colors"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-9 h-9 rounded-lg bg-[var(--surface-muted)] text-[var(--foreground-muted)] flex items-center justify-center">
-                    <ToolIcon name={cat.icon} className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-mono text-[var(--foreground-subtle)]">
-                    {activeCount} tools
-                  </span>
+            <div key={cat.slug} className="pb-6 border-b border-[var(--border)] last:border-b-0">
+              <div className="flex items-baseline justify-between gap-4 mb-2">
+                <div>
+                  <h2 className="text-[15px] font-semibold text-[var(--foreground)]">
+                    {cat.name}
+                  </h2>
+                  <p className="text-[13px] text-[var(--foreground-muted)] mt-0.5">
+                    {cat.description}
+                  </p>
                 </div>
+                <span className="text-[12px] text-[var(--foreground-subtle)] shrink-0">
+                  {activeTools.length} tools
+                </span>
+              </div>
 
-                <h2 className="text-sm sm:text-base font-bold text-[var(--foreground)] mb-1">
-                  {cat.name}
-                </h2>
-                <p className="text-xs text-[var(--foreground-muted)] leading-relaxed mb-4 line-clamp-2">
-                  {cat.description}
-                </p>
-
-                {/* Sample tools preview */}
-                <div className="space-y-1 mb-4">
-                  {tools.slice(0, 3).map((tool) => (
-                    <Link
-                      key={tool.slug}
-                      href={`/tools/${tool.slug}`}
-                      className="flex items-center justify-between text-xs py-1 px-2 rounded-md hover:bg-[var(--surface-hover)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
-                    >
-                      <span className="truncate">{tool.name}</span>
-                      <span className="text-[var(--foreground-subtle)] text-[11px]">→</span>
-                    </Link>
-                  ))}
-                </div>
+              {/* Preview of top 3 tools */}
+              <div className="space-y-0.5 mt-2">
+                {activeTools.slice(0, 3).map((tool) => (
+                  <Link
+                    key={tool.slug}
+                    href={`/tools/${tool.slug}`}
+                    className="flex items-center justify-between py-1.5 text-[13px] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors group"
+                  >
+                    <span>{tool.name}</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                ))}
               </div>
 
               <Link
                 href={cat.slug === 'pdf' ? '/pdf' : `/categories/${cat.slug}`}
-                className="inline-flex items-center justify-between w-full pt-3 border-t border-[var(--border)] text-xs font-medium text-[var(--primary)] hover:underline"
+                className="inline-flex items-center gap-1 mt-2 text-[13px] font-medium text-[var(--primary)] hover:underline"
               >
-                <span>Browse {cat.name}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                All {cat.name.toLowerCase()}
+                <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           );

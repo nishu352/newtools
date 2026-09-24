@@ -24,26 +24,25 @@ export function HomepageHeroSearch({ totalToolsCount = 96 }: HomepageHeroSearchP
   }, []);
 
   return (
-    <div className="w-full max-w-xl mx-auto mt-6">
+    <div className="w-full max-w-md mx-auto mt-5">
       <button
         type="button"
         onClick={() => setModalOpen(true)}
-        className="w-full h-12 px-4 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--border)] hover:border-[var(--border-strong)] text-left flex items-center justify-between gap-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--primary)] cursor-pointer"
+        className="w-full h-10 px-3.5 rounded-lg bg-[var(--surface-muted)] hover:bg-[var(--surface-hover)] border border-[var(--border)] hover:border-[var(--border-strong)] text-left flex items-center justify-between gap-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--primary)] cursor-pointer"
         aria-label={`Search across ${totalToolsCount} tools`}
       >
-        <div className="flex items-center gap-3 min-w-0 flex-1">
+        <div className="flex items-center gap-2.5 min-w-0 flex-1">
           <Search className="w-4 h-4 text-[var(--foreground-subtle)] shrink-0" />
-          <span className="text-sm text-[var(--foreground-muted)] truncate">
+          <span className="text-[14px] text-[var(--foreground-muted)]">
             Search tools...
           </span>
         </div>
 
-        <div className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono text-[var(--foreground-subtle)] bg-[var(--surface-muted)] border border-[var(--border)] shrink-0">
-          <span>/</span>
-        </div>
+        <kbd className="px-1.5 py-0.5 rounded text-[10px] font-mono text-[var(--foreground-subtle)] border border-[var(--border)] shrink-0">
+          /
+        </kbd>
       </button>
 
-      {/* Global Search Dialog Modal */}
       <GlobalSearchModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );

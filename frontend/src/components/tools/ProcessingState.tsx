@@ -28,25 +28,23 @@ export function ProcessingState({
       role="status"
       aria-live="polite"
       className={cn(
-        'w-full p-8 sm:p-10 rounded-xl bg-[var(--surface-muted)]/40 border border-[var(--border)] text-center flex flex-col items-center justify-center space-y-4',
+        'w-full py-10 sm:py-12 text-center flex flex-col items-center justify-center space-y-4',
         className
       )}
     >
-      <div className="w-12 h-12 rounded-xl bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin" />
-      </div>
+      <Loader2 className="w-6 h-6 animate-spin text-[var(--primary)]" />
 
-      <div className="space-y-1 max-w-md mx-auto">
-        <h3 className="text-base font-bold text-[var(--foreground)]">{message}</h3>
+      <div className="space-y-1 max-w-sm mx-auto">
+        <h3 className="text-[15px] font-medium text-[var(--foreground)]">{message}</h3>
         {submessage && (
-          <p className="text-xs text-[var(--foreground-muted)] leading-relaxed">
+          <p className="text-[13px] text-[var(--foreground-muted)]">
             {submessage}
           </p>
         )}
       </div>
 
-      {/* Progress Bar: Real percentage if tracked, otherwise indeterminate animation */}
-      <div className="w-full max-w-xs h-2 bg-[var(--surface-active)] rounded-full overflow-hidden relative">
+      {/* Progress Bar */}
+      <div className="w-full max-w-xs h-1 bg-[var(--surface-active)] rounded-full overflow-hidden relative">
         {hasGenuineProgress ? (
           <div
             className="h-full bg-[var(--primary)] rounded-full transition-all duration-200"
@@ -58,7 +56,7 @@ export function ProcessingState({
       </div>
 
       {hasGenuineProgress && (
-        <span className="text-xs font-mono font-semibold text-[var(--primary)]">
+        <span className="text-[12px] font-mono text-[var(--foreground-muted)]">
           {Math.round(progressPercent)}%
         </span>
       )}

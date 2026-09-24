@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Upload, X, File, Download, Trash2, Shield, Loader2 } from 'lucide-react';
+import { Upload, X, File, Download, Trash2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { ErrorState } from './ErrorState';
 import { formatBytes, validateFileSize, FileLimitCategory } from '@/lib/tools/file-limits';
@@ -132,11 +132,11 @@ export function FileToolShell({
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-5">
       {title && (
-        <div className="space-y-1">
-          <h2 className="text-lg font-bold text-[var(--foreground)]">{title}</h2>
-          {description && <p className="text-xs text-[var(--foreground-muted)]">{description}</p>}
+        <div className="space-y-0.5">
+          <h2 className="text-[15px] font-semibold text-[var(--foreground)]">{title}</h2>
+          {description && <p className="text-[13px] text-[var(--foreground-muted)]">{description}</p>}
         </div>
       )}
 
@@ -147,10 +147,10 @@ export function FileToolShell({
         onDragLeave={handleDrag}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`relative border-2 border-dashed rounded-xl p-6 sm:p-10 text-center cursor-pointer transition-colors duration-150 select-none ${
+        className={`relative border-2 border-dashed rounded-lg p-8 sm:p-12 text-center cursor-pointer transition-colors duration-150 select-none ${
           dragActive
-            ? 'border-[var(--primary)] bg-[var(--primary-soft)]/20'
-            : 'border-[var(--border)] hover:border-[var(--primary)] bg-[var(--surface-muted)]/30 hover:bg-[var(--surface-muted)]/50'
+            ? 'border-[var(--primary)] bg-[var(--primary-soft)]'
+            : 'border-[var(--border)] hover:border-[var(--border-strong)] bg-[var(--surface-muted)]'
         }`}
       >
         <input
@@ -163,17 +163,15 @@ export function FileToolShell({
           aria-label="Upload files"
         />
 
-        <div className="flex flex-col items-center justify-center space-y-2.5">
-          <div className="w-10 h-10 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center">
-            <Upload className="w-5 h-5" />
-          </div>
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <Upload className="w-5 h-5 text-[var(--foreground-muted)]" />
           <div>
-            <p className="text-sm font-medium text-[var(--foreground)]">
-              <span className="hidden sm:inline">Drag & drop your {multiple ? 'files' : 'file'} here, or </span>
-              <span className="text-[var(--primary)] font-semibold underline sm:no-underline">browse file</span>
+            <p className="text-[14px] text-[var(--foreground)]">
+              <span className="hidden sm:inline">Drop your {multiple ? 'files' : 'file'} here, or </span>
+              <span className="text-[var(--primary)] font-medium">browse</span>
             </p>
-            <p className="text-xs text-[var(--foreground-muted)] mt-1">
-              Supported format: {accept}
+            <p className="text-[12px] text-[var(--foreground-subtle)] mt-1">
+              {accept}
             </p>
           </div>
         </div>
@@ -190,36 +188,33 @@ export function FileToolShell({
 
       {/* File List */}
       {files.length > 0 && (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between text-xs text-[var(--foreground-muted)] px-1">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[12px] text-[var(--foreground-muted)]">
             <span>
-              Selected {files.length} {files.length === 1 ? 'file' : 'files'} (
-              {formatBytes(files.reduce((acc, f) => acc + f.size, 0))})
+              {files.length} {files.length === 1 ? 'file' : 'files'} ({formatBytes(files.reduce((acc, f) => acc + f.size, 0))})
             </span>
             <button
               type="button"
               onClick={handleClear}
-              className="text-xs font-semibold text-rose-500 hover:text-rose-600 flex items-center gap-1 transition-colors"
+              className="text-[12px] font-medium text-rose-500 hover:text-rose-600 flex items-center gap-1 transition-colors"
             >
-              <Trash2 className="w-3.5 h-3.5" />
-              Clear all
+              <Trash2 className="w-3 h-3" />
+              Clear
             </button>
           </div>
 
-          <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+          <div className="space-y-1 max-h-48 overflow-y-auto">
             {files.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between gap-3 p-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-xs"
+                className="flex items-center justify-between gap-3 py-2 px-3 rounded-md border border-[var(--border)] bg-[var(--surface)] text-[13px]"
               >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-7 h-7 rounded-lg bg-[var(--surface-muted)] text-[var(--primary)] flex items-center justify-center shrink-0">
-                    <File className="w-4 h-4" />
-                  </div>
-                  <div className="min-w-0 truncate">
-                    <p className="font-semibold text-[var(--foreground)] truncate">{item.name}</p>
-                    <p className="text-[10px] text-[var(--foreground-subtle)]">
-                      {formatBytes(item.size)} {item.extraInfo ? `• ${item.extraInfo}` : ''}
+                <div className="flex items-center gap-2 min-w-0">
+                  <File className="w-3.5 h-3.5 text-[var(--foreground-muted)] shrink-0" />
+                  <div className="min-w-0">
+                    <p className="font-medium text-[var(--foreground)] truncate">{item.name}</p>
+                    <p className="text-[11px] text-[var(--foreground-subtle)]">
+                      {formatBytes(item.size)} {item.extraInfo ? `· ${item.extraInfo}` : ''}
                     </p>
                   </div>
                 </div>
@@ -230,7 +225,7 @@ export function FileToolShell({
                     e.stopPropagation();
                     removeFile(item.id);
                   }}
-                  className="w-6 h-6 rounded-lg text-[var(--foreground-subtle)] hover:text-rose-500 hover:bg-rose-500/10 flex items-center justify-center transition-colors shrink-0"
+                  className="w-6 h-6 rounded text-[var(--foreground-subtle)] hover:text-rose-500 flex items-center justify-center transition-colors shrink-0"
                   aria-label={`Remove ${item.name}`}
                 >
                   <X className="w-3.5 h-3.5" />
@@ -242,25 +237,25 @@ export function FileToolShell({
       )}
 
       {/* Tool Specific Options Slot */}
-      {optionsSlot && files.length > 0 && <div className="space-y-4">{optionsSlot}</div>}
+      {optionsSlot && files.length > 0 && <div>{optionsSlot}</div>}
 
       {/* Actions & Progress */}
       {files.length > 0 && (
-        <div className="space-y-3 pt-2">
+        <div className="space-y-3">
           {processing && (
-            <div className="space-y-2 p-4 rounded-xl bg-[var(--surface-muted)]/50 border border-[var(--border)] text-xs">
-              <div className="flex items-center justify-between text-[var(--foreground-muted)]">
-                <span className="flex items-center gap-2 font-medium">
+            <div className="space-y-2 py-3">
+              <div className="flex items-center justify-between text-[13px] text-[var(--foreground-muted)]">
+                <span className="flex items-center gap-2">
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-[var(--primary)]" />
-                  {statusMessage || 'Processing your files...'}
+                  {statusMessage || 'Processing...'}
                 </span>
                 {progressPercent !== undefined && (
-                  <span className="font-mono font-semibold text-[var(--primary)]">
+                  <span className="font-mono font-medium text-[var(--primary)]">
                     {Math.round(progressPercent)}%
                   </span>
                 )}
               </div>
-              <div className="w-full h-1.5 rounded-full bg-[var(--surface-active)] overflow-hidden relative">
+              <div className="w-full h-1 rounded-full bg-[var(--surface-active)] overflow-hidden relative">
                 {progressPercent !== undefined ? (
                   <div
                     className="h-full bg-[var(--primary)] transition-all duration-200"
@@ -273,7 +268,7 @@ export function FileToolShell({
             </div>
           )}
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             {onProcess && (
               <Button
                 variant="primary"
@@ -284,7 +279,7 @@ export function FileToolShell({
               >
                 {processing ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                    <Loader2 className="w-4 h-4 animate-spin mr-1.5" />
                     Processing...
                   </>
                 ) : (
@@ -297,10 +292,10 @@ export function FileToolShell({
               <a
                 href={downloadUrl}
                 download={downloadFilename}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-10 px-4 rounded-lg text-[14px] font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
               >
                 <Download className="w-4 h-4" />
-                Download Result
+                Download
               </a>
             )}
 
@@ -311,7 +306,7 @@ export function FileToolShell({
                 onClick={onDownloadAll}
                 className="w-full sm:w-auto"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="w-4 h-4 mr-1.5" />
                 Download All (ZIP)
               </Button>
             )}
@@ -322,11 +317,10 @@ export function FileToolShell({
       {/* Result Display Slot */}
       {resultSlot && <div className="mt-4">{resultSlot}</div>}
 
-      {/* Privacy Safeguard Notice */}
-      <div className="flex items-center gap-2 text-[11px] text-[var(--foreground-subtle)] pt-2 border-t border-[var(--border)]">
-        <Shield className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-        <span>100% Client-Side. Your files never leave your device. Zero retention.</span>
-      </div>
+      {/* Privacy Notice — subtle, not a card */}
+      <p className="text-[11px] text-[var(--foreground-subtle)] pt-2">
+        Files are processed in your browser. Nothing is uploaded to a server.
+      </p>
     </div>
   );
 }

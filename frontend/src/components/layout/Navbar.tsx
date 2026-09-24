@@ -9,11 +9,11 @@ import { GlobalSearchModal } from './GlobalSearchModal';
 
 const MORE_LINKS = [
   { name: 'Spreadsheets', href: '/categories/excel' },
-  { name: 'Calculators & Finance', href: '/categories/finance' },
+  { name: 'Finance & Calculators', href: '/categories/finance' },
   { name: 'Developer Tools', href: '/categories/developer' },
   { name: 'Text Utilities', href: '/categories/text-content' },
   { name: 'Security & Encoders', href: '/categories/security' },
-  { name: 'All 20 Categories', href: '/categories' },
+  { name: 'All Categories', href: '/categories' },
 ];
 
 export function Navbar() {
@@ -43,52 +43,47 @@ export function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const navLinkClasses = (active: boolean) =>
+    `px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+      active
+        ? 'text-[var(--foreground)]'
+        : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
+    }`;
+
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur-xs">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16 gap-4">
+      <header className="sticky top-0 z-40 w-full border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
+        <div className="max-w-[1120px] mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-[52px] gap-4">
             {/* Left: Brand & Desktop Nav */}
-            <div className="flex items-center gap-6 sm:gap-8">
+            <div className="flex items-center gap-6">
               <Link
                 href="/"
-                className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-md"
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded"
               >
-                <span className="font-bold text-lg sm:text-xl text-[var(--foreground)] tracking-tight">
-                  OmniTools
+                <span className="font-semibold text-[15px] text-[var(--foreground)] tracking-tight">
+                  OminiTools
                 </span>
               </Link>
 
-              <nav className="hidden md:flex items-center gap-1 text-[14px]">
+              <nav className="hidden md:flex items-center gap-0.5">
                 <Link
                   href="/pdf"
-                  className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
-                    pathname.startsWith('/pdf') || pathname === '/tools/pdf'
-                      ? 'text-[var(--primary)] font-semibold'
-                      : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
-                  }`}
+                  className={navLinkClasses(pathname.startsWith('/pdf') || pathname === '/tools/pdf')}
                 >
                   PDF
                 </Link>
 
                 <Link
                   href="/categories/image"
-                  className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
-                    pathname === '/categories/image' || pathname === '/tools/image'
-                      ? 'text-[var(--primary)] font-semibold'
-                      : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
-                  }`}
+                  className={navLinkClasses(pathname === '/categories/image' || pathname === '/tools/image')}
                 >
                   Images
                 </Link>
 
                 <Link
                   href="/categories/word"
-                  className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
-                    pathname === '/categories/word' || pathname === '/tools/office'
-                      ? 'text-[var(--primary)] font-semibold'
-                      : 'text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
-                  }`}
+                  className={navLinkClasses(pathname === '/categories/word' || pathname === '/tools/office')}
                 >
                   Documents
                 </Link>
@@ -97,21 +92,21 @@ export function Navbar() {
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-md font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+                    className={`flex items-center gap-1 px-2.5 py-1.5 text-[13px] font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded`}
                     aria-expanded={moreDropdownOpen}
                   >
                     <span>More</span>
-                    <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                    <ChevronDown className={`w-3 h-3 opacity-50 transition-transform duration-150 ${moreDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {moreDropdownOpen && (
-                    <div className="absolute left-0 mt-1.5 w-52 py-1.5 bg-[var(--surface)] border border-[var(--border)] rounded-lg shadow-sm z-50">
+                    <div className="absolute left-0 mt-1 w-48 py-1 bg-[var(--surface)] border border-[var(--border)] rounded-lg shadow-lg z-50 animate-fade-in">
                       {MORE_LINKS.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           onClick={() => setMoreDropdownOpen(false)}
-                          className="block px-3.5 py-2 text-xs font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors"
+                          className="block px-3 py-2 text-[13px] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors"
                         >
                           {item.name}
                         </Link>
@@ -123,16 +118,16 @@ export function Navbar() {
             </div>
 
             {/* Right: Search + Theme + Mobile toggle */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Search button */}
+            <div className="flex items-center gap-1.5">
+              {/* Search trigger */}
               <button
                 onClick={() => setSearchModalOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+                className="flex items-center gap-2 h-8 px-2.5 rounded-md border border-[var(--border)] bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors text-[13px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer"
                 aria-label="Search tools"
               >
-                <Search className="w-3.5 h-3.5 text-[var(--foreground-subtle)]" />
-                <span className="hidden sm:inline">Search tools...</span>
-                <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-[var(--foreground-subtle)] bg-[var(--surface)] border border-[var(--border)] rounded">
+                <Search className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[var(--foreground-subtle)]">Search...</span>
+                <kbd className="hidden sm:inline-block ml-1 px-1 py-px text-[10px] font-mono text-[var(--foreground-subtle)] border border-[var(--border)] rounded">
                   /
                 </kbd>
               </button>
@@ -142,10 +137,10 @@ export function Navbar() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+                className="md:hidden flex items-center justify-center w-8 h-8 rounded-md text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
                 aria-label="Open menu"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -153,57 +148,53 @@ export function Navbar() {
 
         {/* Mobile menu dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[var(--border)] bg-[var(--surface)] px-4 py-3 space-y-1">
-            <Link
-              href="/pdf"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              PDF Tools
-            </Link>
-            <Link
-              href="/categories/image"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Image Tools
-            </Link>
-            <Link
-              href="/categories/word"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Document & Office Tools
-            </Link>
-            <Link
-              href="/categories/excel"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Spreadsheet Tools
-            </Link>
-            <Link
-              href="/categories/developer"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Developer Tools
-            </Link>
-            <Link
-              href="/categories/finance"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Finance & Calculators
-            </Link>
-            <Link
-              href="/categories/text-content"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-            >
-              Text Utilities
-            </Link>
-            <div className="pt-2 border-t border-[var(--border)]">
+          <div className="md:hidden border-t border-[var(--border)] bg-[var(--background)] px-4 py-2 animate-slide-down">
+            <nav className="space-y-0.5">
               <Link
-                href="/categories"
-                className="block px-3 py-2 rounded-md text-sm font-medium text-[var(--primary)] hover:bg-[var(--surface-hover)]"
+                href="/pdf"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
               >
-                View all categories →
+                PDF Tools
               </Link>
-            </div>
+              <Link
+                href="/categories/image"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+              >
+                Image Tools
+              </Link>
+              <Link
+                href="/categories/word"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+              >
+                Documents
+              </Link>
+              <Link
+                href="/categories/excel"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+              >
+                Spreadsheets
+              </Link>
+              <Link
+                href="/categories/developer"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+              >
+                Developer
+              </Link>
+              <Link
+                href="/categories/finance"
+                className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+              >
+                Calculators
+              </Link>
+              <div className="pt-1.5 mt-1.5 border-t border-[var(--border)]">
+                <Link
+                  href="/categories"
+                  className="block px-3 py-2.5 rounded-md text-[14px] font-medium text-[var(--primary)] hover:bg-[var(--surface-hover)]"
+                >
+                  All categories →
+                </Link>
+              </div>
+            </nav>
           </div>
         )}
       </header>

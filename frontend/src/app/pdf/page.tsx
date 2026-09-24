@@ -45,17 +45,17 @@ export default function PdfCategoryPage() {
 
   const sections = [
     {
-      title: 'Organize PDF',
+      title: 'Organize',
       description: 'Combine, split, extract, and rearrange PDF pages.',
       tools: organizeTools,
     },
     {
-      title: 'Convert PDF',
+      title: 'Convert',
       description: 'Convert images to PDF or extract selectable text.',
       tools: convertTools,
     },
     {
-      title: 'Optimize PDF',
+      title: 'Optimize',
       description: 'Reduce PDF file size without uploading to an external server.',
       tools: optimizeTools,
     },
@@ -78,8 +78,7 @@ export default function PdfCategoryPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-10 sm:space-y-12">
-        {/* Navigation Breadcrumbs */}
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <Breadcrumbs
           items={[
             { name: 'Home', href: '/' },
@@ -87,30 +86,30 @@ export default function PdfCategoryPage() {
           ]}
         />
 
-        {/* ── Category Intro Header ── */}
-        <div className="pb-4 border-b border-[var(--border)]">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+        {/* Category Header */}
+        <div className="mt-2 mb-8 sm:mb-10">
+          <h1 className="text-[24px] sm:text-[30px] font-semibold text-[var(--foreground)] tracking-tight">
             PDF Tools
           </h1>
-          <p className="mt-1.5 text-sm sm:text-base text-[var(--foreground-muted)] max-w-2xl">
+          <p className="mt-1 text-[14px] sm:text-[15px] text-[var(--foreground-muted)] max-w-lg">
             Everything you need to work with PDF files directly in your browser.
           </p>
         </div>
 
-        {/* ── Organized PDF Workflow Groups ── */}
-        <div className="space-y-10 sm:space-y-12">
+        {/* Organized Sections */}
+        <div className="space-y-10">
           {sections.map((section) => (
-            <section key={section.title} className="space-y-2">
-              <div className="pb-2 border-b border-[var(--border)]/70">
-                <h2 className="text-base sm:text-lg font-bold text-[var(--foreground)] tracking-tight uppercase tracking-wider text-xs font-semibold text-[var(--primary)] mb-0.5">
+            <section key={section.title}>
+              <div className="pb-2 mb-1 border-b border-[var(--border)]">
+                <h2 className="text-[12px] font-semibold uppercase tracking-wider text-[var(--primary)]">
                   {section.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[var(--foreground-muted)]">
+                <p className="text-[13px] text-[var(--foreground-muted)] mt-0.5">
                   {section.description}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0.5 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                 {section.tools.map((tool) => (
                   <ToolRow key={tool.id} tool={tool} />
                 ))}

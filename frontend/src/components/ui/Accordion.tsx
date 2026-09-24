@@ -24,7 +24,7 @@ export function AccordionItem({
   return (
     <div
       className={cn(
-        'border-b border-[var(--border)] py-3 last:border-b-0',
+        'border-b border-[var(--border)] last:border-b-0',
         className
       )}
     >
@@ -34,15 +34,15 @@ export function AccordionItem({
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
         id={`accordion-header-${id}`}
-        className="w-full flex items-center justify-between text-left py-2 gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg"
+        className="w-full flex items-center justify-between text-left py-3 gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded"
       >
-        <span className="text-sm sm:text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+        <span className="text-[14px] font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
           {title}
         </span>
         <ChevronDown
           className={cn(
-            'w-4 h-4 text-[var(--foreground-muted)] transition-transform duration-200 shrink-0 group-hover:text-[var(--primary)]',
-            isOpen && 'rotate-180 text-[var(--primary)]'
+            'w-3.5 h-3.5 text-[var(--foreground-subtle)] transition-transform duration-150 shrink-0',
+            isOpen && 'rotate-180'
           )}
         />
       </button>
@@ -52,7 +52,7 @@ export function AccordionItem({
           id={`accordion-content-${id}`}
           role="region"
           aria-labelledby={`accordion-header-${id}`}
-          className="pt-2 pb-3 text-sm text-[var(--foreground-muted)] leading-relaxed animate-fade-in"
+          className="pb-3 text-[13px] text-[var(--foreground-muted)] leading-relaxed animate-fade-in"
         >
           {children}
         </div>
@@ -68,7 +68,7 @@ export interface AccordionProps {
 
 export function Accordion({ children, className }: AccordionProps) {
   return (
-    <div className={cn('divide-y divide-[var(--border)]', className)}>
+    <div className={cn('', className)}>
       {children}
     </div>
   );

@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
-/* ─── Google Font hint (Inter loaded via next/font) ─────────────────────────── */
+/* ─── Design System: Refined, Calm, Professional ────────────────────────────── */
 @layer base {
-  /* ─── Light mode tokens (Section 17 Color System Reset) ─────────────────── */
+  /* ─── Light mode tokens ─────────────────────────────────────────────────── */
   :root {
-    /* Primary action color — Blue */
+    /* Primary action color — restrained blue */
     --primary:           #2563EB;
     --primary-hover:     #1D4ED8;
     --primary-soft:      #EFF6FF;
     --primary-foreground:#ffffff;
 
-    /* Surfaces */
+    /* Surfaces — minimal contrast hierarchy */
     --background:        #ffffff;
-    --secondary-bg:      #f8fafc;
+    --secondary-bg:      #fafafa;
     --surface:           #ffffff;
     --surface-elevated:  #ffffff;
-    --surface-muted:     #f8fafc;
-    --surface-hover:     #f1f5f9;
+    --surface-muted:     #f9fafb;
+    --surface-hover:     #f3f4f6;
+    --surface-active:    #e5e7eb;
 
-    /* Borders */
+    /* Borders — subtle, not prominent */
     --border:            #e5e7eb;
     --border-strong:     #d1d5db;
 
-    /* Text */
+    /* Text — proper hierarchy */
     --foreground:        #111827;
     --foreground-muted:  #6b7280;
     --foreground-subtle: #9ca3af;
@@ -30,60 +31,66 @@
     /* Legacy aliases */
     --card:              #ffffff;
     --card-foreground:   #111827;
-    --muted:             #f8fafc;
+    --muted:             #f9fafb;
     --muted-foreground:  #6b7280;
     --accent:            #2563EB;
     --accent-foreground: #ffffff;
 
-    /* Semantic status */
+    /* Semantic status — restrained */
     --success:           #16a34a;
     --success-soft:      #dcfce7;
     --warning:           #d97706;
     --warning-soft:      #fef3c7;
     --error:             #dc2626;
     --error-soft:        #fee2e2;
+
+    /* Radius */
+    --radius-sm:         4px;
+    --radius-md:         6px;
+    --radius-lg:         8px;
+    --radius-xl:         12px;
   }
 
-  /* ─── Dark mode tokens ──────────────────────────────────────────────────── */
+  /* ─── Dark mode tokens — professional, not cyberpunk ─────────────────────── */
   .dark {
-    /* Primary action color */
     --primary:           #3B82F6;
-    --primary-hover:     #2563EB;
-    --primary-soft:      #1e293b;
+    --primary-hover:     #60a5fa;
+    --primary-soft:      rgba(59, 130, 246, 0.1);
     --primary-foreground:#ffffff;
 
-    /* Surfaces */
-    --background:        #0b0f17;
-    --secondary-bg:      #0f172a;
-    --surface:           #0f172a;
-    --surface-elevated:  #1e293b;
-    --surface-muted:     #1e293b;
-    --surface-hover:     #334155;
+    --background:        #0f1117;
+    --secondary-bg:      #161922;
+    --surface:           #161922;
+    --surface-elevated:  #1c1f2e;
+    --surface-muted:     #1c1f2e;
+    --surface-hover:     #252836;
+    --surface-active:    #2e3245;
 
-    /* Borders */
-    --border:            #1e293b;
-    --border-strong:     #334155;
+    --border:            #252836;
+    --border-strong:     #353849;
 
-    /* Text */
-    --foreground:        #f8fafc;
-    --foreground-muted:  #94a3b8;
-    --foreground-subtle: #64748b;
+    --foreground:        #e8eaed;
+    --foreground-muted:  #9ca3af;
+    --foreground-subtle: #6b7280;
 
-    /* Legacy aliases */
-    --card:              #0f172a;
-    --card-foreground:   #f8fafc;
-    --muted:             #1e293b;
-    --muted-foreground:  #94a3b8;
+    --card:              #161922;
+    --card-foreground:   #e8eaed;
+    --muted:             #1c1f2e;
+    --muted-foreground:  #9ca3af;
     --accent:            #3B82F6;
     --accent-foreground: #ffffff;
 
-    /* Semantic status */
     --success:           #22c55e;
-    --success-soft:      #14532d;
+    --success-soft:      rgba(34, 197, 94, 0.12);
     --warning:           #f59e0b;
-    --warning-soft:      #451a03;
+    --warning-soft:      rgba(245, 158, 11, 0.12);
     --error:             #ef4444;
-    --error-soft:        #450a0a;
+    --error-soft:        rgba(239, 68, 68, 0.12);
+
+    --radius-sm:         4px;
+    --radius-md:         6px;
+    --radius-lg:         8px;
+    --radius-xl:         12px;
   }
 }
 
@@ -99,6 +106,8 @@ body {
   color: var(--foreground);
   font-feature-settings: "rlig" 1, "calt" 1;
   overflow-x: hidden;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
 }
 
 /* Prevent horizontal scroll at any viewport */
@@ -111,7 +120,7 @@ body {
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* ─── Text selection ────────────────────────────────────────────────────────── */
@@ -193,11 +202,11 @@ pre, code, .mono {
   }
 }
 
-/* ─── Mobile nav animation ──────────────────────────────────────────────────── */
+/* ─── Animations (subtle, functional only) ──────────────────────────────────── */
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
@@ -206,7 +215,7 @@ pre, code, .mono {
 }
 
 .animate-slide-down {
-  animation: slideDown 0.18s ease-out forwards;
+  animation: slideDown 0.15s ease-out forwards;
 }
 
 @keyframes indeterminate {
@@ -234,5 +243,20 @@ pre, code, .mono {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.2s ease-out forwards;
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.15s ease-out forwards;
 }

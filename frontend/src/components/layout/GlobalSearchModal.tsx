@@ -3,9 +3,8 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, X, Command, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 import { toolRegistry } from '@/lib/tools/registry';
-import { ToolIcon } from '@/components/tools/ToolIcon';
 
 interface GlobalSearchModalProps {
   isOpen: boolean;
@@ -61,8 +60,8 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const results = React.useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) {
-      // Default to popular featured tools
-      return allTools.filter((t) => t.isFeatured).slice(0, 8);
+      // Show featured tools as defaults
+      return allTools.filter((t) => t.isFeatured).slice(0, 6);
     }
 
     return allTools
@@ -91,134 +90,108 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/60 dark:bg-black/80 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] sm:pt-[18vh] px-4 bg-black/40 dark:bg-black/60 animate-fade-in"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
       aria-label="Search tools"
     >
       <div
-        className="w-full max-w-2xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-scale-up"
+        className="w-full max-w-lg rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl overflow-hidden flex flex-col max-h-[65vh] animate-scale-up"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--border)] bg-[var(--surface-muted)]/50">
-          <Search className="w-5 h-5 text-[var(--foreground-muted)] shrink-0" />
+        {/* Search Input */}
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--border)]">
+          <Search className="w-4 h-4 text-[var(--foreground-muted)] shrink-0" />
           <input
             ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="What do you need to do? (e.g. compress PDF, resize image, EMI)..."
-            className="flex-1 bg-transparent text-sm sm:text-base text-[var(--foreground)] placeholder:text-[var(--foreground-subtle)] focus:outline-none"
+            placeholder="Search tools..."
+            className="flex-1 bg-transparent text-[14px] text-[var(--foreground)] placeholder:text-[var(--foreground-subtle)] focus:outline-none"
             aria-label="Search query"
           />
           {query ? (
             <button
               onClick={() => setQuery('')}
-              className="p-1 rounded-md text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-muted)]"
+              className="p-1 rounded text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
               aria-label="Clear query"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3.5 h-3.5" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[11px] font-mono font-medium rounded border border-[var(--border)] text-[var(--foreground-subtle)] bg-[var(--surface)]">
+            <kbd className="hidden sm:inline px-1.5 py-0.5 text-[10px] font-mono text-[var(--foreground-subtle)] border border-[var(--border)] rounded">
               ESC
             </kbd>
           )}
         </div>
 
-        {/* Results List / Suggestions */}
-        <div className="overflow-y-auto p-3 flex-1 scrollbar-thin space-y-1">
+        {/* Results */}
+        <div className="overflow-y-auto py-2 px-2 flex-1 scrollbar-thin">
           {results.length > 0 ? (
             <>
-              <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--foreground-subtle)] flex items-center justify-between">
-                <span>{query ? `Search Results (${results.length})` : 'Popular & Recommended Tools'}</span>
-                {!query && <span className="flex items-center gap-1 text-[var(--primary)]"><Sparkles className="w-3 h-3" /> Quick Picks</span>}
-              </div>
+              {!query && (
+                <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--foreground-subtle)]">
+                  Popular tools
+                </div>
+              )}
 
               {results.map((tool) => (
                 <button
                   key={tool.id}
                   onClick={() => handleSelectTool(tool.slug)}
-                  className="w-full flex items-center gap-3.5 p-3 rounded-xl hover:bg-[var(--primary-soft)]/20 border border-transparent hover:border-[var(--primary)]/30 text-left transition-all group cursor-pointer"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--surface-hover)] text-left transition-colors group cursor-pointer"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-[var(--surface-muted)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground-muted)] group-hover:text-[var(--primary)] group-hover:bg-[var(--surface)] group-hover:border-[var(--primary)]/30 transition-colors shrink-0">
-                    <ToolIcon name={tool.icon} className="w-4 h-4" />
-                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-sm text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors truncate">
+                      <span className="text-[14px] font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors truncate">
                         {tool.name}
                       </span>
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[var(--surface-muted)] text-[var(--foreground-muted)] uppercase tracking-wider border border-[var(--border)] shrink-0">
+                      <span className="text-[11px] text-[var(--foreground-subtle)] shrink-0">
                         {tool.category}
                       </span>
                     </div>
-                    <p className="text-xs text-[var(--foreground-muted)] truncate mt-0.5">
+                    <p className="text-[12px] text-[var(--foreground-muted)] truncate mt-0.5">
                       {tool.shortDescription}
                     </p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[var(--foreground-subtle)] opacity-0 group-hover:opacity-100 group-hover:text-[var(--primary)] transition-all shrink-0" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--foreground-subtle)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                 </button>
               ))}
             </>
           ) : (
             /* Empty State */
-            <div className="py-10 px-6 text-center space-y-4">
-              <div className="w-12 h-12 rounded-full bg-[var(--surface-muted)] border border-[var(--border)] flex items-center justify-center mx-auto text-[var(--foreground-muted)]">
-                <Search className="w-6 h-6" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-base font-bold text-[var(--foreground)]">No tools found</h4>
-                <p className="text-xs sm:text-sm text-[var(--foreground-muted)] max-w-sm mx-auto">
-                  Try another search such as &quot;compress PDF&quot;, &quot;resize image&quot;, or &quot;EMI calculator&quot;.
-                </p>
-              </div>
+            <div className="py-8 px-4 text-center space-y-3">
+              <p className="text-[14px] font-medium text-[var(--foreground)]">No tools found</p>
+              <p className="text-[13px] text-[var(--foreground-muted)]">
+                Try searching for &ldquo;compress PDF&rdquo;, &ldquo;resize image&rdquo;, or &ldquo;JSON&rdquo;.
+              </p>
 
-              {/* Suggestions */}
-              <div className="pt-2">
-                <span className="text-[11px] font-semibold text-[var(--foreground-subtle)] uppercase tracking-wider block mb-2">
-                  Popular searches:
-                </span>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {['compress PDF', 'resize image', 'EMI calculator', 'JSON formatter', 'Base64', 'QR code', 'merge PDF'].map((term) => (
-                    <button
-                      key={term}
-                      onClick={() => handleSuggestionClick(term)}
-                      className="px-2.5 py-1 text-xs rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] text-[var(--foreground)] hover:border-[var(--primary)] hover:bg-[var(--primary-soft)]/20 transition-colors"
-                    >
-                      {term}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-[var(--border)] flex justify-center gap-3 text-xs">
-                <Link
-                  href="/tools"
-                  onClick={onClose}
-                  className="font-medium text-[var(--primary)] hover:underline flex items-center gap-1"
-                >
-                  Browse all 96 tools <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+              <div className="flex flex-wrap justify-center gap-1.5 pt-2">
+                {['compress PDF', 'resize image', 'EMI calculator', 'JSON formatter', 'merge PDF'].map((term) => (
+                  <button
+                    key={term}
+                    onClick={() => handleSuggestionClick(term)}
+                    className="px-2 py-1 text-[12px] rounded-md border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors"
+                  >
+                    {term}
+                  </button>
+                ))}
               </div>
             </div>
           )}
         </div>
 
-        {/* Footer info bar */}
-        <div className="px-4 py-2.5 border-t border-[var(--border)] bg-[var(--surface-muted)]/30 text-xs text-[var(--foreground-subtle)] flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Command className="w-3.5 h-3.5" />
-            <span>Tip: Press <strong>Ctrl+K</strong> or <strong>⌘K</strong> anytime to search</span>
-          </div>
+        {/* Footer */}
+        <div className="px-3 py-2 border-t border-[var(--border)] text-[11px] text-[var(--foreground-subtle)] flex items-center justify-between">
+          <span>Press <strong>Esc</strong> to close</span>
           <Link
-            href="/tools"
-            onClick={onClose}
+            href="/categories"
+            onClick={handleClose}
             className="text-[var(--primary)] hover:underline font-medium"
           >
-            View Directory
+            Browse all
           </Link>
         </div>
       </div>

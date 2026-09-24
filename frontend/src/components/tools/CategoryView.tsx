@@ -39,7 +39,7 @@ export function CategoryView({ categorySlug, basePath = '/categories' }: Categor
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <Breadcrumbs
           items={[
             { name: basePath === '/tools' ? 'Tools' : 'Categories', href: basePath },
@@ -48,22 +48,20 @@ export function CategoryView({ categorySlug, basePath = '/categories' }: Categor
         />
 
         {/* Category Header */}
-        <div className="pb-4 border-b border-[var(--border)]">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+        <div className="mt-2 mb-8">
+          <h1 className="text-[24px] sm:text-[30px] font-semibold text-[var(--foreground)] tracking-tight">
             {category.name}
           </h1>
-          <p className="mt-1.5 text-sm sm:text-base text-[var(--foreground-muted)] max-w-2xl leading-relaxed">
+          <p className="mt-1 text-[14px] sm:text-[15px] text-[var(--foreground-muted)] max-w-lg leading-relaxed">
             {category.intro || category.description}
           </p>
         </div>
 
-        {/* Tool list as clean, scannable rows */}
-        <div className="space-y-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0.5">
-            {activeTools.map((tool) => (
-              <ToolRow key={tool.id} tool={tool} />
-            ))}
-          </div>
+        {/* Tool rows */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+          {activeTools.map((tool) => (
+            <ToolRow key={tool.id} tool={tool} />
+          ))}
         </div>
 
         {/* Ad slot */}
@@ -71,8 +69,8 @@ export function CategoryView({ categorySlug, basePath = '/categories' }: Categor
 
         {/* Related Categories */}
         {relatedCategories.length > 0 && (
-          <div className="pt-8 border-t border-[var(--border)]">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--foreground-muted)] mb-3">
+          <div className="pt-8 mt-8 border-t border-[var(--border)]">
+            <h2 className="text-[12px] font-semibold uppercase tracking-wider text-[var(--foreground-subtle)] mb-3">
               Related Categories
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -83,7 +81,7 @@ export function CategoryView({ categorySlug, basePath = '/categories' }: Categor
                   <Link
                     key={relCat.slug}
                     href={`/categories/${relCat.slug}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-xs font-medium text-[var(--foreground)] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[var(--border)] text-[13px] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors"
                   >
                     <span>{relCat.name}</span>
                     <span className="text-[var(--foreground-subtle)]">({count.active})</span>

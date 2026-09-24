@@ -9,11 +9,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     const variantStyles = {
-      // Electric Blue — consistent in both light and dark
       primary:
-        'bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] shadow-sm shadow-blue-500/20 dark:shadow-blue-900/30',
+        'bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)]',
       secondary:
-        'bg-[var(--surface-muted)] text-[var(--foreground)] hover:bg-[var(--border)] dark:hover:bg-[var(--border-strong)]',
+        'bg-[var(--surface-muted)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--surface-hover)]',
       outline:
         'border border-[var(--border)] bg-transparent hover:bg-[var(--surface-muted)] text-[var(--foreground)]',
       ghost:
@@ -23,10 +22,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const sizeStyles = {
-      sm:   'h-9 px-3.5 text-xs rounded-md',
-      md:   'h-10 px-4 text-sm rounded-lg',     // 40px — comfortable tap
-      lg:   'h-11 px-6 text-base rounded-lg',   // 44px — full tap target
-      icon: 'h-10 w-10 p-0 flex items-center justify-center rounded-lg',
+      sm:   'h-8 px-3 text-[13px] rounded-md',
+      md:   'h-10 px-4 text-[14px] rounded-md',
+      lg:   'h-11 px-5 text-[15px] rounded-lg',
+      icon: 'h-9 w-9 p-0 flex items-center justify-center rounded-md',
     };
 
     return (

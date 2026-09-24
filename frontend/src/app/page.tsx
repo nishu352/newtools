@@ -19,103 +19,141 @@ export default function HomePage() {
     ...toolRegistry.getToolsByCategory('math-calculators'),
   ].filter((t) => t.status === 'active' || t.status === 'beta');
   const developerTools = toolRegistry.getToolsByCategory('developer').filter((t) => t.status === 'active' || t.status === 'beta');
+  const securityTools = toolRegistry.getToolsByCategory('security').filter((t) => t.status === 'active' || t.status === 'beta');
+  const dateTimeTools = toolRegistry.getToolsByCategory('date-time').filter((t) => t.status === 'active' || t.status === 'beta');
+  const generatorTools = toolRegistry.getToolsByCategory('generators').filter((t) => t.status === 'active' || t.status === 'beta');
+  const qrTools = toolRegistry.getToolsByCategory('qr-barcode').filter((t) => t.status === 'active' || t.status === 'beta');
+  const cssTools = toolRegistry.getToolsByCategory('css-design').filter((t) => t.status === 'active' || t.status === 'beta');
 
   const categories = [
     {
       title: 'PDF Tools',
       description: 'Merge, split, compress, and organize PDF documents.',
       hubHref: '/pdf',
-      hubText: 'All PDF tools',
       tools: pdfTools,
     },
     {
       title: 'Image Tools',
       description: 'Compress, resize, convert, and optimize images.',
       hubHref: '/categories/image',
-      hubText: 'All image tools',
       tools: imageTools,
     },
     {
       title: 'Document Tools',
       description: 'Word DOCX text extractors, statistics, and converters.',
       hubHref: '/categories/word',
-      hubText: 'All document tools',
       tools: wordTools,
     },
     {
       title: 'Spreadsheet Tools',
-      description: 'Spreadsheet viewer, CSV, TSV, and JSON converters.',
+      description: 'Viewer, CSV, TSV, and JSON converters.',
       hubHref: '/categories/excel',
-      hubText: 'All spreadsheet tools',
       tools: excelTools,
     },
     {
-      title: 'Text Tools',
+      title: 'Text Utilities',
       description: 'Clean whitespace, sort lines, count words, and format strings.',
       hubHref: '/categories/text-content',
-      hubText: 'All text tools',
       tools: textTools,
     },
     {
       title: 'Finance & Calculators',
       description: 'Loan EMI, compound interest, percentage, and everyday math.',
       hubHref: '/categories/finance',
-      hubText: 'All calculators',
       tools: financeTools,
     },
     {
       title: 'Developer Utilities',
       description: 'Format JSON, SQL, XML, test regex, and decode tokens.',
       hubHref: '/categories/developer',
-      hubText: 'All developer tools',
       tools: developerTools,
     },
-  ];
+    {
+      title: 'Encoding & Security',
+      description: 'Multi-hash generators, HMAC, Base64, and binary converters.',
+      hubHref: '/categories/security',
+      tools: securityTools,
+    },
+    {
+      title: 'Date & Time',
+      description: 'Unix timestamps, date differences, and timezone converters.',
+      hubHref: '/categories/date-time',
+      tools: dateTimeTools,
+    },
+    {
+      title: 'Generators',
+      description: 'Random strings, NanoID, UUIDs, and Lorem Ipsum.',
+      hubHref: '/categories/generators',
+      tools: generatorTools,
+    },
+    {
+      title: 'QR & Barcode',
+      description: 'Generate and scan QR codes.',
+      hubHref: '/categories/qr-barcode',
+      tools: qrTools,
+    },
+    {
+      title: 'CSS & Design',
+      description: 'Gradients, box shadows, unit converters, and color tools.',
+      hubHref: '/categories/css-design',
+      tools: cssTools,
+    },
+  ].filter((cat) => cat.tools.length > 0);
 
   return (
-    <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 space-y-12 sm:space-y-16">
-      {/* ── Main Intro + Search (Restrained Hero) ── */}
-      <section className="text-center max-w-2xl mx-auto pt-2 sm:pt-6">
-        <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[var(--foreground)] tracking-tight">
-          OmniTools
+    <div className="max-w-[1120px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      {/* ── Compact Hero ── */}
+      <section className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
+        <h1 className="text-[28px] sm:text-[36px] font-semibold text-[var(--foreground)] tracking-tight leading-tight">
+          OminiTools
         </h1>
-        <p className="mt-2 text-base sm:text-lg text-[var(--foreground-muted)]">
+        <p className="mt-1.5 text-[15px] sm:text-[16px] text-[var(--foreground-muted)] leading-relaxed">
           Simple tools for everyday files.
         </p>
-
-        {/* Clean, instant discovery search */}
         <HomepageHeroSearch totalToolsCount={allTools.length} />
       </section>
 
-      {/* ── Categorized Tool Directory ── */}
-      <div className="space-y-12 sm:space-y-14">
+      {/* ── Tool Directory ── */}
+      <div className="space-y-10 sm:space-y-12">
         {categories.map((cat) => (
-          <section key={cat.title} className="space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-2 border-b border-[var(--border)]">
+          <section key={cat.title}>
+            {/* Category header */}
+            <div className="flex items-baseline justify-between gap-4 mb-1 pb-2 border-b border-[var(--border)]">
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-[var(--foreground)] tracking-tight">
+                <h2 className="text-[16px] sm:text-[18px] font-semibold text-[var(--foreground)] tracking-tight">
                   {cat.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[var(--foreground-muted)] mt-0.5">
+                <p className="text-[13px] text-[var(--foreground-muted)] mt-0.5">
                   {cat.description}
                 </p>
               </div>
 
               <Link
                 href={cat.hubHref}
-                className="inline-flex items-center gap-1 text-xs font-medium text-[var(--primary)] hover:underline shrink-0 mt-1 sm:mt-0"
+                className="hidden sm:inline-flex items-center gap-1 text-[12px] font-medium text-[var(--primary)] hover:underline shrink-0 whitespace-nowrap"
               >
-                <span>{cat.hubText}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                View all
+                <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
 
-            {/* Clean rows list */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0.5 pt-1">
+            {/* Tool rows in a 2-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 mt-1">
               {cat.tools.slice(0, 8).map((tool) => (
                 <ToolRow key={tool.id} tool={tool} />
               ))}
             </div>
+
+            {/* Mobile "View all" link */}
+            {cat.tools.length > 8 && (
+              <Link
+                href={cat.hubHref}
+                className="sm:hidden inline-flex items-center gap-1 mt-2 text-[13px] font-medium text-[var(--primary)] hover:underline"
+              >
+                View all {cat.title.toLowerCase()}
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            )}
           </section>
         ))}
       </div>

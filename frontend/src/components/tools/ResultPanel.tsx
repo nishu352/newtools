@@ -26,15 +26,15 @@ export interface ResultPanelProps {
 }
 
 export function ResultPanel({
-  title = 'Done!',
-  subtitle = 'Your file has been processed successfully.',
+  title = 'Done',
+  subtitle = 'Your file is ready.',
   metrics = [],
   downloadUrl,
   downloadFilename,
   onDownload,
   onStartOver,
-  downloadButtonText = 'Download File',
-  startOverButtonText = 'Start Over',
+  downloadButtonText = 'Download',
+  startOverButtonText = 'Process another file',
   className,
   children,
 }: ResultPanelProps) {
@@ -56,30 +56,28 @@ export function ResultPanel({
   return (
     <div
       role="region"
-      aria-label="Result Panel"
+      aria-label="Result"
       className={cn(
-        'w-full p-6 sm:p-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-5',
+        'w-full py-6 space-y-4',
         className
       )}
     >
-      {/* Header status */}
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-          <CheckCircle2 className="w-5 h-5" />
-        </div>
+      {/* Header */}
+      <div className="flex items-center gap-2.5">
+        <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)] leading-tight">
+          <h3 className="text-[15px] font-semibold text-[var(--foreground)] leading-tight">
             {title}
           </h3>
-          <p className="text-xs text-[var(--foreground-muted)] mt-0.5">
+          <p className="text-[13px] text-[var(--foreground-muted)]">
             {subtitle}
           </p>
         </div>
       </div>
 
-      {/* Metrics Row / Grid */}
+      {/* Metrics */}
       {metrics.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-[var(--border)]">
+        <div className="flex flex-wrap gap-6 py-3 border-y border-[var(--border)]">
           {metrics.map((m, idx) => (
             <div key={idx} className="flex flex-col">
               <span className="text-[11px] font-medium uppercase tracking-wider text-[var(--foreground-subtle)]">
@@ -87,7 +85,7 @@ export function ResultPanel({
               </span>
               <span
                 className={cn(
-                  'text-base sm:text-lg font-bold mt-0.5',
+                  'text-[16px] font-semibold mt-0.5',
                   m.highlight
                     ? 'text-emerald-600 dark:text-emerald-400'
                     : 'text-[var(--foreground)]'
@@ -100,29 +98,29 @@ export function ResultPanel({
         </div>
       )}
 
-      {/* Optional Custom Preview Slot */}
+      {/* Custom content */}
       {children}
 
-      {/* Action Buttons: 1 Primary CTA + 1 Secondary CTA */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
         <Button
           variant="primary"
-          size="lg"
+          size="md"
           onClick={handleDownload}
-          className="w-full sm:w-auto sm:min-w-[200px] shadow-sm justify-center"
+          className="w-full sm:w-auto justify-center"
         >
-          <Download className="w-4 h-4 mr-2" />
+          <Download className="w-4 h-4 mr-1.5" />
           {downloadButtonText}
         </Button>
 
         {onStartOver && (
           <Button
             variant="secondary"
-            size="lg"
+            size="md"
             onClick={onStartOver}
             className="w-full sm:w-auto justify-center"
           >
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <RefreshCw className="w-3.5 h-3.5 mr-1.5" />
             {startOverButtonText}
           </Button>
         )}

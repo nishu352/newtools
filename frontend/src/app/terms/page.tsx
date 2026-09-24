@@ -11,58 +11,52 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function TermsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Breadcrumbs items={[{ name: 'Terms of Service' }]} />
 
-      <div className="my-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+      <div className="mt-6 mb-10">
+        <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)] mb-2">
           Terms of Service
         </h1>
-        <p className="mt-2 text-xs text-slate-500">Last updated: September 2026</p>
+        <p className="text-xs text-[var(--muted)]">Last updated: September 2026</p>
       </div>
 
-      <div className="space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+      <div className="space-y-6 text-sm text-[var(--foreground)] leading-relaxed">
         <section>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">1. Agreement to Terms</h2>
-          <p>
-            By accessing or using OmniTools, you agree to be bound by these Terms of Service and all applicable laws and
-            regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+          <h2 className="text-base font-semibold text-[var(--foreground)] mb-2">1. Agreement to Terms</h2>
+          <p className="text-[var(--muted)]">
+            By accessing or using OmniTools, you agree to be bound by these Terms of Service and all applicable laws and regulations.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">2. Use License & Availability</h2>
-          <p>
-            OmniTools grants you a free, non-exclusive, non-transferable license to access and use the online utilities
-            provided on this platform for personal or commercial purposes.
+          <h2 className="text-base font-semibold text-[var(--foreground)] mb-2">2. Use License</h2>
+          <p className="text-[var(--muted)]">
+            OmniTools grants you a free, non-exclusive, non-transferable license to access and use the online utilities provided on this platform for personal or commercial purposes.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">3. Acceptable Use Policy</h2>
-          <p className="mb-2">You agree not to:</p>
-          <ul className="list-disc pl-5 space-y-1 text-xs text-slate-600 dark:text-slate-400">
-            <li>Attempt to disrupt, overload, or reverse-engineer any backend APIs or rate-limiting systems.</li>
+          <h2 className="text-base font-semibold text-[var(--foreground)] mb-2">3. Acceptable Use Policy</h2>
+          <p className="text-[var(--muted)] mb-2">You agree not to:</p>
+          <ul className="list-disc list-inside space-y-1 text-xs text-[var(--muted)]">
+            <li>Attempt to disrupt, overload, or reverse-engineer any backend services or rate-limiting systems.</li>
             <li>Use the tools for any unlawful purpose or to facilitate cyberattacks, malware distribution, or spam.</li>
-            <li>Scrape or mirror the service in a way that infringes upon platform operations.</li>
+            <li>Scrape or mirror the service in a way that negatively impacts platform operation.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">4. Disclaimer of Warranties</h2>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            OmniTools and its software utilities are provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo;
-            basis without warranties of any kind, whether express or implied. While we take pride in precision and
-            mathematical correctness, we make no guarantees that results or calculations are 100% error-free.
+          <h2 className="text-base font-semibold text-[var(--foreground)] mb-2">4. Disclaimer of Warranties</h2>
+          <p className="text-[var(--muted)]">
+            OmniTools and its software utilities are provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, whether express or implied.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">5. Limitation of Liability</h2>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            In no event shall OmniTools or its contributors be liable for any damages (including, without limitation,
-            damages for loss of data or profit, or business interruption) arising out of the use or inability to use the
-            materials or tools on this site.
+          <h2 className="text-base font-semibold text-[var(--foreground)] mb-2">5. Limitation of Liability</h2>
+          <p className="text-[var(--muted)]">
+            In no event shall OmniTools or its contributors be liable for any damages arising out of the use or inability to use the tools or materials on this site.
           </p>
         </section>
       </div>
