@@ -9,7 +9,6 @@ import { OfflineIndicator } from '@/components/layout/OfflineIndicator';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { generateWebSiteSchema } from '@/lib/seo/schema';
 import { AnalyticsScripts } from '@/components/monetization/AnalyticsScripts';
-import { AdSenseScript } from '@/components/monetization/AdSenseScript';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,6 +36,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        {/* Google AdSense Verification & Auto-Ads */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120312262865304"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -49,7 +54,6 @@ export default function RootLayout({
 
         {/* Monetization scripts — afterInteractive, never render-blocking */}
         <AnalyticsScripts />
-        <AdSenseScript />
       </body>
     </html>
   );
