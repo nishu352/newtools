@@ -15,41 +15,33 @@ export function ToolCard({ tool }: ToolCardProps) {
   const cardContent = (
     <div
       className={cn(
-        'group relative flex flex-col justify-between p-4 sm:p-4.5 rounded-xl h-full',
-        'border border-[var(--border)] bg-[var(--surface)]',
-        'hover:border-[var(--primary)]/50 hover:bg-[var(--surface-hover)]',
-        'transition-all duration-150 shadow-2xs hover:shadow-xs',
+        'tool-card group bg-white dark:bg-slate-900 border border-[var(--surface-border)] hover:border-slate-300 dark:hover:border-slate-700 rounded-xl p-6 cursor-pointer shadow-2xs hover:shadow-sm transition-utility flex flex-col justify-between min-h-[195px] h-full',
         !isAvailable && 'opacity-60 cursor-not-allowed'
       )}
     >
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-            <ToolIcon name={tool.icon} className="w-4 h-4" />
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--surface-subtle)] border border-[var(--surface-border)] flex items-center justify-center shrink-0">
+            <ToolIcon name={tool.icon} className="w-5 h-5 text-[var(--brand)]" />
           </div>
-
-          <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[var(--surface-muted)] text-[var(--foreground-subtle)]">
+          <span className="text-[10px] font-bold text-[var(--content-tertiary)] uppercase tracking-wider bg-[var(--surface-subtle)] px-2 py-0.5 rounded border border-[var(--surface-border)]">
             {tool.category}
           </span>
         </div>
-
-        <h3 className="font-semibold text-sm sm:text-base leading-snug text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors truncate">
+        <h3 className="text-base font-bold text-[var(--content-primary)] group-hover:text-[var(--brand)] transition-utility mb-1.5 truncate">
           {tool.name}
         </h3>
-
-        <p className="text-xs text-[var(--foreground-muted)] leading-relaxed mt-1 line-clamp-2">
+        <p className="text-xs text-[var(--content-secondary)] leading-relaxed line-clamp-2">
           {tool.shortDescription}
         </p>
       </div>
 
-      <div className="mt-3 pt-2.5 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--foreground-subtle)]">
-        <span className="text-[11px] font-medium group-hover:text-[var(--foreground-muted)] transition-colors">
-          {tool.executionMode === 'client'
-            ? 'In-browser'
-            : 'Fast processing'}
+      <div className="pt-4 mt-2 border-t border-[var(--surface-border)] flex items-center justify-between text-xs text-[var(--content-secondary)] font-medium">
+        <span className="text-[11px] text-[var(--content-tertiary)] font-semibold uppercase tracking-wider">
+          {tool.executionMode === 'client' ? 'In-browser • Free' : 'Free • Fast'}
         </span>
-        <span className="font-semibold text-[var(--primary)] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-          Open Tool <ArrowRight className="w-3 h-3" />
+        <span className="tool-arrow text-[var(--content-tertiary)] group-hover:text-[var(--brand)] transition-utility font-bold flex items-center gap-1">
+          <ArrowRight className="w-3.5 h-3.5" />
         </span>
       </div>
     </div>
@@ -62,7 +54,7 @@ export function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-xl"
+      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)] rounded-xl"
     >
       {cardContent}
     </Link>
