@@ -10,12 +10,12 @@ interface HomepageHeroSearchProps {
 }
 
 const POPULAR_SEARCH_TAGS = [
-  { label: 'PDF to JPG', href: '/tools/pdf-to-jpg' },
+  { label: 'Merge PDF', href: '/tools/merge-pdf' },
+  { label: 'Compress PDF', href: '/tools/compress-pdf' },
   { label: 'Image Compressor', href: '/tools/image-compressor' },
   { label: 'EMI Calculator', href: '/tools/emi-calculator' },
   { label: 'JSON Formatter', href: '/tools/json-formatter' },
-  { label: 'Merge PDF', href: '/tools/merge-pdf' },
-  { label: 'Base64 Encoder', href: '/tools/base64-encode-decode' },
+  { label: 'Base64 Converter', href: '/tools/base64-converter' },
 ];
 
 export function HomepageHeroSearch({ totalToolsCount = 96 }: HomepageHeroSearchProps) {

@@ -255,11 +255,11 @@ export interface QuickConversionPair {
 }
 
 export const QUICK_CONVERSIONS: QuickConversionPair[] = [
-  { label: 'PDF → Text / Word', slug: 'pdf-to-text', category: 'PDF', description: 'Extract text content from PDF pages' },
-  { label: 'DOCX → HTML / PDF', slug: 'docx-converter', category: 'Office', description: 'Convert Word document to clean HTML' },
-  { label: 'Excel → CSV', slug: 'spreadsheet-cleaner', category: 'Office', description: 'Clean and export spreadsheet rows' },
+  { label: 'PDF → Plain Text', slug: 'pdf-to-text', category: 'PDF', description: 'Extract clean selectable plain text from PDF' },
+  { label: 'DOCX → Markdown / HTML', slug: 'docx-converter', category: 'Office', description: 'Convert Word document to clean HTML or Markdown' },
+  { label: 'Excel → CSV', slug: 'csv-to-excel', category: 'Office', description: 'Extract XLSX sheets into clean CSV files' },
   { label: 'CSV → Excel', slug: 'csv-to-excel', category: 'Office', description: 'Convert delimited text to XLSX workbook' },
-  { label: 'PPTX → Images / PDF', slug: 'pptx-viewer', category: 'Office', description: 'Extract slides and presentation notes' },
+  { label: 'Spreadsheet → JSON', slug: 'spreadsheet-to-json', category: 'Office', description: 'Convert tabular rows into structured JSON' },
   { label: 'Image → PDF', slug: 'image-to-pdf', category: 'PDF', description: 'Combine JPG or PNG photos into one PDF' },
   { label: 'JPG ↔ PNG', slug: 'image-converter', category: 'Image', description: 'Convert raster image formats losslessly' },
   { label: 'Image → WebP', slug: 'image-converter', category: 'Image', description: 'Compress images into modern WebP format' },

@@ -216,14 +216,24 @@ export async function compressPdf(
   const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
   const originalSize = pdfBuffer.length;
   const compressed = await pdfDoc.save({ useObjectStreams: true });
-  const compressedSize = compressed.length;
-  const reductionPercent = Math.max(0, Math.round(((originalSize - compressedSize) / originalSize) * 100));
+  
+  if (compressed.length < originalSize) {
+    const compressedSize = compressed.length;
+    const reductionPercent = Math.round(((originalSize - compressedSize) / originalSize) * 100);
+    return {
+      data: compressed,
+      originalSize,
+      compressedSize,
+      reductionPercent: Math.max(0, reductionPercent),
+    };
+  }
 
+  // Already optimally compressed; never return a larger file
   return {
-    data: compressed,
+    data: pdfBuffer,
     originalSize,
-    compressedSize,
-    reductionPercent,
+    compressedSize: originalSize,
+    reductionPercent: 0,
   };
 }
 

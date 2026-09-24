@@ -26,17 +26,17 @@ const POPULAR_PDF_SLUGS = [
   'merge-pdf',
   'split-pdf',
   'compress-pdf',
-  'pdf-to-jpg',
-  'pdf-to-word',
+  'image-to-pdf',
+  'rotate-pdf',
   'pdf-to-text',
 ];
 
 const COMMON_PDF_CONVERSIONS = [
-  { from: 'PDF', to: 'JPG', slug: 'pdf-to-jpg', desc: 'Render PDF pages into crisp JPG image slides' },
-  { from: 'PDF', to: 'PNG', slug: 'pdf-to-png', desc: 'Lossless transparent document rasterization' },
-  { from: 'PDF', to: 'Word', slug: 'pdf-to-word', desc: 'Extract structural text into DOCX document' },
-  { from: 'PDF', to: 'Text', slug: 'pdf-to-text', desc: 'Extract clean raw plain text from any PDF' },
-  { from: 'Image', to: 'PDF', slug: 'image-to-pdf', desc: 'Convert JPG, PNG, WebP images into a single PDF' },
+  { from: 'Images', to: 'PDF', slug: 'image-to-pdf', desc: 'Combine JPG or PNG photos into a single PDF document' },
+  { from: 'PDF', to: 'Text', slug: 'pdf-to-text', desc: 'Extract clean selectable plain text from PDF documents' },
+  { from: 'PDF', to: 'Split Pages', slug: 'split-pdf', desc: 'Extract single pages or ranges into separate PDF files' },
+  { from: 'Multiple', to: 'Merged PDF', slug: 'merge-pdf', desc: 'Combine multiple PDF documents in custom sequence' },
+  { from: 'Large PDF', to: 'Compressed', slug: 'compress-pdf', desc: 'Optimize PDF streams to reduce file size' },
 ];
 
 export default function PdfCategoryPage() {
