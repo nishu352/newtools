@@ -87,14 +87,24 @@ export function unflattenJson(flat: Record<string, unknown>): Record<string, unk
   for (const [path, val] of Object.entries(flat)) {
     const parts = path.split('.');
     let current = result;
+    let safe = true;
     for (let i = 0; i < parts.length - 1; i++) {
       const part = parts[i];
+      if (part === '__proto__' || part === 'constructor' || part === 'prototype') {
+        safe = false;
+        break;
+      }
       if (!current[part] || typeof current[part] !== 'object') {
         current[part] = {};
       }
       current = current[part] as Record<string, unknown>;
     }
-    current[parts[parts.length - 1]] = val;
+    if (safe) {
+      const lastKey = parts[parts.length - 1];
+      if (lastKey !== '__proto__' && lastKey !== 'constructor' && lastKey !== 'prototype') {
+        current[lastKey] = val;
+      }
+    }
   }
 
   return result;

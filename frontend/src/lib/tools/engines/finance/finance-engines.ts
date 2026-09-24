@@ -18,9 +18,9 @@ export function calculateSimpleInterest(
   annualRatePercent: number,
   timeYears: number
 ): SimpleInterestResult {
-  const p = Math.max(0, principal);
-  const r = Math.max(0, annualRatePercent);
-  const t = Math.max(0, timeYears);
+  const p = isNaN(principal) || !isFinite(principal) ? 0 : Math.max(0, principal);
+  const r = isNaN(annualRatePercent) || !isFinite(annualRatePercent) ? 0 : Math.max(0, annualRatePercent);
+  const t = isNaN(timeYears) || !isFinite(timeYears) ? 0 : Math.max(0, timeYears);
 
   const interest = (p * r * t) / 100;
   const totalAmount = p + interest;
@@ -48,9 +48,9 @@ export function calculateCagr(
   endingValue: number,
   years: number
 ): CagrResult {
-  const bv = Math.max(0.01, beginningValue);
-  const ev = Math.max(0, endingValue);
-  const n = Math.max(0.1, years);
+  const bv = isNaN(beginningValue) || !isFinite(beginningValue) ? 0.01 : Math.max(0.01, beginningValue);
+  const ev = isNaN(endingValue) || !isFinite(endingValue) ? 0 : Math.max(0, endingValue);
+  const n = isNaN(years) || !isFinite(years) ? 0.1 : Math.max(0.1, years);
 
   const cagr = Math.pow(ev / bv, 1 / n) - 1;
   const cagrPercent = Number((cagr * 100).toFixed(2));
@@ -87,8 +87,8 @@ export function calculateTax(
   taxRatePercent: number,
   mode: 'exclusive' | 'inclusive' = 'exclusive'
 ): TaxCalculationResult {
-  const amt = Math.max(0, amount);
-  const rate = Math.max(0, taxRatePercent);
+  const amt = isNaN(amount) || !isFinite(amount) ? 0 : Math.max(0, amount);
+  const rate = isNaN(taxRatePercent) || !isFinite(taxRatePercent) ? 0 : Math.max(0, taxRatePercent);
 
   if (mode === 'exclusive') {
     const taxAmount = (amt * rate) / 100;

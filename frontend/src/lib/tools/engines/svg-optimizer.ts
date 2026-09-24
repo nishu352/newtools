@@ -29,9 +29,9 @@ export function sanitizeSvg(svg: string): { sanitized: string; itemsRemoved: num
     return '';
   });
 
-  // 2. Remove <foreignObject> tags and contents (common XSS vector)
-  const foreignObjectRegex = /<foreignObject\b[^<]*(?:(?!<\/foreignObject>)<[^<]*)*<\/foreignObject>/gi;
-  cleaned = cleaned.replace(foreignObjectRegex, () => {
+  // 2. Remove <foreignObject>, <iframe>, <embed>, <object> tags and contents (XSS vectors)
+  const dangerousTagsRegex = /<(?:foreignObject|iframe|embed|object)\b[^<]*(?:(?!<\/(?:foreignObject|iframe|embed|object)>)<[^<]*)*<\/(?:foreignObject|iframe|embed|object)>|<(?:embed|iframe)\b[^>]*\/?>/gi;
+  cleaned = cleaned.replace(dangerousTagsRegex, () => {
     count++;
     return '';
   });
@@ -43,8 +43,8 @@ export function sanitizeSvg(svg: string): { sanitized: string; itemsRemoved: num
     return '';
   });
 
-  // 4. Remove javascript: pseudo-protocols in href or xlink:href
-  const jsHrefRegex = /(?:href|xlink:href)\s*=\s*["']\s*javascript:[^"']*["']/gi;
+  // 4. Remove javascript: and data:text/html pseudo-protocols in href or xlink:href
+  const jsHrefRegex = /(?:href|xlink:href)\s*=\s*["']\s*(?:javascript:|data:\s*text\/html)[^"']*["']/gi;
   cleaned = cleaned.replace(jsHrefRegex, () => {
     count++;
     return '';

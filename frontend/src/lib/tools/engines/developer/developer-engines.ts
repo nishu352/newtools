@@ -157,9 +157,21 @@ export function markdownToHtml(md: string): string {
   // Blockquotes
   html = html.replace(/^\>\s+(.*$)/gim, '<blockquote>$1</blockquote>');
 
-  // Links & Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/gim, '<img alt="$1" src="$2" />');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');
+  // Links & Images with URL sanitization against javascript: / data:
+  const sanitizeUrl = (url: string) => {
+    const trimmed = url.trim();
+    if (/^(?:https?:\/\/|\/|#|mailto:|tel:)/i.test(trimmed)) {
+      return trimmed;
+    }
+    return '#';
+  };
+
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/gim, (_, alt, src) => {
+    return `<img alt="${alt}" src="${sanitizeUrl(src)}" />`;
+  });
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, (_, text, href) => {
+    return `<a href="${sanitizeUrl(href)}" rel="noopener noreferrer" target="_blank">${text}</a>`;
+  });
 
   // Unordered lists
   html = html.replace(/^\s*[-*]\s+(.*$)/gim, '<ul><li>$1</li></ul>');
@@ -196,16 +208,37 @@ export function testRegex(
   testString: string
 ): { valid: boolean; matches: RegexMatchResult[]; error?: string } {
   if (!pattern) return { valid: true, matches: [] };
+  if (pattern.length > 1000) {
+    return { valid: false, matches: [], error: 'Pattern exceeds maximum length of 1000 characters.' };
+  }
+
+  // Protect against exponential catastrophic backtracking (e.g. (a+)+, (.*a)*)
+  const nestedQuantifierRegex = /\([^)]*(?:\+|\*|\{\d+,?\d*\})[^)]*\)\s*(?:\+|\*|\{\d+,?\d*\})/;
+  if (nestedQuantifierRegex.test(pattern)) {
+    return {
+      valid: false,
+      matches: [],
+      error: 'Potentially dangerous regex pattern: nested repetition (such as (a+)+) can cause catastrophic backtracking and freeze the browser.',
+    };
+  }
+
+  // Sanitize flags to only standard safe flags: g, i, m, s, u, y
+  const safeFlags = Array.from(new Set((flags || '').split('')))
+    .filter((f) => 'gimsuy'.includes(f))
+    .join('');
+
+  // Safeguard test string length to prevent ReDoS freeze
+  const safeTestString = testString.length > 100000 ? testString.slice(0, 100000) : testString;
 
   try {
-    const reg = new RegExp(pattern, flags);
+    const reg = new RegExp(pattern, safeFlags);
     const matches: RegexMatchResult[] = [];
 
-    if (flags.includes('g')) {
+    if (safeFlags.includes('g')) {
       let m: RegExpExecArray | null;
       let count = 0;
       // Loop protection
-      while ((m = reg.exec(testString)) !== null && count < 1000) {
+      while ((m = reg.exec(safeTestString)) !== null && count < 1000) {
         matches.push({
           match: m[0],
           index: m.index,
@@ -215,7 +248,7 @@ export function testRegex(
         count++;
       }
     } else {
-      const m = reg.exec(testString);
+      const m = reg.exec(safeTestString);
       if (m) {
         matches.push({
           match: m[0],

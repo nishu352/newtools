@@ -108,7 +108,15 @@ export function stringifyDelimitedText(rows: string[][], delimiter = ','): strin
  * Parses XLSX OpenXML workbook zip using JSZip.
  */
 export async function parseXlsx(data: Uint8Array): Promise<SpreadsheetData> {
-  const zip = await JSZip.loadAsync(data);
+  if (!data || data.byteLength === 0) {
+    throw new Error('This file is empty. Please upload a valid Excel spreadsheet.');
+  }
+  let zip: JSZip;
+  try {
+    zip = await JSZip.loadAsync(data);
+  } catch {
+    throw new Error('This file could not be processed. Try another Excel spreadsheet.');
+  }
   const sharedStrings: string[] = [];
 
   // Parse shared strings if present
@@ -324,7 +332,9 @@ export function rowsToJson(rows: string[][], firstRowAsHeaders = true): string {
   const objects = dataRows.map((row) => {
     const obj: Record<string, string> = {};
     headers.forEach((h, i) => {
-      obj[h] = row[i] ?? '';
+      if (h !== '__proto__' && h !== 'constructor' && h !== 'prototype') {
+        obj[h] = row[i] ?? '';
+      }
     });
     return obj;
   });

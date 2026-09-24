@@ -355,6 +355,13 @@ export function JwtDecoderTool() {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-start gap-2.5 p-3 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-800 dark:text-amber-300 text-xs">
+        <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600 dark:text-amber-400" />
+        <p className="leading-relaxed">
+          <strong className="font-semibold">Security Notice:</strong> This tool decodes and inspects JWT structure entirely in your browser. It does not verify cryptographic signatures or authenticate private keys. Your tokens are never sent to any server.
+        </p>
+      </div>
+
       <div className="space-y-2">
         <label className="text-xs font-semibold text-[var(--foreground)]">Encoded JWT Token:</label>
         <textarea

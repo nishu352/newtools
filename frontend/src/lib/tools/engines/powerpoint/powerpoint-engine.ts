@@ -21,7 +21,15 @@ export interface PptxInfo {
  * Parses a PPTX file buffer and extracts slide count, slide text per slide, and metadata.
  */
 export async function parsePptx(buffer: Uint8Array): Promise<PptxInfo> {
-  const zip = await JSZip.loadAsync(buffer);
+  if (!buffer || buffer.byteLength === 0) {
+    throw new Error('This file is empty. Please upload a valid PowerPoint presentation.');
+  }
+  let zip: JSZip;
+  try {
+    zip = await JSZip.loadAsync(buffer);
+  } catch {
+    throw new Error('This file could not be processed. Try another PowerPoint presentation.');
+  }
 
   // Find all slide XML files
   const slideFiles = Object.keys(zip.files)

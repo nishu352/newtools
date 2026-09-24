@@ -21,10 +21,18 @@ export interface DocxStats {
  * Extracts plain text from DOCX binary buffer.
  */
 export async function extractDocxText(buffer: Uint8Array): Promise<string> {
-  const zip = await JSZip.loadAsync(buffer);
+  if (!buffer || buffer.byteLength === 0) {
+    throw new Error('This file is empty. Please upload a valid Word document.');
+  }
+  let zip: JSZip;
+  try {
+    zip = await JSZip.loadAsync(buffer);
+  } catch {
+    throw new Error('This file could not be processed. Try another Word document.');
+  }
   const docFile = zip.file('word/document.xml');
   if (!docFile) {
-    throw new Error('Invalid DOCX file: word/document.xml not found.');
+    throw new Error('Invalid Word document: word/document.xml not found.');
   }
 
   const xml = await docFile.async('text');

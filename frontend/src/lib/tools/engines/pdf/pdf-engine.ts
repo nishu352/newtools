@@ -72,6 +72,24 @@ export function parsePageRanges(rangeStr: string, totalPages: number): number[] 
 }
 
 /**
+ * Safely loads a PDF document with signature validation and error normalization.
+ */
+export async function safeLoadPdf(pdfBuffer: Uint8Array): Promise<PDFDocument> {
+  if (!pdfBuffer || pdfBuffer.byteLength === 0) {
+    throw new Error('This file is empty. Please upload a valid PDF.');
+  }
+  const header = String.fromCharCode(...pdfBuffer.slice(0, 5));
+  if (!header.startsWith('%PDF')) {
+    throw new Error('This file is not a valid PDF document.');
+  }
+  try {
+    return await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  } catch {
+    throw new Error('This file could not be processed. Try another PDF.');
+  }
+}
+
+/**
  * Merges multiple PDF Uint8Array buffers into a single PDF.
  */
 export async function mergePdfs(pdfBuffers: Uint8Array[]): Promise<Uint8Array> {
@@ -82,7 +100,7 @@ export async function mergePdfs(pdfBuffers: Uint8Array[]): Promise<Uint8Array> {
   const mergedDoc = await PDFDocument.create();
 
   for (const buffer of pdfBuffers) {
-    const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+    const srcDoc = await safeLoadPdf(buffer);
     const copiedPages = await mergedDoc.copyPages(srcDoc, srcDoc.getPageIndices());
     copiedPages.forEach((page) => mergedDoc.addPage(page));
   }
@@ -97,7 +115,7 @@ export async function splitPdf(
   pdfBuffer: Uint8Array,
   rangeStr: string
 ): Promise<Array<{ filename: string; data: Uint8Array }>> {
-  const srcDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const srcDoc = await safeLoadPdf(pdfBuffer);
   const totalPages = srcDoc.getPageCount();
 
   const parts = rangeStr.trim() ? rangeStr.split(',').map((p) => p.trim()) : ['all'];
@@ -130,7 +148,7 @@ export async function splitPdf(
  * Extracts specific pages into a new PDF.
  */
 export async function extractPdfPages(pdfBuffer: Uint8Array, pageNumbers: number[]): Promise<Uint8Array> {
-  const srcDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const srcDoc = await safeLoadPdf(pdfBuffer);
   const totalPages = srcDoc.getPageCount();
   const validIndices = pageNumbers.map((p) => p - 1).filter((i) => i >= 0 && i < totalPages);
 
@@ -149,7 +167,7 @@ export async function extractPdfPages(pdfBuffer: Uint8Array, pageNumbers: number
  * Deletes specified pages from a PDF.
  */
 export async function deletePdfPages(pdfBuffer: Uint8Array, pageNumbersToDelete: number[]): Promise<Uint8Array> {
-  const srcDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const srcDoc = await safeLoadPdf(pdfBuffer);
   const totalPages = srcDoc.getPageCount();
   const deleteIndices = new Set(pageNumbersToDelete.map((p) => p - 1));
 
@@ -170,7 +188,7 @@ export async function deletePdfPages(pdfBuffer: Uint8Array, pageNumbersToDelete:
  * Reorders pages in a PDF.
  */
 export async function reorderPdfPages(pdfBuffer: Uint8Array, newOrder: number[]): Promise<Uint8Array> {
-  const srcDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const srcDoc = await safeLoadPdf(pdfBuffer);
   const totalPages = srcDoc.getPageCount();
   const indices = newOrder.map((p) => p - 1).filter((i) => i >= 0 && i < totalPages);
 
@@ -193,7 +211,7 @@ export async function rotatePdfPages(
   angleDegrees: number,
   pageNumbers?: number[]
 ): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const pages = pdfDoc.getPages();
   const targetIndices = pageNumbers ? new Set(pageNumbers.map((p) => p - 1)) : null;
 
@@ -213,7 +231,7 @@ export async function rotatePdfPages(
 export async function compressPdf(
   pdfBuffer: Uint8Array
 ): Promise<{ data: Uint8Array; originalSize: number; compressedSize: number; reductionPercent: number }> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const originalSize = pdfBuffer.length;
   const compressed = await pdfDoc.save({ useObjectStreams: true });
   
@@ -241,7 +259,7 @@ export async function compressPdf(
  * Retrieves document metadata.
  */
 export async function getPdfMetadata(pdfBuffer: Uint8Array): Promise<PdfMetadata> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   return {
     title: pdfDoc.getTitle(),
     author: pdfDoc.getAuthor(),
@@ -259,7 +277,7 @@ export async function getPdfMetadata(pdfBuffer: Uint8Array): Promise<PdfMetadata
  * Removes metadata from PDF.
  */
 export async function removePdfMetadata(pdfBuffer: Uint8Array): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   pdfDoc.setTitle('');
   pdfDoc.setAuthor('');
   pdfDoc.setSubject('');
@@ -274,7 +292,7 @@ export async function removePdfMetadata(pdfBuffer: Uint8Array): Promise<Uint8Arr
  * Inspects page dimensions, orientation, and detects standard page sizes (A4, Letter, etc.).
  */
 export async function getPdfPageSizes(pdfBuffer: Uint8Array): Promise<PdfPageInfo[]> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const pages = pdfDoc.getPages();
 
   return pages.map((page, idx) => {
@@ -317,7 +335,7 @@ export async function addWatermarkToPdf(
   text: string,
   options: WatermarkOptions = {}
 ): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
   const pages = pdfDoc.getPages();
 
@@ -352,7 +370,7 @@ export async function addPageNumbersToPdf(
   pdfBuffer: Uint8Array,
   options: PageNumberOptions = {}
 ): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const pages = pdfDoc.getPages();
   const total = pages.length;
@@ -405,7 +423,7 @@ export async function addHeaderFooterToPdf(
   headerText?: string,
   footerText?: string
 ): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+  const pdfDoc = await safeLoadPdf(pdfBuffer);
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const pages = pdfDoc.getPages();
 

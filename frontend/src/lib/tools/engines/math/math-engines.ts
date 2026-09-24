@@ -8,6 +8,7 @@
 // -------------------------------------------------------------
 
 export function calculateGcd(a: number, b: number): number {
+  if (isNaN(a) || isNaN(b) || !isFinite(a) || !isFinite(b)) return 0;
   let x = Math.abs(Math.round(a));
   let y = Math.abs(Math.round(b));
   while (y) {
@@ -19,11 +20,14 @@ export function calculateGcd(a: number, b: number): number {
 }
 
 export function calculateLcm(a: number, b: number): number {
-  if (a === 0 || b === 0) return 0;
-  return Math.abs(Math.round(a * b)) / calculateGcd(a, b);
+  if (isNaN(a) || isNaN(b) || !isFinite(a) || !isFinite(b) || a === 0 || b === 0) return 0;
+  const gcd = calculateGcd(a, b);
+  if (gcd === 0) return 0;
+  return Math.abs(Math.round(a * b)) / gcd;
 }
 
 export function isPrime(n: number): boolean {
+  if (isNaN(n) || !isFinite(n) || n > 1e12) return false;
   const num = Math.round(n);
   if (num <= 1) return false;
   if (num <= 3) return true;
@@ -35,6 +39,7 @@ export function isPrime(n: number): boolean {
 }
 
 export function primeFactorization(n: number): number[] {
+  if (isNaN(n) || !isFinite(n) || Math.abs(n) > 1e12) return [];
   let num = Math.abs(Math.round(n));
   const factors: number[] = [];
   while (num % 2 === 0 && num > 0) {
