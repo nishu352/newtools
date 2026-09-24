@@ -106,7 +106,7 @@ export function Navbar() {
 
               {/* Desktop Nav Items */}
               <nav
-                className="hidden xl:flex items-center gap-1 pl-4 border-l border-[var(--border)]"
+                className="hidden lg:flex items-center gap-1 pl-4 border-l border-[var(--border)]"
                 aria-label="Main desktop navigation"
               >
                 <Link

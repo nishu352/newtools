@@ -71,7 +71,7 @@ export const PRIMARY_NAV_GROUPS: NavCategoryGroup[] = [
   },
   {
     id: 'finance',
-    label: 'Finance & Calculators',
+    label: 'Finance',
     href: '/tools/finance',
     categorySlugs: ['finance', 'math-calculators'],
     popularSlugs: [
@@ -88,7 +88,7 @@ export const PRIMARY_NAV_GROUPS: NavCategoryGroup[] = [
   },
   {
     id: 'developer',
-    label: 'Developer Tools',
+    label: 'Developer',
     href: '/tools/developer',
     categorySlugs: ['developer'],
     popularSlugs: [

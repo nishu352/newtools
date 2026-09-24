@@ -80,6 +80,22 @@ export function CategoryView({ categorySlug, basePath = '/categories' }: Categor
               <strong className="text-[var(--foreground)]">{activeTools.length}</strong> active utilities
             </span>
           </div>
+
+          {/* Popular Shortcuts */}
+          {activeTools.length > 0 && (
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className="text-xs font-semibold text-[var(--foreground)]">Popular:</span>
+              {activeTools.slice(0, 5).map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={`/tools/${tool.slug}`}
+                  className="px-2.5 py-1 rounded-lg bg-[var(--surface)] hover:bg-[var(--primary-soft)] border border-[var(--border)] hover:border-[var(--primary)]/30 text-xs font-medium text-[var(--foreground)] hover:text-[var(--primary)] transition-all shadow-2xs"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Tool search and listing */}

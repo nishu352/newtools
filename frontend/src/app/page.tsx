@@ -106,61 +106,45 @@ export default function HomePage() {
         </div>
 
         <h1 className="text-[32px] sm:text-[48px] lg:text-[56px] font-extrabold text-[var(--foreground)] tracking-tight max-w-3xl leading-[1.12] text-balance">
-          Simple tools for{' '}
-          <span className="text-[var(--primary)]">everyday problems.</span>
+          Free online tools for{' '}
+          <span className="text-[var(--primary)]">everyday tasks.</span>
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-[var(--foreground-muted)] max-w-xl leading-relaxed text-balance">
-          Calculate, convert, format, compress and create without installing anything.
+          Convert, compress, calculate, edit and organize files directly in your browser.
         </p>
 
         {/* Prominent Search Bar */}
         <HomepageHeroSearch totalToolsCount={allTools.length} />
       </section>
 
-      {/* ── 2. What are you trying to do? (Intent / Use Cases) ── */}
+      {/* ── 2. Popular & Featured Tools (Instant discovery right below hero) ── */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="mb-6">
-          <span className="text-xs font-bold uppercase tracking-wider text-[var(--primary)] block mb-1">
-            Intent Navigation
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
-            What are you trying to do?
-          </h2>
-          <p className="text-sm text-[var(--foreground-muted)] mt-1">
-            Jump directly to the right category hub for your task.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
+          <div>
+            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--primary)] mb-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Curated Selection</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
+              Popular tools
+            </h2>
+            <p className="text-sm text-[var(--foreground-muted)] mt-1">
+              Frequently used everyday utilities, executing 100% in-browser with zero file uploads.
+            </p>
+          </div>
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)] hover:underline shrink-0"
+          >
+            <span>View all 96 tools</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
-          {HOMEPAGE_USE_CASES.map((uc) => (
-            <Link
-              key={uc.id}
-              href={uc.href}
-              className="group p-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 hover:bg-[var(--primary-soft)]/10 hover:shadow-md transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-9 h-9 rounded-xl bg-[var(--surface-muted)] text-[var(--foreground)] group-hover:text-[var(--primary)] group-hover:bg-[var(--primary-soft)] transition-colors flex items-center justify-center">
-                    <ToolIcon name={uc.icon} className="w-4 h-4" />
-                  </div>
-                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[var(--surface-muted)] text-[var(--foreground-muted)] border border-[var(--border)]">
-                    {uc.badge}
-                  </span>
-                </div>
-                <h3 className="font-bold text-sm text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-                  {uc.title}
-                </h3>
-                <p className="text-xs text-[var(--foreground-muted)] mt-1 leading-relaxed">
-                  {uc.description}
-                </p>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-[var(--border)]/60 flex items-center justify-between text-xs font-semibold text-[var(--primary)]">
-                <span>{uc.actionText}</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          {featuredTools.map((tool) => (
+            <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
       </section>
@@ -173,7 +157,7 @@ export default function HomePage() {
               Directory Structure
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
-              Everything you need, in one place.
+              Tool categories
             </h2>
             <p className="text-sm text-[var(--foreground-muted)] mt-1">
               Explore utilities organized cleanly across {majorCategories.length} primary hubs.
@@ -221,33 +205,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 4. Popular & Featured Tools (Curated, not a card wall) ── */}
+      {/* ── 4. What do you want to do? (Task-based Intent Navigation) ── */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--primary)] mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Curated Selection</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
-              Popular tools
-            </h2>
-            <p className="text-sm text-[var(--foreground-muted)] mt-1">
-              High-frequency everyday utilities, executing 100% in-browser with zero uploads.
-            </p>
-          </div>
-          <Link
-            href="/tools"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)] hover:underline shrink-0"
-          >
-            <span>View all 96 tools</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+        <div className="mb-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-[var(--primary)] block mb-1">
+            Task-Based Discovery
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
+            What do you want to do?
+          </h2>
+          <p className="text-sm text-[var(--foreground-muted)] mt-1">
+            Select a task to jump directly to the right tools.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          {featuredTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
+          {HOMEPAGE_USE_CASES.map((uc) => (
+            <Link
+              key={uc.id}
+              href={uc.href}
+              className="group p-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 hover:bg-[var(--primary-soft)]/10 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-[var(--surface-muted)] text-[var(--foreground)] group-hover:text-[var(--primary)] group-hover:bg-[var(--primary-soft)] transition-colors flex items-center justify-center">
+                    <ToolIcon name={uc.icon} className="w-4 h-4" />
+                  </div>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[var(--surface-muted)] text-[var(--foreground-muted)] border border-[var(--border)]">
+                    {uc.badge}
+                  </span>
+                </div>
+                <h3 className="font-bold text-sm text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                  {uc.title}
+                </h3>
+                <p className="text-xs text-[var(--foreground-muted)] mt-1 leading-relaxed">
+                  {uc.description}
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-[var(--border)]/60 flex items-center justify-between text-xs font-semibold text-[var(--primary)]">
+                <span>{uc.actionText}</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
           ))}
         </div>
       </section>

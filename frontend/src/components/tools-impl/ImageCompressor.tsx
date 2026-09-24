@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Upload, Download, RefreshCw, Trash2, Sliders, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { MobileStickyAction } from '@/components/tools/MobileStickyAction';
 
 type OutputFormat = 'image/jpeg' | 'image/png' | 'image/webp';
 
@@ -441,12 +442,19 @@ export function ImageCompressor() {
               size="lg"
               onClick={handleDownload}
               disabled={!compressedResult || isCompressing}
-              className="gap-2"
+              className="gap-2 w-full sm:w-auto justify-center"
             >
               <Download className="w-4 h-4" />
               Download Compressed Image
             </Button>
           </div>
+
+          {/* Mobile Sticky Download Bar */}
+          <MobileStickyAction
+            show={Boolean(compressedResult && !isCompressing)}
+            label={`Download (${formatBytes(compressedResult?.size || 0)})`}
+            onClick={handleDownload}
+          />
         </div>
       )}
     </div>

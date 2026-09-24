@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { Upload, X, File, AlertCircle, Download, Trash2, Shield, Loader2 } from 'lucide-react';
+import { Upload, X, File, Download, Trash2, Shield, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { ErrorState } from './ErrorState';
 import { formatBytes, validateFileSize, FileLimitCategory } from '@/lib/tools/file-limits';
 
 export interface FileItem {
@@ -180,13 +181,11 @@ export function FileToolShell({
 
       {/* Error Banner */}
       {displayError && (
-        <div
-          role="alert"
-          className="flex items-start gap-3 p-4 rounded-xl border border-rose-500/20 bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs"
-        >
-          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-          <div className="flex-1 font-medium">{displayError}</div>
-        </div>
+        <ErrorState
+          message={displayError}
+          onRetry={handleClear}
+          retryButtonText="Clear & Try Again"
+        />
       )}
 
       {/* File List */}
@@ -249,22 +248,28 @@ export function FileToolShell({
       {files.length > 0 && (
         <div className="space-y-3 pt-2">
           {processing && (
-            <div className="space-y-1.5 p-3 rounded-xl bg-[var(--surface-muted)]/50 border border-[var(--border)] text-xs">
+            <div className="space-y-2 p-4 rounded-xl bg-[var(--surface-muted)]/50 border border-[var(--border)] text-xs">
               <div className="flex items-center justify-between text-[var(--foreground-muted)]">
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2 font-medium">
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-[var(--primary)]" />
-                  {statusMessage || 'Processing...'}
+                  {statusMessage || 'Processing your files...'}
                 </span>
-                {progressPercent !== undefined && <span>{progressPercent}%</span>}
+                {progressPercent !== undefined && (
+                  <span className="font-mono font-semibold text-[var(--primary)]">
+                    {Math.round(progressPercent)}%
+                  </span>
+                )}
               </div>
-              {progressPercent !== undefined && (
-                <div className="w-full h-1.5 rounded-full bg-[var(--border)] overflow-hidden">
+              <div className="w-full h-1.5 rounded-full bg-[var(--surface-active)] overflow-hidden relative">
+                {progressPercent !== undefined ? (
                   <div
                     className="h-full bg-[var(--primary)] transition-all duration-200"
                     style={{ width: `${progressPercent}%` }}
                   />
-                </div>
-              )}
+                ) : (
+                  <div className="h-full bg-[var(--primary)] rounded-full w-1/3 animate-indeterminate" />
+                )}
+              </div>
             </div>
           )}
 
