@@ -2,6 +2,7 @@ import { CategoryDefinition, ToolCategory, ToolDefinition } from './types';
 import { CATEGORY_LIST } from './definitions/categories';
 import { CLIENT_FOUNDATION_TOOLS } from './definitions/client-tools';
 import { PHASE6_TOOLS } from './definitions/phase6-tools';
+import { PHASE7_TOOLS } from './definitions/phase7-tools';
 import { ROADMAP_TOOLS } from './definitions/roadmap-tools';
 
 class ToolRegistry {
@@ -15,7 +16,7 @@ class ToolRegistry {
     }
 
     // Register initial tools
-    for (const tool of [...CLIENT_FOUNDATION_TOOLS, ...PHASE6_TOOLS, ...ROADMAP_TOOLS]) {
+    for (const tool of [...CLIENT_FOUNDATION_TOOLS, ...PHASE6_TOOLS, ...PHASE7_TOOLS, ...ROADMAP_TOOLS]) {
       this.registerTool(tool);
     }
   }

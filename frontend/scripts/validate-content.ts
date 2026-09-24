@@ -7,6 +7,7 @@
 import { CATEGORY_LIST } from '../src/lib/tools/definitions/categories';
 import { CLIENT_FOUNDATION_TOOLS } from '../src/lib/tools/definitions/client-tools';
 import { PHASE6_TOOLS } from '../src/lib/tools/definitions/phase6-tools';
+import { PHASE7_TOOLS } from '../src/lib/tools/definitions/phase7-tools';
 import { ROADMAP_TOOLS } from '../src/lib/tools/definitions/roadmap-tools';
 import { RESOURCE_GUIDES } from '../src/lib/resources/definitions';
 
@@ -15,7 +16,7 @@ const warnings: string[] = [];
 
 // ─── Tool Validation ───────────────────────────────────────────────────────────
 
-const allTools = [...CLIENT_FOUNDATION_TOOLS, ...PHASE6_TOOLS, ...ROADMAP_TOOLS];
+const allTools = [...CLIENT_FOUNDATION_TOOLS, ...PHASE6_TOOLS, ...PHASE7_TOOLS, ...ROADMAP_TOOLS];
 const toolSlugs = new Set<string>();
 const toolIds = new Set<string>();
 

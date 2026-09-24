@@ -15,7 +15,14 @@ export type ToolCategory =
   | 'web-seo'
   | 'image-graphics'
   | 'pdf-files'
-  | 'everyday-utilities';
+  | 'everyday-utilities'
+  | 'data'
+  | 'security'
+  | 'date-time'
+  | 'generators'
+  | 'qr-barcode'
+  | 'css-design'
+  | 'productivity';
 
 export interface CategoryDefinition {
   slug: ToolCategory;

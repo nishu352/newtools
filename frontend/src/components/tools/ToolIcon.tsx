@@ -41,6 +41,12 @@ import {
   Split,
   Eye,
   Trash2,
+  QrCode,
+  Clock,
+  ShieldCheck,
+  CheckSquare,
+  Boxes,
+  FileCode,
   LucideProps,
 } from 'lucide-react';
 
@@ -86,6 +92,12 @@ const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   Split,
   Eye,
   Trash2,
+  QrCode,
+  Clock,
+  ShieldCheck,
+  CheckSquare,
+  Boxes,
+  FileCode,
 };
 
 interface ToolIconProps extends LucideProps {

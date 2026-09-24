@@ -67,6 +67,71 @@ import { ImageInspectorTool } from './image/ImageInspectorTool';
 import { FaviconGeneratorTool } from './image/FaviconGeneratorTool';
 import { ImagesToZipTool } from './image/ImagesToZipTool';
 
+// Phase 7 Tools
+import {
+  TextManipulatorTool,
+  TextExtractorTool,
+  SlugGeneratorTool,
+  LoremIpsumTool,
+} from './phase7/TextTools';
+import {
+  XmlFormatterTool,
+  HtmlFormatterTool,
+  MarkdownPreviewTool,
+  RegexTesterTool,
+  CronExpressionTool,
+  JwtDecoderTool,
+  UserAgentParserTool,
+  HttpStatusCodesTool,
+} from './phase7/DeveloperTools';
+import {
+  JsonDiffTool,
+  JsonFlattenerTool,
+  DataUriTool,
+} from './phase7/DataTools';
+import {
+  MultiHashHmacTool,
+  BinaryHexConverterTool,
+  Rot13Tool,
+} from './phase7/SecurityTools';
+import {
+  GcdLcmPrimeTool,
+  FractionCalculatorTool,
+  GeometryCalculatorTool,
+  ScientificCalculatorTool,
+} from './phase7/MathTools';
+import {
+  SimpleInterestTool,
+  CagrCalculatorTool,
+  TaxMarginCalculatorTool,
+} from './phase7/FinanceTools';
+import {
+  UnixTimestampTool,
+  DateDifferenceTool,
+  TimezoneConverterTool,
+} from './phase7/DateTimeTools';
+import {
+  UrlParserBuilderTool,
+  HtmlEntityTool,
+} from './phase7/WebTools';
+import {
+  RandomStringNanoIdTool,
+  RandomNumberGeneratorTool,
+} from './phase7/GeneratorsTools';
+import {
+  CssGradientGeneratorTool,
+  CssBoxShadowGeneratorTool,
+  CssUnitConverterTool,
+} from './phase7/DesignTools';
+import {
+  PomodoroTimerTool,
+  RandomPickerTool,
+} from './phase7/ProductivityTools';
+import {
+  QrGeneratorTool,
+  QrScannerTool,
+} from './phase7/QrScannerTool';
+
 import { ExecutionBadge } from '../tools/ExecutionBadge';
 import { PrivacyBadge } from '../tools/PrivacyBadge';
 import { Clock, BellRing, Sparkles } from 'lucide-react';
@@ -155,6 +220,71 @@ export function ToolRunner({ tool }: ToolRunnerProps) {
   if (tool.slug === 'image-inspector') return <ImageInspectorTool />;
   if (tool.slug === 'favicon-generator') return <FaviconGeneratorTool />;
   if (tool.slug === 'images-to-zip') return <ImagesToZipTool />;
+
+  // Phase 7 Text Tools
+  if (tool.slug === 'sort-lines' || tool.slug === 'reverse-text' || tool.slug === 'whitespace-cleaner' || tool.slug === 'line-numbers') {
+    return <TextManipulatorTool />;
+  }
+  if (tool.slug === 'text-extractor') return <TextExtractorTool />;
+  if (tool.slug === 'slug-generator') return <SlugGeneratorTool />;
+  if (tool.slug === 'lorem-ipsum-generator') return <LoremIpsumTool />;
+
+  // Phase 7 Developer Tools
+  if (tool.slug === 'xml-formatter') return <XmlFormatterTool />;
+  if (tool.slug === 'html-formatter') return <HtmlFormatterTool />;
+  if (tool.slug === 'markdown-preview') return <MarkdownPreviewTool />;
+  if (tool.slug === 'regex-tester') return <RegexTesterTool />;
+  if (tool.slug === 'cron-expression') return <CronExpressionTool />;
+  if (tool.slug === 'jwt-decoder') return <JwtDecoderTool />;
+  if (tool.slug === 'user-agent-parser') return <UserAgentParserTool />;
+  if (tool.slug === 'http-status-codes') return <HttpStatusCodesTool />;
+
+  // Phase 7 Data Tools
+  if (tool.slug === 'json-diff') return <JsonDiffTool />;
+  if (tool.slug === 'json-flattener') return <JsonFlattenerTool />;
+  if (tool.slug === 'data-uri') return <DataUriTool />;
+
+  // Phase 7 Security Tools
+  if (tool.slug === 'multi-hash-hmac') return <MultiHashHmacTool />;
+  if (tool.slug === 'binary-hex-converter') return <BinaryHexConverterTool />;
+  if (tool.slug === 'rot13-cipher') return <Rot13Tool />;
+
+  // Phase 7 Math Tools
+  if (tool.slug === 'gcd-lcm-prime') return <GcdLcmPrimeTool />;
+  if (tool.slug === 'fraction-calculator') return <FractionCalculatorTool />;
+  if (tool.slug === 'geometry-calculator') return <GeometryCalculatorTool />;
+  if (tool.slug === 'scientific-calculator') return <ScientificCalculatorTool />;
+
+  // Phase 7 Finance Tools
+  if (tool.slug === 'simple-interest-calculator') return <SimpleInterestTool />;
+  if (tool.slug === 'cagr-calculator') return <CagrCalculatorTool />;
+  if (tool.slug === 'tax-margin-calculator') return <TaxMarginCalculatorTool />;
+
+  // Phase 7 Date & Time Tools
+  if (tool.slug === 'unix-timestamp-converter') return <UnixTimestampTool />;
+  if (tool.slug === 'date-difference-calculator') return <DateDifferenceTool />;
+  if (tool.slug === 'timezone-converter') return <TimezoneConverterTool />;
+
+  // Phase 7 Web Tools
+  if (tool.slug === 'url-parser-builder') return <UrlParserBuilderTool />;
+  if (tool.slug === 'html-entity-encoder') return <HtmlEntityTool />;
+
+  // Phase 7 Generators
+  if (tool.slug === 'random-string-nanoid') return <RandomStringNanoIdTool />;
+  if (tool.slug === 'random-number-generator') return <RandomNumberGeneratorTool />;
+
+  // Phase 7 Design Tools
+  if (tool.slug === 'css-gradient-generator') return <CssGradientGeneratorTool />;
+  if (tool.slug === 'css-box-shadow-generator') return <CssBoxShadowGeneratorTool />;
+  if (tool.slug === 'css-unit-converter') return <CssUnitConverterTool />;
+
+  // Phase 7 Productivity Tools
+  if (tool.slug === 'pomodoro-timer') return <PomodoroTimerTool />;
+  if (tool.slug === 'random-picker') return <RandomPickerTool />;
+
+  // Phase 7 QR & Barcode Tools
+  if (tool.slug === 'qr-code-generator') return <QrGeneratorTool />;
+  if (tool.slug === 'qr-code-reader') return <QrScannerTool />;
 
   // Fallback for tools in development
   return (
