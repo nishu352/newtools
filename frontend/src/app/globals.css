@@ -1,60 +1,62 @@
 @import "tailwindcss";
 
-/* ─── Design System: Omnitools Production UI Reference ────────────────────────── */
+/* ─── Design System: Omnitools Modern Gradient & Shape UI ────────────────────────── */
 
 @layer base {
   :root {
     /* Brand Palette */
-    --brand: #2563EB;
-    --brand-hover: #1D4ED8;
+    --brand: #3B82F6;
+    --brand-hover: #2563EB;
     --brand-light: #EFF6FF;
+    --brand-gradient: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%);
 
     /* Surface & Background */
-    --background: #FFFFFF;
+    --background: #FAFAFC;
     --surface-base: #FFFFFF;
-    --surface-subtle: #F8FAFC;
-    --surface-muted: #F1F5F9;
+    --surface-subtle: #F1F5F9;
+    --surface-muted: #E2E8F0;
     --surface-border: #E2E8F0;
     --border: #E2E8F0;
 
     /* Content & Typography Colors */
-    --content-primary: #111827;
-    --content-secondary: #64748B;
+    --content-primary: #0F172A;
+    --content-secondary: #475569;
     --content-tertiary: #94A3B8;
-    --foreground: #111827;
+    --foreground: #0F172A;
     --muted: #64748B;
 
     /* Status Colors */
-    --status-success: #16A34A;
-    --status-error: #DC2626;
-    --primary: #2563EB;
+    --status-success: #10B981;
+    --status-error: #EF4444;
+    --primary: #3B82F6;
     --primary-soft: #EFF6FF;
-    --danger: #DC2626;
+    --danger: #EF4444;
   }
 
   .dark {
-    --brand: #3B82F6;
-    --brand-hover: #2563EB;
+    --brand: #60A5FA;
+    --brand-hover: #3B82F6;
     --brand-light: #1E293B;
+    --brand-gradient: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #A855F7 100%);
 
-    --background: #0F172A;
-    --surface-base: #1E293B;
-    --surface-subtle: #0F172A;
-    --surface-muted: #1E293B;
-    --surface-border: #334155;
-    --border: #334155;
+    --background: #090D16;
+    --surface-base: #111827;
+    --surface-subtle: #1F2937;
+    --surface-muted: #374151;
+    --surface-border: #1F2937;
+    --border: #1F2937;
 
-    --content-primary: #F8FAFC;
-    --content-secondary: #94A3B8;
-    --content-tertiary: #64748B;
-    --foreground: #F8FAFC;
-    --muted: #94A3B8;
+    --content-primary: #F9FAFB;
+    --content-secondary: #9CA3AF;
+    --content-tertiary: #6B7280;
+    --foreground: #F9FAFB;
+    --muted: #9CA3AF;
 
-    --status-success: #22C55E;
-    --status-error: #EF4444;
-    --primary: #3B82F6;
+    --status-success: #34D399;
+    --status-error: #F87171;
+    --primary: #60A5FA;
     --primary-soft: #1E293B;
-    --danger: #EF4444;
+    --danger: #F87171;
   }
 }
 
@@ -64,26 +66,88 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background);
   color: var(--content-primary);
+  overflow-x: hidden;
 }
 
 ::selection {
-  background-color: #DBEAFE;
-  color: #1E40AF;
+  background-color: #C7D2FE;
+  color: #312E81;
 }
 
 .dark ::selection {
-  background-color: #1E3A8A;
-  color: #93C5FD;
+  background-color: #312E81;
+  color: #E0E7FF;
+}
+
+/* Gradient Background Effects & Ambient Light Blobs */
+.bg-gradient-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+}
+
+.dark .bg-gradient-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.2) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.18) 0px, transparent 50%);
+}
+
+.bg-hero-gradient {
+  background: linear-gradient(180deg, rgba(238, 242, 255, 0.8) 0%, rgba(243, 244, 256, 0.3) 60%, rgba(250, 250, 252, 1) 100%);
+}
+
+.dark .bg-hero-gradient {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.9) 0%, rgba(15, 23, 42, 0.5) 60%, rgba(9, 13, 22, 1) 100%);
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-card {
+  background-color: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark .glass-pill {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .transition-utility {
-  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tool-card {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.15);
+}
+
+.dark .tool-card:hover {
+  box-shadow: 0 12px 28px -10px rgba(99, 102, 241, 0.25);
 }
 
 .tool-card:hover .tool-arrow {
   transform: translateX(4px);
 }
 
+/* Custom Scrollbar for pills */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -91,3 +155,4 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
