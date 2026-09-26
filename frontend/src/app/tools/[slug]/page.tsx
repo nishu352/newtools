@@ -14,7 +14,7 @@ import {
   generateBreadcrumbSchema,
   generateFaqSchema,
 } from '@/lib/seo/schema';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Shield, Sparkles, HelpCircle, BookOpen, Layers } from 'lucide-react';
 
 interface ToolPageProps {
   params: Promise<{ slug: string }>;
@@ -77,9 +77,11 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         />
       )}
 
-      {/* Tool Header & Breadcrumb Bar */}
-      <section className="border-b border-[var(--surface-border)] bg-[var(--surface-subtle)] py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      {/* ── TOOL HEADER BAR WITH GRADIENT DECORATION ── */}
+      <section className="relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 bg-gradient-mesh py-8 px-4 sm:px-6 lg:px-8">
+        <div className="absolute top-0 right-1/4 w-72 h-72 bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
           <Breadcrumbs
             items={[
               { name: category ? category.name : tool.category, href: `/categories/${tool.category}` },
@@ -87,28 +89,38 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             ]}
           />
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--content-primary)]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded-full border border-blue-200 dark:border-blue-900/40">
+                  {tool.category}
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-900/40">
+                  <Shield className="w-3 h-3" />
+                  In-Browser Secure
+                </span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                 {tool.name}
               </h1>
-              <p className="text-sm text-[var(--content-secondary)] mt-1 max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 max-w-2xl leading-relaxed">
                 {tool.content?.intro || tool.shortDescription}
               </p>
             </div>
+
             <Link
               href="/"
-              className="self-start sm:self-center inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--background)] border border-[var(--surface-border)] text-[var(--content-secondary)] hover:text-[var(--content-primary)] hover:border-slate-300 transition-utility"
+              className="self-start sm:self-center inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 transition-all shadow-2xs shrink-0"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to all tools</span>
+              <span>All tools</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Main Workspace Canvas */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      {/* ── MAIN WORKSPACE CANVAS ── */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Tool Runner Workspace */}
         <div className="mb-14">
           <ToolRunner tool={tool} />
@@ -119,20 +131,23 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
           {/* 3-Step How It Works */}
           {content?.howToUse && content.howToUse.length > 0 && (
             <div>
-              <h2 className="text-lg font-bold text-[var(--content-primary)] mb-4">How it works</h2>
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-4 h-4 text-amber-500" />
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">How it works</h2>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {content.howToUse.map((step) => (
                   <div
                     key={step.step}
-                    className="border border-[var(--surface-border)] rounded-xl p-4 bg-[var(--background)]"
+                    className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm shadow-2xs"
                   >
-                    <div className="text-xs font-bold text-[var(--brand)] mb-1">
+                    <div className="text-[11px] font-extrabold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/40 inline-block px-2.5 py-0.5 rounded-md mb-2">
                       Step 0{step.step}
                     </div>
-                    <h3 className="text-sm font-semibold text-[var(--content-primary)] mb-1">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-[var(--content-secondary)] leading-relaxed">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -143,17 +158,17 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
           {/* Formula for Calculators */}
           {content?.formula && (
-            <div className="border border-[var(--surface-border)] rounded-xl p-5 bg-[var(--background)]">
-              <h2 className="text-sm font-bold text-[var(--content-primary)] mb-2">Calculation Formula</h2>
-              <div className="p-3 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-subtle)] font-mono text-xs text-[var(--content-primary)] overflow-x-auto mb-3">
+            <div className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 bg-white/80 dark:bg-slate-900/80 shadow-2xs">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white mb-2">Calculation Formula</h2>
+              <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-mono text-xs text-slate-900 dark:text-slate-100 overflow-x-auto mb-3">
                 {content.formula}
               </div>
               {content.formulaVars && content.formulaVars.length > 0 && (
                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                   {content.formulaVars.map((v) => (
                     <div key={v.variable} className="flex gap-2">
-                      <dt className="font-mono font-semibold text-[var(--brand)] shrink-0">{v.variable}</dt>
-                      <dd className="text-[var(--content-secondary)]">{v.meaning}</dd>
+                      <dt className="font-mono font-bold text-blue-600 dark:text-blue-400 shrink-0">{v.variable}</dt>
+                      <dd className="text-slate-600 dark:text-slate-400">{v.meaning}</dd>
                     </div>
                   ))}
                 </dl>
@@ -164,10 +179,13 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
           {/* FAQs Accordion */}
           {tool.faqs && tool.faqs.length > 0 && (
             <div>
-              <h2 className="text-lg font-bold text-[var(--content-primary)] mb-4">
-                Frequently Asked Questions
-              </h2>
-              <div className="border border-[var(--surface-border)] rounded-xl bg-[var(--background)] p-4">
+              <div className="flex items-center gap-2 mb-4">
+                <HelpCircle className="w-4 h-4 text-blue-500" />
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+              <div className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl bg-white/80 dark:bg-slate-900/80 p-5 shadow-2xs">
                 <Accordion>
                   {tool.faqs.map((faq, idx) => (
                     <AccordionItem
@@ -176,7 +194,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
                       title={faq.question}
                       defaultOpen={idx === 0}
                     >
-                      <p className="text-xs text-[var(--content-secondary)] leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         {faq.answer}
                       </p>
                     </AccordionItem>
@@ -188,17 +206,20 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
           {/* Related Guide */}
           {relatedGuide && (
-            <div className="p-5 border border-[var(--surface-border)] rounded-xl bg-[var(--surface-subtle)]">
-              <p className="text-[10px] font-bold text-[var(--content-tertiary)] uppercase tracking-wider mb-1">
-                Related Guide
-              </p>
+            <div className="p-6 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 shadow-2xs">
+              <div className="flex items-center gap-2 mb-1.5">
+                <BookOpen className="w-4 h-4 text-purple-500" />
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  Related Learning Resource
+                </span>
+              </div>
               <Link
                 href={`/resources/${relatedGuide.slug}`}
-                className="text-sm font-bold text-[var(--content-primary)] hover:text-[var(--brand)] transition-utility"
+                className="text-base font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {relatedGuide.title} &rarr;
               </Link>
-              <p className="text-xs text-[var(--content-secondary)] mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 {relatedGuide.description}
               </p>
             </div>
@@ -206,11 +227,14 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
           {/* Related Tools Grid */}
           {relatedTools.length > 0 && (
-            <div className="pt-8 border-t border-[var(--surface-border)]">
-              <h2 className="text-base font-bold text-[var(--content-primary)] mb-4">
-                Related tools
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="pt-8 border-t border-slate-200 dark:border-slate-800">
+              <div className="flex items-center gap-2 mb-4">
+                <Layers className="w-4 h-4 text-blue-500" />
+                <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                  Related tools you might need
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                 {relatedTools.map((relTool) => (
                   <ToolRow key={relTool.id} tool={relTool} />
                 ))}
@@ -222,3 +246,4 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     </>
   );
 }
+
