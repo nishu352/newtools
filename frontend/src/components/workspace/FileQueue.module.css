@@ -1,0 +1,92 @@
+.queue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-4);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.itemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.size {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-waiting { color: var(--color-text-secondary); }
+.status-uploading { color: var(--color-primary); }
+.status-processing { color: var(--color-warning); }
+.status-completed { color: var(--color-success); }
+.status-failed { color: var(--color-error); }
+
+.progressBar {
+  height: 4px;
+  background-color: var(--color-surface-muted);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: var(--spacing-2);
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-primary);
+  transition: width var(--transition-normal);
+}
+
+.progressFill.completed { background-color: var(--color-success); }
+.progressFill.failed { background-color: var(--color-error); }
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-left: var(--spacing-4);
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: var(--spacing-1);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.removeBtn:hover {
+  color: var(--color-error);
+  background-color: rgba(220, 38, 38, 0.1);
+}

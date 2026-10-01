@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px); /* Full height minus navbar */
+  background-color: var(--color-surface-secondary);
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 var(--spacing-4);
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: var(--color-background);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebarHeader {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-muted);
+  overflow: auto;
+  padding: var(--spacing-8);
+}
+
+.canvas {
+  width: 100%;
+  max-width: 800px;
+  height: 1000px; /* Placeholder for PDF page */
+  background-color: var(--color-background);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+}
+
+.properties {
+  width: 280px;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .properties {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
