@@ -4,25 +4,28 @@ import React from 'react';
 import { Search, Sparkles } from 'lucide-react';
 
 interface HeroSearchBannerProps {
-  totalToolsCount: number;
+  totalToolsCount?: number;
+  totalWorkspacesCount?: number;
+  totalCapabilitiesCount?: number;
   searchQuery: string;
   onSearchChange: (q: string) => void;
   onTagClick?: (tag: string) => void;
 }
 
 export function HeroSearchBanner({
-  totalToolsCount,
+  totalWorkspacesCount = 30,
+  totalCapabilitiesCount = 168,
   searchQuery,
   onSearchChange,
   onTagClick,
 }: HeroSearchBannerProps) {
   const popularTags = [
     { label: 'PDF Editor', query: 'pdf editor' },
-    { label: 'Merge PDF', query: 'merge pdf' },
-    { label: 'Compress PDF', query: 'compress pdf' },
-    { label: 'JPG to PNG', query: 'jpg to png' },
-    { label: 'Word to PDF', query: 'word to pdf' },
+    { label: 'PDF Organizer', query: 'pdf organizer' },
+    { label: 'Convert to PDF', query: 'convert to pdf' },
     { label: 'Image Compressor', query: 'image compressor' },
+    { label: 'Image Converter', query: 'image converter' },
+    { label: 'Text Analyzer', query: 'text analyzer' },
   ];
 
   return (
@@ -50,7 +53,7 @@ export function HeroSearchBanner({
 
           {/* Subtitle */}
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-            {totalToolsCount} free online tools to edit, convert, manage and optimize your files. Fast, secure and easy to use.
+            {totalWorkspacesCount} professional workspaces · {totalCapabilitiesCount} verified capabilities to edit, convert, manage and optimize your files. Fast, secure and easy to use.
           </p>
 
           {/* Search Bar with Orange Button */}

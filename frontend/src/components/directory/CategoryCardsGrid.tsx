@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '@/lib/tool-registry/categories';
 import { getToolsByCategory } from '@/lib/tool-registry/registry';
 import { getCategoryUi } from '@/lib/tool-registry/category-ui';
+import { getWorkspacesByCategory } from '@/lib/workspace-registry';
 
 interface CategoryCardsGridProps {
   onSelectCategory?: (categoryId: string) => void;
@@ -36,7 +37,7 @@ export function CategoryCardsGrid({
             href="/tools"
             className="hidden sm:inline-flex items-center gap-1 text-xs sm:text-[13px] font-semibold text-[#FF5722] hover:text-[#E64A19] transition-colors"
           >
-            <span>View All Tools</span>
+            <span>View All Workspaces</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         )}
@@ -46,7 +47,8 @@ export function CategoryCardsGrid({
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-9 gap-3">
         {displayCategories.map((cat) => {
           const ui = getCategoryUi(cat.id);
-          const count = getToolsByCategory(cat.id).length;
+          const toolCount = getToolsByCategory(cat.id).length;
+          const wsCount = getWorkspacesByCategory(cat.id).length;
           const Icon = ui.icon;
           const isSelected = selectedCategory === cat.id;
 
@@ -68,8 +70,14 @@ export function CategoryCardsGrid({
               <h3 className="text-[13px] font-bold text-slate-900 dark:text-white truncate w-full group-hover:text-[#FF5722] transition-colors">
                 {cat.name}
               </h3>
-              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
-                {count} {count === 1 ? 'tool' : 'tools'}
+              <p className="text-[10.5px] text-slate-400 dark:text-slate-500 mt-0.5">
+                {wsCount > 0 ? (
+                  <span>
+                    {wsCount} {wsCount === 1 ? 'workspace' : 'workspaces'} · {toolCount} caps
+                  </span>
+                ) : (
+                  <span>{toolCount} tools</span>
+                )}
               </p>
             </div>
           );

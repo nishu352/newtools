@@ -1,12 +1,11 @@
 import React from 'react';
-import { getCategoryBySlug } from '@/lib/tool-registry/categories';
-import { getToolsByCategory } from '@/lib/tool-registry/registry';
+import { getCategoryBySlug, CATEGORIES } from '@/lib/tool-registry/categories';
 import { getCategoryUi } from '@/lib/tool-registry/category-ui';
-import { ToolCard } from '@/components/ui/card/ToolCard';
+import { getWorkspacesByCategory } from '@/lib/workspace-registry';
+import { WorkspaceCard } from '@/components/ui/card/WorkspaceCard';
 import { notFound, redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { CATEGORIES } from '@/lib/tool-registry/categories';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 
 export function generateStaticParams() {
@@ -28,7 +27,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.name} - Free Online Utilities | OmniTools`,
+    title: `${category.name} Workspaces & Capabilities | OmniTools`,
     description: category.description,
   };
 }
@@ -52,7 +51,9 @@ export default async function CategoryPage({
     redirect(`/categories/${category.slug}`);
   }
 
-  const tools = getToolsByCategory(slug);
+  const workspaces = getWorkspacesByCategory(category.id);
+  const totalCapabilities = workspaces.reduce((acc, ws) => acc + ws.modes.length, 0);
+
   const ui = getCategoryUi(category.id);
   const Icon = ui.icon;
 
@@ -83,12 +84,12 @@ export default async function CategoryPage({
             </div>
 
             <div>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
                   {category.name}
                 </h1>
                 <span className="text-xs px-2.5 py-0.5 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                  {tools.length} {tools.length === 1 ? 'Tool' : 'Tools'}
+                  {workspaces.length} {workspaces.length === 1 ? 'Workspace' : 'Workspaces'} · {totalCapabilities} Capabilities
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl">
@@ -99,32 +100,26 @@ export default async function CategoryPage({
 
           <Link
             href="/tools"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shadow-2xs shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shadow-2xs shrink-0"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>All Tools</span>
+            <span>All Workspaces</span>
           </Link>
         </div>
       </div>
 
-      {/* Tools Grid */}
-      {tools.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          {tools.map((tool) => (
-            <ToolCard
-              key={tool.id}
-              slug={tool.slug}
-              name={tool.name}
-              description={tool.description}
-              category={category.name}
-            />
+      {/* Workspaces Grid */}
+      {workspaces.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {workspaces.map((ws) => (
+            <WorkspaceCard key={ws.id} workspace={ws} />
           ))}
         </div>
       ) : (
         <div className="py-16 px-4 text-center rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]">
           <Icon className="w-12 h-12 mx-auto text-slate-300 dark:text-slate-600 mb-3" />
           <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">
-            No tools available yet in {category.name}
+            No workspaces available yet in {category.name}
           </h3>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4">
             Utilities for {category.name} are currently scheduled for upcoming releases.

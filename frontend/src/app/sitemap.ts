@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllTools } from '@/lib/tool-registry/registry';
+import { getAllWorkspaces } from '@/lib/workspace-registry';
 import { CATEGORIES } from '@/lib/tool-registry/categories';
 import { resourceRegistry } from '@/lib/resources/registry';
 import { getBaseUrl } from '@/lib/seo/metadata';
@@ -71,13 +72,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
-  // Dynamic tool routes — canonical 168 tools
+  // Dynamic public workspace routes — 30 canonical workspaces
+  const workspaceRoutes: MetadataRoute.Sitemap = getAllWorkspaces()
+    .map((ws) => ({
+      url: `${BASE_URL}/tools/${ws.slug}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.95,
+    }));
+
+  // Dynamic tool routes — canonical 168 capabilities for deep link preservation
   const toolRoutes: MetadataRoute.Sitemap = getAllTools()
+    .filter((tool) => !getAllWorkspaces().some((ws) => ws.slug === tool.slug))
     .map((tool) => ({
       url: `${BASE_URL}/tools/${tool.slug}`,
       lastModified,
       changeFrequency: 'weekly' as const,
-      priority: tool.status === 'active' || !tool.status ? 0.9 : 0.7,
+      priority: tool.status === 'active' || !tool.status ? 0.85 : 0.7,
     }));
 
   // Resource guide routes
@@ -90,5 +101,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...resourceRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...workspaceRoutes, ...toolRoutes, ...resourceRoutes];
 }

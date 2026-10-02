@@ -3,8 +3,8 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, X, ArrowRight } from 'lucide-react';
-import { getAllTools } from '@/lib/tool-registry/registry';
+import { Search, X, ArrowRight, Layers } from 'lucide-react';
+import { searchWorkspacesAndCapabilities, getAllWorkspaces } from '@/lib/workspace-registry';
 
 interface GlobalSearchModalProps {
   isOpen: boolean;
@@ -16,7 +16,9 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const [query, setQuery] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const allTools = React.useMemo(() => getAllTools(), []);
+  const popularWorkspaces = React.useMemo(() => {
+    return getAllWorkspaces().slice(0, 6);
+  }, []);
 
   const handleClose = React.useCallback(() => {
     setQuery('');
@@ -57,29 +59,14 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
     };
   }, [isOpen]);
 
-  const results = React.useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) {
-      // Show default tools when query is empty
-      return allTools.slice(0, 6);
-    }
+  const searchResults = React.useMemo(() => {
+    if (!query.trim()) return [];
+    return searchWorkspacesAndCapabilities(query, 12);
+  }, [query]);
 
-    return allTools
-      .filter((tool) => {
-        const nameMatch = tool.name.toLowerCase().includes(q);
-        const descMatch = (tool.description || '').toLowerCase().includes(q);
-        const catMatch = tool.category.toLowerCase().includes(q);
-        const slugMatch = tool.slug.toLowerCase().includes(q);
-        const keywordMatch = tool.seo?.keywords?.some((k) => k.toLowerCase().includes(q));
-
-        return nameMatch || descMatch || catMatch || slugMatch || keywordMatch;
-      })
-      .slice(0, 10);
-  }, [query, allTools]);
-
-  const handleSelectTool = (slug: string) => {
+  const handleNavigate = (url: string) => {
     handleClose();
-    router.push(`/tools/${slug}`);
+    router.push(url);
   };
 
   const handleSuggestionClick = (term: string) => {
@@ -108,14 +95,14 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tools..."
+            placeholder="Search capabilities... (e.g. jpg to pdf, redact, word count)"
             className="flex-1 bg-transparent text-[14px] text-[var(--foreground)] placeholder:text-[var(--foreground-subtle)] focus:outline-none"
             aria-label="Search query"
           />
           {query ? (
             <button
               onClick={() => setQuery('')}
-              className="p-1 rounded text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+              className="p-1 rounded text-[var(--foreground-muted)] hover:text-[var(--foreground)] cursor-pointer"
               aria-label="Clear query"
             >
               <X className="w-3.5 h-3.5" />
@@ -129,31 +116,64 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
 
         {/* Results */}
         <div className="overflow-y-auto py-2 px-2 flex-1 scrollbar-thin">
-          {results.length > 0 ? (
+          {!query.trim() ? (
+            /* Default: Popular Workspaces */
             <>
-              {!query && (
-                <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--foreground-subtle)]">
-                  Popular tools
-                </div>
-              )}
+              <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--foreground-subtle)]">
+                Featured Workspaces
+              </div>
 
-              {results.map((tool) => (
+              {popularWorkspaces.map((ws) => (
                 <button
-                  key={tool.id}
-                  onClick={() => handleSelectTool(tool.slug)}
+                  key={ws.id}
+                  onClick={() => handleNavigate(`/tools/${ws.slug}`)}
                   className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--surface-hover)] text-left transition-colors group cursor-pointer"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-[14px] font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors truncate">
-                        {tool.name}
+                        {ws.name}
                       </span>
-                      <span className="text-[11px] text-[var(--foreground-subtle)] shrink-0">
-                        {tool.category}
+                      <span className="text-[11px] px-1.5 py-0.2 rounded font-medium bg-slate-100 dark:bg-slate-800 text-[var(--foreground-subtle)] shrink-0 uppercase text-[10px]">
+                        {ws.category}
                       </span>
                     </div>
                     <p className="text-[12px] text-[var(--foreground-muted)] truncate mt-0.5">
-                      {tool.description}
+                      {ws.description}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--foreground-subtle)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                </button>
+              ))}
+            </>
+          ) : searchResults.length > 0 ? (
+            /* Capability & Workspace Grouped Results */
+            <>
+              <div className="px-2 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--foreground-subtle)]">
+                Capabilities & Workspaces ({searchResults.length})
+              </div>
+
+              {searchResults.map((res) => (
+                <button
+                  key={`${res.workspace.id}-${res.mode.id}`}
+                  onClick={() => handleNavigate(res.targetUrl)}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--surface-hover)] text-left transition-colors group cursor-pointer"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[13.5px] font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                        {res.workspaceName}
+                      </span>
+                      <span className="text-[12px] text-[var(--foreground-subtle)]">→</span>
+                      <span className="text-[12.5px] font-semibold text-[#EA580C] dark:text-[#FF6E40] bg-orange-50 dark:bg-orange-950/40 px-1.5 py-0.2 rounded border border-orange-200/60 dark:border-orange-900/40">
+                        Mode: {res.displayLabel}
+                      </span>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 ml-auto shrink-0">
+                        {res.category}
+                      </span>
+                    </div>
+                    <p className="text-[12px] text-[var(--foreground-muted)] truncate mt-1">
+                      {res.description}
                     </p>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-[var(--foreground-subtle)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
@@ -163,17 +183,18 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
           ) : (
             /* Empty State */
             <div className="py-8 px-4 text-center space-y-3">
-              <p className="text-[14px] font-medium text-[var(--foreground)]">No tools found</p>
+              <Layers className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-600 mb-1" />
+              <p className="text-[14px] font-medium text-[var(--foreground)]">No capabilities found</p>
               <p className="text-[13px] text-[var(--foreground-muted)]">
-                Try searching for &ldquo;compress PDF&rdquo;, &ldquo;resize image&rdquo;, or &ldquo;merge PDF&rdquo;.
+                Try searching for &ldquo;jpg to pdf&rdquo;, &ldquo;compress jpg&rdquo;, or &ldquo;redact pdf&rdquo;.
               </p>
 
               <div className="flex flex-wrap justify-center gap-1.5 pt-2">
-                {['compress PDF', 'resize image', 'merge PDF', 'word counter', 'crop image'].map((term) => (
+                {['jpg to pdf', 'redact pdf', 'compress jpg', 'word count', 'remove background'].map((term) => (
                   <button
                     key={term}
                     onClick={() => handleSuggestionClick(term)}
-                    className="px-2 py-1 text-[12px] rounded-md border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors"
+                    className="px-2 py-1 text-[12px] rounded-md border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-strong)] transition-colors cursor-pointer"
                   >
                     {term}
                   </button>
@@ -187,11 +208,11 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
         <div className="px-3 py-2 border-t border-[var(--border)] text-[11px] text-[var(--foreground-subtle)] flex items-center justify-between">
           <span>Press <strong>Esc</strong> to close</span>
           <Link
-            href="/categories"
+            href="/tools"
             onClick={handleClose}
             className="text-[var(--primary)] hover:underline font-medium"
           >
-            Browse all
+            Browse all workspaces
           </Link>
         </div>
       </div>

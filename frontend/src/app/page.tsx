@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAllTools } from '@/lib/tool-registry/registry';
+import { getWorkspaceStats } from '@/lib/workspace-registry';
 import { HeroSearchBanner } from '@/components/directory/HeroSearchBanner';
 import { FeatureHighlightsRow } from '@/components/directory/FeatureHighlightsRow';
 import { CategoryCardsGrid } from '@/components/directory/CategoryCardsGrid';
@@ -12,6 +13,7 @@ import { RecentFilesAndTools } from '@/components/directory/RecentFilesAndTools'
 export default function HomePage() {
   const router = useRouter();
   const allTools = React.useMemo(() => getAllTools(), []);
+  const stats = React.useMemo(() => getWorkspaceStats(), []);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchSubmit = (q: string) => {
@@ -27,6 +29,8 @@ export default function HomePage() {
       {/* 1. Hero Search & Brand Banner */}
       <HeroSearchBanner
         totalToolsCount={allTools.length}
+        totalWorkspacesCount={stats.totalWorkspaces}
+        totalCapabilitiesCount={stats.totalCapabilities}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         onTagClick={(tag) => handleSearchSubmit(tag)}
