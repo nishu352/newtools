@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/layout/Navbar';
+import { AppShell } from '@/components/layout/AppShell';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -9,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'OminiTools - Professional Utility Platform',
-  description: 'A clean, modern utility platform for all your daily tasks.',
+  title: 'OmniTools — Everyday Tools, All in One Place',
+  description: '168+ free online tools to edit, convert, manage and optimize your files. Fast, secure and easy to use.',
 };
 
 export default function RootLayout({
@@ -19,12 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body>
-        <Navbar />
-        <main className="main-content">
-          {children}
-        </main>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body className="antialiased bg-[#F8FAFC] dark:bg-[#0B0F17] text-[#0F172A] dark:text-[#F8FAFC]">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <AppShell>
+            {children}
+          </AppShell>
+        </ThemeProvider>
       </body>
     </html>
   );

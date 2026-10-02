@@ -1,33 +1,84 @@
+@import "tailwindcss";
+
 /* ─── OminiTools Phase 0: Foundation Design System ────────────────────────── */
 
 :root {
-  /* Primary Colors */
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-subtle: #EFF6FF;
+  /* Brand Warm Colors */
+  --color-brand-orange: #FF5722;
+  --color-brand-coral: #FF6E40;
+  --color-brand-dark-orange: #E64A19;
+  --color-brand-subtle: #FFF7ED;
+  --color-brand-subtle-border: #FFEDD5;
 
-  /* Background Colors */
-  --color-background: #FFFFFF;
+  /* Primary Brand Tokens (Warm Orange/Coral Identity) */
+  --color-primary: #FF5722;
+  --color-primary-hover: #E64A19;
+  --color-primary-subtle: #FFF7ED;
+  --color-primary-border: #FFEDD5;
+
+  /* Surface & Background Colors */
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
   --color-surface-secondary: #F8FAFC;
   --color-surface-muted: #F1F5F9;
-
-  /* Border */
+  --color-surface-hover: #F8FAFC;
   --color-border: #E2E8F0;
+  --color-border-subtle: #F1F5F9;
 
   /* Text Colors */
-  --color-text-primary: #111827;
-  --color-text-secondary: #64748B;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
   --color-text-tertiary: #94A3B8;
+  --color-text-muted: #94A3B8;
+
+  /* Functional Category Accent Colors */
+  --color-cat-pdf: #EF4444;
+  --color-cat-pdf-bg: #FEF2F2;
+  --color-cat-pdf-border: #FEE2E2;
+
+  --color-cat-image: #10B981;
+  --color-cat-image-bg: #ECFDF5;
+  --color-cat-image-border: #D1FAE5;
+
+  --color-cat-document: #3B82F6;
+  --color-cat-document-bg: #EFF6FF;
+  --color-cat-document-border: #DBEAFE;
+
+  --color-cat-excel: #16A34A;
+  --color-cat-excel-bg: #F0FDF4;
+  --color-cat-excel-border: #DCFCE7;
+
+  --color-cat-powerpoint: #F97316;
+  --color-cat-powerpoint-bg: #FFF7ED;
+  --color-cat-powerpoint-border: #FFEDD5;
+
+  --color-cat-converter: #06B6D4;
+  --color-cat-converter-bg: #ECFEFF;
+  --color-cat-converter-border: #CFFAFE;
+
+  --color-cat-text: #EC4899;
+  --color-cat-text-bg: #FDF2F8;
+  --color-cat-text-border: #FCE7F3;
+
+  --color-cat-developer: #6366F1;
+  --color-cat-developer-bg: #EEF2FF;
+  --color-cat-developer-border: #E0E7FF;
+
+  --color-cat-utility: #64748B;
+  --color-cat-utility-bg: #F1F5F9;
+  --color-cat-utility-border: #E2E8F0;
 
   /* Status Colors */
   --color-success: #16A34A;
-  --color-error: #DC2626;
   --color-warning: #D97706;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
 
   /* Typography */
   --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Spacing */
+  --spacing: 0.25rem;
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
@@ -38,38 +89,42 @@
   --spacing-16: 4rem;
 
   /* Radii */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
 
   /* Transitions */
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode Architecture (Targeting light mode first) */
+/* Dark Mode Tokens */
 .dark {
-  /* Using the same tokens for dark mode structure */
-  --color-background: #111827;
+  --color-background: #0B0F17;
+  --color-surface: #111827;
   --color-surface-secondary: #1F2937;
-  --color-surface-muted: #374151;
-  --color-border: #374151;
-  --color-text-primary: #F9FAFB;
-  --color-text-secondary: #9CA3AF;
-  --color-text-tertiary: #6B7280;
+  --color-surface-muted: #1E293B;
+  --color-surface-hover: #1E293B;
+  --color-border: #1E293B;
+  --color-border-subtle: #162032;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-tertiary: #64748B;
+  --color-text-muted: #64748B;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
