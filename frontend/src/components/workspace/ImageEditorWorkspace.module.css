@@ -1,0 +1,419 @@
+.editorLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-surface-secondary);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.emptyStateHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.emptyStateHeader h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.emptyStateHeader p {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+}
+
+.dropzoneWrapper {
+  width: 100%;
+}
+
+/* Header */
+.editorHeader {
+  height: 56px;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.headerLeft, .headerCenter, .headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.headerLeft {
+  flex: 1;
+  gap: var(--spacing-3);
+  min-width: 0; /* for ellipsis */
+}
+
+.headerCenter {
+  flex: 2;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.headerRight {
+  flex: 1;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.backButton:hover {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-primary);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-border);
+  margin: 0 var(--spacing-1);
+}
+
+.fileName {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toolbarGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  background-color: var(--color-surface-muted);
+  padding: var(--spacing-1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.iconButton:hover {
+  background-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.iconButton.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.exportButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.exportIcon {
+  margin-right: 4px;
+}
+
+/* Editor Body (Below Header) */
+.editorBody {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebars */
+.leftSidebar {
+  width: 260px;
+  background-color: var(--color-background);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.rightSidebar {
+  width: 260px;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.sidebarHeader {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebarHeader h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sidebarContent {
+  padding: var(--spacing-4);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.emptyProperties {
+  color: var(--color-text-tertiary);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: var(--spacing-8);
+}
+
+/* Sidebar Controls */
+.controlsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.controlGroup label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.controlGroup input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.controlButton {
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.controlButton:hover {
+  background-color: var(--color-border);
+}
+
+.filterList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2);
+}
+
+.filterOption {
+  padding: var(--spacing-3) var(--spacing-2);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.filterOption:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+/* Canvas Area */
+.canvasArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-secondary);
+}
+
+.canvasWrapper {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  position: relative;
+}
+
+.imageContainer {
+  position: relative;
+  transition: transform 0.1s ease-out;
+  transform-origin: center center;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-sm);
+  background-color: white; /* checkerboard could go here */
+  display: flex;
+}
+
+.canvasImage {
+  max-width: none;
+  display: block;
+}
+
+/* Bottom Controls */
+.bottomControls {
+  height: 48px;
+  background-color: var(--color-background);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.bottomLeft, .bottomCenter, .bottomRight {
+  display: flex;
+  align-items: center;
+}
+
+.bottomLeft {
+  flex: 1;
+}
+
+.bottomCenter {
+  flex: 2;
+  justify-content: center;
+  gap: var(--spacing-2);
+}
+
+.bottomRight {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.imageDimensions, .fileSize {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+}
+
+.zoomLevel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  width: 48px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+.bottomIconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.bottomIconButton:hover {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-primary);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .editorHeader {
+    height: auto;
+    flex-wrap: wrap;
+    padding: var(--spacing-2);
+  }
+  
+  .headerCenter {
+    order: 3;
+    flex: 100%;
+    margin-top: var(--spacing-2);
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: var(--spacing-2);
+  }
+  
+  .headerCenter::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .editorBody {
+    flex-direction: column;
+  }
+  
+  .leftSidebar, .rightSidebar {
+    width: 100%;
+    height: auto;
+    max-height: 30vh;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .canvasArea {
+    min-height: 40vh;
+  }
+}

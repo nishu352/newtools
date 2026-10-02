@@ -3,12 +3,39 @@ export type WorkspaceType =
   | 'MultiFileWorkspace'
   | 'EditorWorkspace'
   | 'ImageEditorWorkspace'
+  | 'CompressorWorkspace'
   | 'ConverterWorkspace'
   | 'GeneratorWorkspace'
   | 'ValidatorWorkspace'
   | 'FormatterWorkspace'
   | 'CalculatorWorkspace'
-  | 'ViewerWorkspace';
+  | 'PageManagementWorkspace'
+  | 'PDFCreationWorkspace'
+  | 'ViewerWorkspace'
+  | 'SingleDocumentWorkspace'
+  | 'DocumentConverterWorkspace'
+  | 'DocumentEditorWorkspace'
+  | 'SpreadsheetWorkspace'
+  | 'SpreadsheetConverterWorkspace'
+  | 'PresentationWorkspace'
+  | 'PresentationEditorWorkspace'
+  | 'TextWorkspace'
+  | 'TextDiffWorkspace';
+
+export type SettingType = 'range' | 'select' | 'text' | 'number' | 'boolean' | 'password';
+
+export interface SettingSchema {
+  id: string;
+  type: SettingType;
+  label: string;
+  description?: string;
+  defaultValue?: string | number | boolean;
+  options?: Array<{ label: string; value: string | number }>;
+  min?: number;
+  max?: number;
+  step?: number;
+  placeholder?: string;
+}
 
 export interface ToolMetadata {
   id: string;
@@ -28,4 +55,5 @@ export interface ToolMetadata {
     keywords: string[];
   };
   relatedTools?: string[];
+  settingsConfig?: SettingSchema[];
 }

@@ -1,34 +1,31 @@
-import fs from 'fs';
-import { toolRegistry } from '../src/lib/tools/registry';
+import { getAllTools } from '../src/lib/tool-registry/registry';
+import { CATEGORIES } from '../src/lib/tool-registry/categories';
 
-const toolRunnerCode = fs.readFileSync('./src/components/tools-impl/ToolRunner.tsx', 'utf-8');
-const allTools = toolRegistry.getAllTools();
-console.log('Total registered tools:', allTools.length);
+const tools = getAllTools();
+console.log('Total tools in registry:', tools.length);
 
-const handledInRunner: string[] = [];
-const unhandledInRunner: string[] = [];
+const catCounts: Record<string, number> = {};
+const workspaceCounts: Record<string, number> = {};
+const categoryToolList: Record<string, string[]> = {};
 
-for (const t of allTools) {
-  if (toolRunnerCode.includes("tool.slug === '" + t.slug + "'")) {
-    handledInRunner.push(t.slug);
-  } else {
-    unhandledInRunner.push(t.slug);
-  }
+for (const tool of tools) {
+  catCounts[tool.category] = (catCounts[tool.category] || 0) + 1;
+  workspaceCounts[tool.workspaceType] = (workspaceCounts[tool.workspaceType] || 0) + 1;
+  if (!categoryToolList[tool.category]) categoryToolList[tool.category] = [];
+  categoryToolList[tool.category].push(`${tool.name} (${tool.slug}) -> ${tool.workspaceType}`);
 }
 
-console.log('Handled in ToolRunner:', handledInRunner.length);
-console.log('Unhandled in ToolRunner:', unhandledInRunner.length, unhandledInRunner);
-
-// Group by category and status
-const catSummary: Record<string, { total: number; active: number; handled: number }> = {};
-for (const t of allTools) {
-  if (!catSummary[t.category]) {
-    catSummary[t.category] = { total: 0, active: 0, handled: 0 };
-  }
-  catSummary[t.category].total++;
-  if (t.status === 'active') catSummary[t.category].active++;
-  if (handledInRunner.includes(t.slug)) catSummary[t.category].handled++;
+console.log('\n--- BY CATEGORY ---');
+for (const [cat, count] of Object.entries(catCounts)) {
+  console.log(`Category: "${cat}" -> ${count} tools`);
 }
 
-console.log('\nCategory breakdown:');
-console.table(catSummary);
+console.log('\n--- BY WORKSPACE TYPE ---');
+for (const [ws, count] of Object.entries(workspaceCounts)) {
+  console.log(`Workspace: "${ws}" -> ${count} tools`);
+}
+
+console.log('\n--- DEFINED CATEGORIES IN CATEGORIES.TS ---');
+for (const cat of CATEGORIES) {
+  console.log(`Category ID: "${cat.id}", Name: "${cat.name}", Slug: "${cat.slug}", Href: "${cat.href}"`);
+}

@@ -1,0 +1,48 @@
+import { ToolMetadata } from './types';
+
+export const spreadsheetToolsRegistry: ToolMetadata[] = [
+  {
+    id: 'tool-spreadsheet-viewer',
+    slug: 'spreadsheet-viewer',
+    name: 'Spreadsheet Viewer (Excel, CSV, TSV)',
+    category: 'excel',
+    description: 'Inspect rows, columns, and data tables entirely in your browser without uploading files to third parties.',
+    status: 'active',
+    workspaceType: 'SpreadsheetWorkspace',
+    supportedFormats: ['.xlsx', '.csv', '.tsv'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-csv-to-excel',
+    slug: 'csv-to-excel',
+    name: 'CSV ↔ Excel (XLSX) Converter',
+    category: 'excel',
+    description: 'Bidirectional spreadsheet converter between CSV and modern Microsoft Excel workbooks.',
+    status: 'active',
+    workspaceType: 'SpreadsheetConverterWorkspace',
+    supportedFormats: ['.csv', '.tsv', '.xlsx'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-spreadsheet-to-json',
+    slug: 'spreadsheet-to-json',
+    name: 'Spreadsheet (Excel / CSV) ↔ JSON Converter',
+    category: 'excel',
+    description: 'Transform spreadsheet rows into clean JSON arrays with header mapping, or generate XLSX from JSON.',
+    status: 'active',
+    workspaceType: 'SpreadsheetConverterWorkspace',
+    supportedFormats: ['.xlsx', '.csv', '.json'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-spreadsheet-cleaner',
+    slug: 'spreadsheet-cleaner',
+    name: 'Spreadsheet Clean, Transpose & Statistics',
+    category: 'excel',
+    description: 'Fast data prep tool. Compute sum, average, min, max, and median, remove duplicate rows, and transpose matrices.',
+    status: 'active',
+    workspaceType: 'SpreadsheetWorkspace',
+    supportedFormats: ['.xlsx', '.csv', '.tsv'],
+    settingsConfig: undefined,
+  },
+];

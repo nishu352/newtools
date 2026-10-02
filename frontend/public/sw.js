@@ -54,6 +54,11 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
+  // 0. Never intercept requests on localhost
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    return;
+  }
+
   // 1. Never cache non-GET requests
   if (event.request.method !== 'GET') {
     return;

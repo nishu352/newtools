@@ -1,27 +1,61 @@
 import React from 'react';
 import { WorkspaceShell } from '@/components/workspace/WorkspaceShell';
+import { EditorWorkspace } from '@/components/workspace/EditorWorkspace';
+import { SingleFileWorkspace } from '@/components/workspace/SingleFileWorkspace';
+import { ImageEditorWorkspace } from '@/components/workspace/ImageEditorWorkspace';
+import { CompressorWorkspace } from '@/components/workspace/CompressorWorkspace';
+import { MultiFileWorkspace } from '@/components/workspace/MultiFileWorkspace';
+import { ConverterWorkspace } from '@/components/workspace/ConverterWorkspace';
+import { PageManagementWorkspace } from '@/components/workspace/PageManagementWorkspace';
+import { ViewerWorkspace } from '@/components/workspace/ViewerWorkspace';
+import { PDFCreationWorkspace } from '@/components/workspace/PDFCreationWorkspace';
+import { SingleDocumentWorkspace } from '@/components/workspace/SingleDocumentWorkspace';
+import { DocumentConverterWorkspace } from '@/components/workspace/DocumentConverterWorkspace';
+import { DocumentEditorWorkspace } from '@/components/workspace/DocumentEditorWorkspace';
+import { SpreadsheetWorkspace } from '@/components/workspace/SpreadsheetWorkspace';
+import { SpreadsheetConverterWorkspace } from '@/components/workspace/SpreadsheetConverterWorkspace';
+import { PresentationWorkspace } from '@/components/workspace/PresentationWorkspace';
+import { PresentationEditorWorkspace } from '@/components/workspace/PresentationEditorWorkspace';
+import { TextWorkspace } from '@/components/workspace/TextWorkspace';
+import { TextDiffWorkspace } from '@/components/workspace/TextDiffWorkspace';
 import { FileDropzone } from '@/components/workspace/FileDropzone';
 import { notFound } from 'next/navigation';
-import { getToolBySlug } from '@/lib/tool-registry/registry';
+import { getToolBySlug, getAllTools } from '@/lib/tool-registry/registry';
+import { Metadata } from 'next';
 
-// Note: In Next.js 13+ App Router, page props use promises in some versions,
-// but for standard dynamic routes with standard config, params is an object or promise.
-// Using a generic approach that works across Next.js 13-15.
+export function generateStaticParams() {
+  return getAllTools().map((tool) => ({
+    slug: tool.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  const tool = getToolBySlug(resolvedParams.slug);
+  
+  if (!tool) {
+    return { title: 'Tool Not Found | OminiTools' };
+  }
+  
+  return {
+    title: `${tool.name} | OminiTools`,
+    description: tool.description,
+    openGraph: {
+      title: `${tool.name} | OminiTools`,
+      description: tool.description,
+      type: 'website',
+    },
+    alternates: {
+      canonical: `https://ominitools.com/tools/${tool.slug}`,
+    }
+  };
+}
+
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
-  // Resolve params if it's a promise (Next.js 15+ pattern)
   const resolvedParams = await Promise.resolve(params);
   const slug = resolvedParams.slug;
   
-  // Phase 0: For demonstration, we'll mock a tool if it doesn't exist in the empty registry
-  const tool = getToolBySlug(slug) || {
-    id: 'mock-tool',
-    slug,
-    name: slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-    category: 'utilities',
-    description: 'This is a foundation workspace for the tool.',
-    status: 'active',
-    workspaceType: 'SingleFileWorkspace' as const
-  };
+  const tool = getToolBySlug(slug);
 
   if (!tool) {
     notFound();
@@ -33,23 +67,64 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
     { label: tool.name }
   ];
 
-  return (
-    <WorkspaceShell
-      title={tool.name}
-      description={tool.description}
-      breadcrumbs={breadcrumbs}
-    >
-      {/* 
-        Phase 0: This is a placeholder for the actual workspace logic.
-        The workspace type from the registry will determine which specific
-        workspace component is rendered here. 
-      */}
-      <div style={{ padding: 'var(--spacing-8)' }}>
-        <FileDropzone 
-          onFilesSelected={(files) => console.log('Files selected:', files)} 
-          multiple={tool.workspaceType === 'MultiFileWorkspace'}
+  switch (tool.workspaceType) {
+    case 'TextWorkspace':
+      return <TextWorkspace tool={tool} />;
+    case 'TextDiffWorkspace':
+      return <TextDiffWorkspace tool={tool} />;
+    case 'PresentationWorkspace':
+      return <PresentationWorkspace tool={tool} />;
+    case 'PresentationEditorWorkspace':
+      return <PresentationEditorWorkspace tool={tool} />;
+    case 'SpreadsheetWorkspace':
+      return <SpreadsheetWorkspace tool={tool} />;
+    case 'SpreadsheetConverterWorkspace':
+      return <SpreadsheetConverterWorkspace tool={tool} />;
+    case 'SingleDocumentWorkspace':
+      return <SingleDocumentWorkspace tool={tool} />;
+    case 'DocumentConverterWorkspace':
+      return <DocumentConverterWorkspace tool={tool} />;
+    case 'DocumentEditorWorkspace':
+      return <DocumentEditorWorkspace tool={tool} />;
+    case 'ImageEditorWorkspace':
+      return <ImageEditorWorkspace title={tool.name} description={tool.description} breadcrumbs={breadcrumbs} tool={tool} />;
+    case 'CompressorWorkspace':
+      return <CompressorWorkspace tool={tool} />;
+    case 'EditorWorkspace':
+      return (
+        <EditorWorkspace 
+          title={tool.name}
+          description={tool.description}
+          breadcrumbs={breadcrumbs}
         />
-      </div>
-    </WorkspaceShell>
-  );
+      );
+    case 'SingleFileWorkspace':
+      return <SingleFileWorkspace tool={tool} />;
+    case 'MultiFileWorkspace':
+      return <MultiFileWorkspace tool={tool} />;
+    case 'ConverterWorkspace':
+      return <ConverterWorkspace tool={tool} />;
+    case 'PageManagementWorkspace':
+      return <PageManagementWorkspace tool={tool} />;
+    case 'PDFCreationWorkspace':
+      return <PDFCreationWorkspace tool={tool} />;
+    case 'ViewerWorkspace':
+      return <ViewerWorkspace tool={tool} />;
+    default:
+      // Fallback for other types
+      return (
+        <WorkspaceShell
+          title={tool.name}
+          description={tool.description}
+          breadcrumbs={breadcrumbs}
+        >
+          <div style={{ padding: 'var(--spacing-8)' }}>
+            <FileDropzone 
+              onFilesSelected={(files) => console.log('Files selected:', files)} 
+              multiple={false}
+            />
+          </div>
+        </WorkspaceShell>
+      );
+  }
 }

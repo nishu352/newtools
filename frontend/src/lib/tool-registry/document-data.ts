@@ -1,0 +1,48 @@
+import { ToolMetadata } from './types';
+
+export const documentToolsRegistry: ToolMetadata[] = [
+  {
+    id: 'tool-docx-text-extractor',
+    slug: 'docx-text-extractor',
+    name: 'Word (DOCX) Text Extractor & Word Counter',
+    category: 'documents',
+    description: 'Read and copy full text from Microsoft Word documents and inspect document statistics without installing MS Word.',
+    status: 'active',
+    workspaceType: 'SingleDocumentWorkspace',
+    supportedFormats: ['.docx'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-docx-converter',
+    slug: 'docx-converter',
+    name: 'DOCX to Markdown, HTML & Text',
+    category: 'documents',
+    description: 'Transform styled Word documents into clean Markdown, web-ready HTML, or plain text.',
+    status: 'active',
+    workspaceType: 'DocumentConverterWorkspace',
+    supportedFormats: ['.docx'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-docx-metadata-viewer',
+    slug: 'docx-metadata-viewer',
+    name: 'DOCX Metadata Viewer & Sanitizer',
+    category: 'documents',
+    description: 'Inspect author, revision, and timestamp properties in DOCX files and sanitize them with one click.',
+    status: 'active',
+    workspaceType: 'SingleDocumentWorkspace',
+    supportedFormats: ['.docx'],
+    settingsConfig: undefined,
+  },
+  {
+    id: 'tool-text-to-docx',
+    slug: 'text-to-docx',
+    name: 'Text / Markdown to DOCX Generator',
+    category: 'documents',
+    description: 'Generate standard Microsoft Word (DOCX) documents from plain text or Markdown with heading support.',
+    status: 'active',
+    workspaceType: 'DocumentEditorWorkspace',
+    supportedFormats: ['.txt', '.md'],
+    settingsConfig: undefined,
+  },
+];

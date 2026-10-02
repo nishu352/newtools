@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, X, ArrowRight } from 'lucide-react';
-import { toolRegistry } from '@/lib/tools/registry';
+import { getAllTools } from '@/lib/tool-registry/registry';
 
 interface GlobalSearchModalProps {
   isOpen: boolean;
@@ -16,7 +16,7 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const [query, setQuery] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const allTools = React.useMemo(() => toolRegistry.getActiveTools(), []);
+  const allTools = React.useMemo(() => getAllTools(), []);
 
   const handleClose = React.useCallback(() => {
     setQuery('');
@@ -60,17 +60,17 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const results = React.useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) {
-      // Show featured tools as defaults
-      return allTools.filter((t) => t.isFeatured).slice(0, 6);
+      // Show default tools when query is empty
+      return allTools.slice(0, 6);
     }
 
     return allTools
       .filter((tool) => {
         const nameMatch = tool.name.toLowerCase().includes(q);
-        const descMatch = tool.shortDescription.toLowerCase().includes(q);
+        const descMatch = (tool.description || '').toLowerCase().includes(q);
         const catMatch = tool.category.toLowerCase().includes(q);
         const slugMatch = tool.slug.toLowerCase().includes(q);
-        const keywordMatch = tool.keywords?.some((k) => k.toLowerCase().includes(q));
+        const keywordMatch = tool.seo?.keywords?.some((k) => k.toLowerCase().includes(q));
 
         return nameMatch || descMatch || catMatch || slugMatch || keywordMatch;
       })
@@ -153,7 +153,7 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
                       </span>
                     </div>
                     <p className="text-[12px] text-[var(--foreground-muted)] truncate mt-0.5">
-                      {tool.shortDescription}
+                      {tool.description}
                     </p>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-[var(--foreground-subtle)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
@@ -165,11 +165,11 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
             <div className="py-8 px-4 text-center space-y-3">
               <p className="text-[14px] font-medium text-[var(--foreground)]">No tools found</p>
               <p className="text-[13px] text-[var(--foreground-muted)]">
-                Try searching for &ldquo;compress PDF&rdquo;, &ldquo;resize image&rdquo;, or &ldquo;JSON&rdquo;.
+                Try searching for &ldquo;compress PDF&rdquo;, &ldquo;resize image&rdquo;, or &ldquo;merge PDF&rdquo;.
               </p>
 
               <div className="flex flex-wrap justify-center gap-1.5 pt-2">
-                {['compress PDF', 'resize image', 'EMI calculator', 'JSON formatter', 'merge PDF'].map((term) => (
+                {['compress PDF', 'resize image', 'merge PDF', 'word counter', 'crop image'].map((term) => (
                   <button
                     key={term}
                     onClick={() => handleSuggestionClick(term)}

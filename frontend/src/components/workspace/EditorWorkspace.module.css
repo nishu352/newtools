@@ -1,0 +1,386 @@
+.editorLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-surface-secondary);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.emptyStateHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.emptyStateHeader h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.emptyStateHeader p {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+}
+
+.dropzoneWrapper {
+  width: 100%;
+}
+
+/* Header */
+.editorHeader {
+  height: 60px;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.headerLeft, .headerCenter, .headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.headerLeft {
+  flex: 1;
+  gap: var(--spacing-3);
+}
+
+.headerCenter {
+  flex: 2;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.headerRight {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.backButton:hover {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-primary);
+}
+
+.fileName {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toolbarGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-border);
+}
+
+.iconButton {
+  padding: var(--spacing-2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.iconButton:hover:not(:disabled) {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-primary);
+}
+
+.iconButton.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Editor Main Area */
+.editorMain {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Left Sidebar */
+.leftSidebar {
+  width: 240px;
+  background-color: var(--color-background);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebarHeader {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-muted);
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.pageThumbnailWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+}
+
+.pageThumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1.414;
+  background-color: var(--color-background);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.pageThumbnailWrapper:hover .pageThumbnail {
+  border-color: var(--color-border);
+}
+
+.pageThumbnailWrapper.activeThumbnail .pageThumbnail {
+  border-color: var(--color-primary);
+}
+
+.pageNumber {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.pageThumbnailWrapper.activeThumbnail .pageNumber {
+  color: var(--color-primary);
+}
+
+/* Center Canvas */
+.canvasArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.canvasControls {
+  position: absolute;
+  bottom: var(--spacing-6);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-4);
+  gap: var(--spacing-4);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+}
+
+.zoomControls, .pageControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.zoomLevel, .pageIndicator {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  min-width: 48px;
+  text-align: center;
+}
+
+.canvasScroll {
+  flex: 1;
+  overflow: auto;
+  padding: var(--spacing-8);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.canvasDocument {
+  transform-origin: top center;
+  transition: transform 0.1s ease-out;
+}
+
+.canvasDocumentInner {
+  width: 800px;
+  aspect-ratio: 1 / 1.414;
+  background-color: var(--color-background);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.interactionOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  cursor: crosshair;
+}
+
+.interactionOverlay.select {
+  cursor: default;
+}
+
+/* Right Sidebar */
+.rightSidebar {
+  width: 280px;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.propertiesPanel {
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.propertyGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.propertyLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.colorPicker {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.colorSwatch:hover {
+  transform: scale(1.1);
+}
+
+.colorSwatch.activeSwatch {
+  border-color: var(--color-background);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.rangeInput {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.emptyProperties {
+  text-align: center;
+  padding: var(--spacing-8) 0;
+  color: var(--color-text-tertiary);
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .leftSidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerCenter {
+    display: none;
+  }
+  
+  .rightSidebar {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    bottom: 0;
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
+    z-index: 20;
+  }
+  
+  /* Could add a toggle button logic here */
+}

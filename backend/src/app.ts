@@ -8,6 +8,7 @@ import { registerRateLimit } from './plugins/rate-limit.js';
 import { registerPrisma } from './plugins/prisma.js';
 import { healthRoutes } from './routes/health.route.js';
 import { metaRoutes } from './routes/v1/meta.route.js';
+import { toolsRoutes } from './routes/v1/tools.route.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = fastify({
@@ -64,6 +65,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   await app.register(healthRoutes);
   await app.register(metaRoutes, { prefix: '/api/v1' });
+  await app.register(toolsRoutes, { prefix: '/api/v1' });
 
   return app;
 }

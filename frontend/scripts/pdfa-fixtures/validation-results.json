@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-10-02T09:14:48.823Z",
+  "verapdfVersion": "veraPDF 1.30.2",
+  "verapdfAvailable": true,
+  "allPass": true,
+  "results": [
+    {
+      "input": "fixture_a_simple_text.pdf",
+      "output": "fixture_a_simple_text_pdfa.pdf",
+      "inputSize": 24276,
+      "outputSize": 29089,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_a_simple_text_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    },
+    {
+      "input": "fixture_b_multi_page.pdf",
+      "output": "fixture_b_multi_page_pdfa.pdf",
+      "inputSize": 17144,
+      "outputSize": 21956,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_b_multi_page_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    },
+    {
+      "input": "fixture_c_raster_image.pdf",
+      "output": "fixture_c_raster_image_pdfa.pdf",
+      "inputSize": 13601,
+      "outputSize": 18421,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_c_raster_image_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    },
+    {
+      "input": "fixture_d_metadata.pdf",
+      "output": "fixture_d_metadata_pdfa.pdf",
+      "inputSize": 12951,
+      "outputSize": 17978,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_d_metadata_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    },
+    {
+      "input": "fixture_e_ominitools.pdf",
+      "output": "fixture_e_ominitools_pdfa.pdf",
+      "inputSize": 25056,
+      "outputSize": 29991,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_e_ominitools_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    },
+    {
+      "input": "fixture_f_mixed.pdf",
+      "output": "fixture_f_mixed_pdfa.pdf",
+      "inputSize": 12656,
+      "outputSize": 17471,
+      "conversionOk": true,
+      "verapdfResult": {
+        "success": true,
+        "output": "PASS C:\\Users\\bhard\\Desktop\\tools\\frontend\\scripts\\pdfa-fixtures\\fixture_f_mixed_pdfa.pdf 1b\n",
+        "passed": true,
+        "failures": []
+      }
+    }
+  ]
+}

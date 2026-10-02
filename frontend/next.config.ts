@@ -40,6 +40,7 @@ function buildCsp(): string {
   const scriptSrc = [
     "'self'",
     "'unsafe-inline'",      // Required for Next.js inline scripts
+    ...(process.env.NODE_ENV !== 'production' ? ["'unsafe-eval'"] : []),
     ...ADSENSE_DOMAINS.slice(0, 1),  // pagead2.googlesyndication.com
     ...GTAG_DOMAINS.slice(0, 1),     // www.googletagmanager.com
     ...PLAUSIBLE_DOMAINS,
@@ -138,8 +139,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/pdf',
+        destination: '/categories/pdf',
+        permanent: true,
+      },
+      {
         source: '/tools/pdf',
-        destination: '/pdf',
+        destination: '/categories/pdf',
+        permanent: true,
+      },
+      {
+        source: '/categories/image',
+        destination: '/categories/images',
         permanent: true,
       },
       {
