@@ -8,8 +8,7 @@ import {
   ChevronRight, UploadCloud, ArrowRight, Download, CheckCircle2,
   AlertCircle, RefreshCw, Image as ImageIcon
 } from 'lucide-react';
-import { processPdfTool } from '@/lib/processing/adapters/pdf-adapter';
-import { encodeTiffRgb } from '@/lib/tools/engines/pdf/pdf-engine';
+import { encodeTiffRgb } from '@/lib/tools/engines/image/image-engine';
 import JSZip from 'jszip';
 import styles from './ConverterWorkspace.module.css';
 
@@ -359,6 +358,7 @@ export function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
         }
 
         // For all other PDF tools (pdf-to-word, pdf-to-excel, pdf-to-powerpoint, pdf-to-html, pdf-to-epub, pdf-to-rtf, pdf-to-text, pdf-to-xml, pdf-to-json, convert-to-pdf-a)
+        const { processPdfTool } = await import('@/lib/processing/adapters/pdf-adapter');
         const res = await processPdfTool({
           toolSlug: tool.slug,
           files: [{ id: '1', file }],

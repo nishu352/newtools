@@ -267,3 +267,64 @@ export function generateIcoFromPngs(
 
   return buffer;
 }
+
+/**
+ * Standard uncompressed baseline RGB TIFF encoder.
+ */
+export function encodeTiffRgb(width: number, height: number, rgbBytes: Uint8Array): Uint8Array {
+  const ifdEntries = 12;
+  const headerSize = 8;
+  const ifdSize = 2 + ifdEntries * 12 + 4;
+  const offsetBitsPerSample = headerSize + ifdSize;
+  const offsetXRes = offsetBitsPerSample + 6;
+  const offsetYRes = offsetXRes + 8;
+  const offsetImageData = offsetYRes + 8;
+
+  const totalSize = offsetImageData + rgbBytes.length;
+  const buffer = new Uint8Array(totalSize);
+  const view = new DataView(buffer.buffer);
+
+  buffer[0] = 0x49;
+  buffer[1] = 0x49;
+  view.setUint16(2, 42, true);
+  view.setUint32(4, 8, true);
+
+  view.setUint16(8, ifdEntries, true);
+  let pos = 10;
+
+  function writeTag(tag: number, type: number, count: number, valOrOffset: number) {
+    view.setUint16(pos, tag, true);
+    view.setUint16(pos + 2, type, true);
+    view.setUint32(pos + 4, count, true);
+    view.setUint32(pos + 8, valOrOffset, true);
+    pos += 12;
+  }
+
+  writeTag(256, 4, 1, width);
+  writeTag(257, 4, 1, height);
+  writeTag(258, 3, 3, offsetBitsPerSample);
+  writeTag(259, 3, 1, 1);
+  writeTag(262, 3, 1, 2);
+  writeTag(273, 4, 1, offsetImageData);
+  writeTag(277, 3, 1, 3);
+  writeTag(278, 4, 1, height);
+  writeTag(279, 4, 1, rgbBytes.length);
+  writeTag(282, 5, 1, offsetXRes);
+  writeTag(283, 5, 1, offsetYRes);
+  writeTag(296, 3, 1, 2);
+
+  view.setUint32(pos, 0, true);
+
+  view.setUint16(offsetBitsPerSample, 8, true);
+  view.setUint16(offsetBitsPerSample + 2, 8, true);
+  view.setUint16(offsetBitsPerSample + 4, 8, true);
+
+  view.setUint32(offsetXRes, 72, true);
+  view.setUint32(offsetXRes + 4, 1, true);
+
+  view.setUint32(offsetYRes, 72, true);
+  view.setUint32(offsetYRes + 4, 1, true);
+
+  buffer.set(rgbBytes, offsetImageData);
+  return buffer;
+}
